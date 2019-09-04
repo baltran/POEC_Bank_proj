@@ -19,7 +19,7 @@ def connexion_bdd(user='root', password='', host='127.0.0.1', database=DATABASE)
     else:
         print("je suis connecté à la bdd")
         cnx.autocommit = True  # commit automatiquement à chaque create|insert|update
-
+        return cnx, cnx.cursor
 
 
 def envoi_requete(cursor, requete, donnees=None):
