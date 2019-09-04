@@ -43,7 +43,7 @@ CREATE TABLE `utilisateur` (
 INSERT INTO `utilisateur` (`login`,`password`,`nom`, `prenom`, `email`) VALUES
 ('admin', 'admin', 'Smith', 'John', 'john.smith@domain.com');
 
-
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -1,9 +1,10 @@
 
 import mysql.connector
 #from mysql.connector import Error
+from configs.config import DATABASE
 
 
-def connexion_bdd(user='root', password='', host='127.0.0.1', database='annuaire'):
+def connexion_bdd(user='root', password='', host='127.0.0.1', database=DATABASE):
     try:
         print("connexion")
         cnx = mysql.connector.connection.MySQLConnection(user=user, password=password, host=host, database=database)
