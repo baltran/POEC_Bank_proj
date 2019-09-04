@@ -46,10 +46,11 @@ INSERT INTO `utilisateur` (`login`,`password`,`nom`, `prenom`, `email`) VALUES
 COMMIT;
 
 CREATE TABLE `agent` (
-  `mle` int(20) DEFAULT NULL,
-   `login` varchar(20) PRIMARY KEY NOT NULL,
+  `mle` int(20) PRIMARY KEY NOT NULL,
+   `login` varchar(20) ,
    `date_debut` datetime DEFAULT NULL,
-   `date_fin` datetime DEFAULT NULL
+   `date_fin` datetime DEFAULT NULL,
+   FOREIGN KEY (login) REFERENCES utilisateur(login)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 COMMIT;
