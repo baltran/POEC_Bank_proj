@@ -14,7 +14,7 @@ class Utilisateur:
         self.nom = ""
         self.prenom = ""
         self.email = ""
-        self.email = ""
+
         self.__class__.cnx, self.cursor = bdd.connexion_bdd(database=DATABASE)
 
     def connexion(self, login, pwd):
