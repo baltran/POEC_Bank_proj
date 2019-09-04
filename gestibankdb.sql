@@ -19,73 +19,31 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `annuaire`
+-- Base de données :  `gestiBankDB`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `employe`
+-- Structure de la table `utilisateur`
 --
 
-CREATE TABLE `employe` (
-  `nom` varchar(20) DEFAULT NULL,
+CREATE TABLE `utilisateur` (
+  `login` varchar(20) PRIMARY KEY NOT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  `nom` varchar(30) DEFAULT NULL,
   `prenom` varchar(20) DEFAULT NULL,
-  `datnais` datetime DEFAULT NULL,
-  `ville` varchar(20) DEFAULT NULL,
-  `sexe` varchar(1) DEFAULT NULL,
-  `mle` smallint(6) NOT NULL
+  `email` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `employe`
 --
 
-INSERT INTO `employe` (`nom`, `prenom`, `datnais`, `ville`, `sexe`, `mle`) VALUES
-('dupont', 'pierre', '1960-02-15 00:00:00', 'PARIS', 'M', 725),
-('durant', 'lea', '1957-07-01 00:00:00', 'PARIS', 'F', 735),
-('kroc', 'odile', '1963-12-27 00:00:00', 'PARIS', 'F', 736),
-('zeblouz', 'agathe', '1955-01-05 00:00:00', 'PARIS', 'F', 921);
+INSERT INTO `utilisateur` (`login`,`password`,`nom`, `prenom`, `email`) VALUES
+('admin', 'admin', 'Smith', 'John', 'john.smith@domain.com');
 
--- --------------------------------------------------------
 
---
--- Structure de la table `personne`
---
-
-CREATE TABLE `personne` (
-  `nom` varchar(30) NOT NULL,
-  `prenom` varchar(20) NOT NULL,
-  `telephone` varchar(20) NOT NULL,
-  `mail` varchar(50) NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `employe`
---
-ALTER TABLE `employe`
-  ADD PRIMARY KEY (`mle`);
-
---
--- Index pour la table `personne`
---
-ALTER TABLE `personne`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `personne`
---
-ALTER TABLE `personne`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
