@@ -1,6 +1,6 @@
 import logging
 import mysql.connector
-import modules.bdd as bdd
+from modules.bdd import connexion_bdd, envoi_requete, fermeture
 from configs.config import DATABASE
 #logging.basicConfig(filename='connexion.log', level=logging.INFO, format='%(name)s - %(levelname)s - %(message)s')
 root_logger = logging.getLogger()
@@ -23,15 +23,15 @@ class Utilisateur:
 
     def connexion(self, login, pwd, cnx=None):
         if not cnx:
-            self.__class__.cnx, self.cursor = bdd.connexion_bdd()
+            self.__class__.cnx, self.cursor = connexion_bdd()
         else:
             self.cursor = cnx.cursor()
-        #requete = "select * from utilisateur where login=%s and password=PASSWORD(%s)"
-        requete = "select * from utilisateur where login='{}' and password=PASSWORD('{}')".format(login, pwd)
-        #donnees = (login, pwd)
+        requete = "select * from utilisateur where login=%s and password=PASSWORD(%s)"
+        #requete = "select * from utilisateur where login='{}' and password=PASSWORD('{}')".format(login, pwd)
+        donnees = (login, pwd)
         try:
-            #bdd.envoi_requete(self.cursor, requete, donnees)
-            bdd.envoi_requete(self.cursor, requete)
+            envoi_requete(self.cursor, requete, donnees)
+            envoi_requete(self.cursor, requete)
         except mysql.connector.errors.IntegrityError:
             logging.error("Utilisateur inconnu", exc_info=True)
             raise
