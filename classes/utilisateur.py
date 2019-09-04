@@ -27,11 +27,9 @@ class Utilisateur:
         else:
             self.cursor = cnx.cursor()
         requete = "select * from utilisateur where login=%s and password=PASSWORD(%s)"
-        #requete = "select * from utilisateur where login='{}' and password=PASSWORD('{}')".format(login, pwd)
         donnees = (login, pwd)
         try:
             envoi_requete(self.cursor, requete, donnees)
-            envoi_requete(self.cursor, requete)
         except mysql.connector.errors.IntegrityError:
             logging.error("Utilisateur inconnu", exc_info=True)
             raise
