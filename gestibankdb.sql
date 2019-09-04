@@ -43,7 +43,7 @@ CREATE TABLE `utilisateur` (
 INSERT INTO `utilisateur` (`login`,`password`,`nom`, `prenom`, `email`) VALUES
 ('admin', 'admin', 'Smith', 'John', 'john.smith@domain.com');
 
-
+COMMIT;
 
 CREATE TABLE `agent` (
   `mle` int(20) DEFAULT NULL,
