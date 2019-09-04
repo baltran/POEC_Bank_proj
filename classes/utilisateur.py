@@ -1,18 +1,20 @@
 import logging
 import mysql.connector
 import modules.bdd as bdd
-
-DATABASE = "GestiBankDB"
+from configs.config import DATABASE
 logging.basicConfig(filename='connexion.log', level=logging.INFO, format='%(name)s - %(levelname)s - %(message)s')
 
 
 class Utilisateur:
     #cnx, cursor = bdd.connexion_bdd(database=DATABASE)
 
-    def __init__(self, nom, prenom, email):
-        self.nom = nom
-        self.prenom = prenom
-        self.email = email
+    def __init__(self):
+        self.login = ""
+        self.pwd = ""
+        self.nom = ""
+        self.prenom = ""
+        self.email = ""
+        self.email = ""
         self.__class__.cnx, self.cursor = bdd.connexion_bdd(database=DATABASE)
 
     def connexion(self, login, pwd):
