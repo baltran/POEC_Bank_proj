@@ -1,7 +1,7 @@
 import logging
-#import configs.config
+from  configs.config import DATABASE
 import mysql.connector
-from  modules.bdd import  envoi_requete, connexion_bdd, fermeture
+import modules.bdd as bdd
 from classes.utilisateur import Utilisateur
 
 
@@ -9,39 +9,24 @@ class Admin(Utilisateur):
 
     logging.basicConfig(filename='../log/admin_connexion.log', level=logging.INFO, format='%(name)s - %(levelname)s - %(message)s')
 
-    def create_agent(self):
-        DATABASE = "GestiBankDB"
-        #user_admin=Utilisateur()
-        cnx_admin, cursor = connexion_bdd(database= DATABASE)
+    def __init__(self):
+        self.demandes = []
+        self.agents = []
 
-        print("connexion réussie")
+    def create_agent(self):
+
+        #user_admin=Utilisateur()
+        cnx_admin, cursor = bdd.connexion_bdd()
         cnx_admin.autocommit = True
         insert_stmt = (
-            "INSERT INTO agent (login, date_debut, date_fin ) "
-            "VALUES (%s, %s, %s)"
+            "INSERT INTO agent (mle, login, date_debut, date_fin )"
+            "VALUES (%s, %s, %s, %s)"
         )
-        data = ('pdupont', '2000-12-04', 'null')
+        data = (1, 'pdupont', '2000-12-04', None)
         cursor = cnx_admin.cursor()
         cursor.execute(insert_stmt, data)
 
-        cnx_admin.close()
 
-
-
-
-
-
-
-""""if __name__=="__main__":
-    def admin_login(self, admin_id, admin_pwd):
-        user_admin = Utilisateur()
-        cnx_admin, curseur = user_admin.connexion()
-        return  cnx_admin
-        print("connexion réussie")
-        
-        
-        
-        
-
+if __name__== "__main__":
     admin = Admin()
-    admin.admin_login(admin_id='', admin_pwd= '')"""
+    admin.create_agent()
