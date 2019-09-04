@@ -45,6 +45,17 @@ INSERT INTO `utilisateur` (`login`,`password`,`nom`, `prenom`, `email`) VALUES
 
 
 
+CREATE TABLE `agent` (
+  `mle` int(20) DEFAULT NULL,
+   `login` varchar(20) PRIMARY KEY NOT NULL,
+   `date_debut` datetime DEFAULT NULL,
+   `date_fin` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+

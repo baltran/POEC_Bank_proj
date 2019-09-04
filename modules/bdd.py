@@ -1,9 +1,12 @@
 
 import mysql.connector
+import configs.config
 #from mysql.connector import Error
 
 
-def connexion_bdd(user='root', password='', host='127.0.0.1', database='annuaire'):
+DATABASE= "GestiBankDB"
+
+def connexion_bdd(user='root', password='', host='127.0.0.1', database = DATABASE):
     try:
         print("connexion")
         cnx = mysql.connector.connection.MySQLConnection(user=user, password=password, host=host, database=database)
@@ -17,7 +20,7 @@ def connexion_bdd(user='root', password='', host='127.0.0.1', database='annuaire
     else:
         print("je suis connecté à la bdd")
         cnx.autocommit = True  # commit automatiquement à chaque create|insert|update
-        return cnx, cnx.cursor()
+
 
 
 def envoi_requete(cursor, requete, donnees=None):
