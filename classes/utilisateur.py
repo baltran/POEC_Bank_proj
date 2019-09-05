@@ -1,13 +1,16 @@
 import logging
 import mysql.connector
+import re
+from classes.admin import Admin
+from classes.conseiller import Conseiller
+from classes.client import Client
 from modules.bdd import connexion_bdd, envoi_requete, fermeture
 from configs.config import DATABASE
 #logging.basicConfig(filename='connexion.log', level=logging.INFO, format='%(name)s - %(levelname)s - %(message)s')
-root_logger = logging.getLogger()
-root_logger.setLevel(logging.DEBUG)  # or whatever
-handler = logging.FileHandler('connexion.log', 'a', 'utf-8')  # or whatever
-handler.setFormatter(logging.Formatter('%(name)s - %(levelname)s - %(message)s'))  # or whatever
-root_logger.addHandler(handler)
+logging.config.fileConfig(fname='../configs/log.conf', disable_existing_loggers=False)
+# Récupère le logger spécifié dans le fichier
+logger = logging.getLogger(__name__)
+
 
 class Utilisateur:
     #cnx, cursor = bdd.connexion_bdd(database=DATABASE)
@@ -30,15 +33,24 @@ class Utilisateur:
         donnees = (login, pwd)
         try:
             envoi_requete(self.cursor, requete, donnees)
-        except mysql.connector.errors.IntegrityError:
+        except mysql.connector.errors.Error:
             logging.error("Utilisateur inconnu", exc_info=True)
             raise
         else:
-            logging.info("connexion réussie")
-            print(self.cursor.rowcount)
-            result = self.cursor.fetchone()
-            print(result)
-            return result
+            if self.cursor.rowcount == 1:
+                logging.info("connexion réussie")
+                print(self.cursor.rowcount)
+                result = self.cursor.fetchone()
+                print(result)
+                if login == "admin":
+                    role = Admin()
+                elif re.match(r"ag\d+", login):
+                    role = Conseiller()
+                else:
+                    role = Client()
+                return role
+            else:
+                return None
 
     def deconnexion(self,login, pwd):
         pass
