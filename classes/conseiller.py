@@ -37,7 +37,7 @@ class Conseiller(Utilisateur):
 
 
     def modifier(self, cnx=None):
-        pass
+       pass
 
     def supprimmer(self, cnx=None):
         pass
