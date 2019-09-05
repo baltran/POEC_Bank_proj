@@ -12,7 +12,7 @@ class Conseiller(Utilisateur):
         self.date_fin = data_conseiller[3]
 
     @classmethod
-    def creer(self, data_user, data_conseiller):
+    def creer(self, data_user, data_conseiller, admin):
         cnx_admin, cursor = bdd.connexion_bdd()
         data_user_table = data_user
         cursor = cnx_admin.cursor()
@@ -32,7 +32,8 @@ class Conseiller(Utilisateur):
         bdd.envoi_requete(cursor, insert_stmt, data_agent_table)
         bdd.fermeture(cnx_admin, cursor)
         cons = Conseiller(data_user, data_conseiller)
-        self.agents.append(cons)
+        admin.agents.append(cons)
+        return cons
 
 
     def modifier(self, cnx=None):
