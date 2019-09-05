@@ -15,12 +15,12 @@ logger = logging.getLogger(__name__)
 class Utilisateur:
     #cnx, cursor = bdd.connexion_bdd(database=DATABASE)
 
-    def __init__(self):
-        self.login = ""
-        self.pwd = ""
-        self.nom = ""
-        self.prenom = ""
-        self.email = ""
+    def __init__(self, login="", pwd="", nom="", prenom="", email=""):
+        self.login = login
+        self.pwd = pwd
+        self.nom = nom
+        self.prenom = prenom
+        self.email = email
 
         self.__class__.cnx, self.cursor = None, None #bdd.connexion_bdd(database=DATABASE)
 
