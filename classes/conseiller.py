@@ -12,7 +12,7 @@ class Conseiller(Utilisateur):
         self.date_fin = data_conseiller[3]
 
     @classmethod
-    def creer(self, data_user, data_conseiller, admin):
+    def creer(self, data_user, data_conseiller, admin, cnx=None):
         cnx_admin, cursor = bdd.connexion_bdd()
         data_user_table = data_user
         cursor = cnx_admin.cursor()
