@@ -3,6 +3,7 @@ from  configs.config import DATABASE
 import mysql.connector
 import modules.bdd as bdd
 from classes.utilisateur import Utilisateur
+from classes.conseiller import Conseiller
 
 
 class Admin(Utilisateur):
@@ -32,8 +33,9 @@ class Admin(Utilisateur):
         )
         bdd.envoi_requete(cursor, insert_stmt, data_agent_table)
         bdd.fermeture(cnx_admin, cursor)
-
-
+        cons = Conseiller(1, 'pdupont', 'jean', None, ('ag1dupont', 'fgfrhfXUkkde$$', 'dupont', 'jean', 'pdupont@gmail.com'))
+        self.agents.append(cons)
+        print(self.agents)
 
 
 if __name__== "__main__":
