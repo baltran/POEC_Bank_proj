@@ -33,7 +33,7 @@ class Conseiller(Utilisateur):
         bdd.fermeture(cnx_admin, cursor)
         cons = Conseiller(data_user, data_conseiller)
         self.agents.append(cons)
-        print(self.agents)
+
 
     def modifier(self, cnx=None):
         pass
