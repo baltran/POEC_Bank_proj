@@ -4,6 +4,7 @@ import mysql.connector
 import modules.bdd as bdd
 from classes.utilisateur import Utilisateur
 from classes.conseiller import Conseiller
+from classes.conseiller import Conseiller
 
 
 class Admin(Utilisateur):
@@ -14,9 +15,6 @@ class Admin(Utilisateur):
         super().__init__()
         self.demandes = []
         self.agents = []
-
-
-
 
 
 if __name__== "__main__":
