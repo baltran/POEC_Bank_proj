@@ -10,23 +10,32 @@ class Admin(Utilisateur):
     logging.basicConfig(filename='../log/admin_connexion.log', level=logging.INFO, format='%(name)s - %(levelname)s - %(message)s')
 
     def __init__(self):
+        super().__init__()
         self.demandes = []
         self.agents = []
 
-    def create_agent(self):
+    def create_conseiller(self):
 
-        #user_admin=Utilisateur()
         cnx_admin, cursor = bdd.connexion_bdd()
-        cnx_admin.autocommit = True
+        data_user_table = ('ag1dupont', 'fgfrhfXUkkde$$', 'dupont', 'jean', 'pdupont@gmail.com')
+        cursor = cnx_admin.cursor()
+        insert_stmt_user = (
+            "INSERT INTO utilisateur (login, password, nom, prenom, email )"
+            "VALUES (%s, password(%s), %s, %s, %s)"
+        )
+        bdd.envoi_requete(cursor, insert_stmt_user, data_user_table)
+        data_agent_table = (1, 'pdupont', 'jean', None)
+
         insert_stmt = (
             "INSERT INTO agent (mle, login, date_debut, date_fin )"
             "VALUES (%s, %s, %s, %s)"
         )
-        data = (1, 'pdupont', '2000-12-04', None)
-        cursor = cnx_admin.cursor()
-        cursor.execute(insert_stmt, data)
+        bdd.envoi_requete(cursor, insert_stmt, data_agent_table)
+        bdd.fermeture(cnx_admin, cursor)
+
+
 
 
 if __name__== "__main__":
     admin = Admin()
-    admin.create_agent()
+    admin.create_conseiller()

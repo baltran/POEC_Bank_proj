@@ -41,12 +41,12 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`login`,`password`,`nom`, `prenom`, `email`) VALUES
-('admin', 'admin', 'Smith', 'John', 'john.smith@domain.com');
+('pdupont', 'hhhfshozo566674', 'pierre', 'dupont', 'pierre.dupont@domain.com');
 
 COMMIT;
 
 CREATE TABLE `agent` (
-  `mle` int(20) PRIMARY KEY NOT NULL,
+  `mle` int(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
    `login` varchar(20) ,
    `date_debut` datetime DEFAULT NULL,
    `date_fin` datetime DEFAULT NULL,
