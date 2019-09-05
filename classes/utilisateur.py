@@ -1,15 +1,19 @@
 import logging
 import mysql.connector
 import re
-from classes.admin import Admin
-from classes.conseiller import Conseiller
-from classes.client import Client
+#try:
+#    from classes.admin import Admin
+#    from classes.conseiller import Conseiller
+#    from classes.client import Client
+#except ImportError:
+#    pass
+
 from modules.bdd import connexion_bdd, envoi_requete, fermeture
 from configs.config import DATABASE
-#logging.basicConfig(filename='connexion.log', level=logging.INFO, format='%(name)s - %(levelname)s - %(message)s')
-logging.config.fileConfig(fname='../configs/log.conf', disable_existing_loggers=False)
+logging.basicConfig(filename='connexion.log', level=logging.INFO, format='%(name)s - %(levelname)s - %(message)s')
+#logging.config.fileConfig(fname='../configs/log.conf', disable_existing_loggers=False)
 # Récupère le logger spécifié dans le fichier
-logger = logging.getLogger(__name__)
+#logger = logging.getLogger(__name__)
 
 
 class Utilisateur:
@@ -37,18 +41,19 @@ class Utilisateur:
             logging.error("Utilisateur inconnu", exc_info=True)
             raise
         else:
-            if self.cursor.rowcount == 1:
+            print(self.cursor.rowcount)
+            if self.cursor.rowcount == -1:
                 logging.info("connexion réussie")
                 print(self.cursor.rowcount)
                 result = self.cursor.fetchone()
                 print(result)
                 if login == "admin":
-                    role = Admin()
+                    role = "admin"
                 elif re.match(r"ag\d+", login):
-                    role = Conseiller()
+                    role = "conseiller"
                 else:
-                    role = Client()
-                return role
+                    role = "client"
+                return role, result
             else:
                 return None
 
