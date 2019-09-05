@@ -16,6 +16,7 @@ logging.basicConfig(filename='connexion.log', level=logging.INFO, format='%(name
 #logger = logging.getLogger(__name__)
 
 
+#dfgfgh
 class Utilisateur:
     #cnx, cursor = bdd.connexion_bdd(database=DATABASE)
 
@@ -26,6 +27,7 @@ class Utilisateur:
         self.prenom = prenom
         self.email = email
 
+        self.is_connected = False
         self.__class__.cnx, self.cursor = None, None #bdd.connexion_bdd(database=DATABASE)
 
     def connexion(self, login, pwd, cnx=None):
@@ -41,21 +43,23 @@ class Utilisateur:
             logging.error("Utilisateur inconnu", exc_info=True)
             raise
         else:
-            print(self.cursor.rowcount)
-            if self.cursor.rowcount == -1:
+            result = self.cursor.fetchone()
+            if result:
                 logging.info("connexion réussie")
                 print(self.cursor.rowcount)
-                result = self.cursor.fetchone()
                 print(result)
+                self.login, self.pwd, self.nom, self.prenom, self.email = result
+
                 if login == "admin":
                     role = "admin"
                 elif re.match(r"ag\d+", login):
                     role = "conseiller"
                 else:
                     role = "client"
+                self.is_connected = True
                 return role, result
             else:
                 return None
 
-    def deconnexion(self,login, pwd):
-        pass
+    def deconnexion(self):
+        self.is_connected = False
