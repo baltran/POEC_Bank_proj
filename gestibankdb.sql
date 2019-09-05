@@ -41,7 +41,7 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`login`,`password`,`nom`, `prenom`, `email`) VALUES
-('pdupont', 'hhhfshozo566674', 'pierre', 'dupont', 'pierre.dupont@domain.com');
+('admin', 'admin', 'smith', 'jean', 'jean.smith@domain.com');
 
 COMMIT;
 

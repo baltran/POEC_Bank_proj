@@ -16,7 +16,6 @@ class Admin(Utilisateur):
         self.agents = []
 
     def create_conseiller(self):
-
         cnx_admin, cursor = bdd.connexion_bdd()
         data_user_table = ('ag1dupont', 'fgfrhfXUkkde$$', 'dupont', 'jean', 'pdupont@gmail.com')
         cursor = cnx_admin.cursor()
@@ -25,7 +24,7 @@ class Admin(Utilisateur):
             "VALUES (%s, password(%s), %s, %s, %s)"
         )
         bdd.envoi_requete(cursor, insert_stmt_user, data_user_table)
-        data_agent_table = (1, 'pdupont', 'jean', None)
+        data_agent_table = (1, 'ag1dupont', '2000-12-04', None)
 
         insert_stmt = (
             "INSERT INTO agent (mle, login, date_debut, date_fin )"
@@ -33,7 +32,7 @@ class Admin(Utilisateur):
         )
         bdd.envoi_requete(cursor, insert_stmt, data_agent_table)
         bdd.fermeture(cnx_admin, cursor)
-        cons = Conseiller(1, 'pdupont', 'jean', None, ('ag1dupont', 'fgfrhfXUkkde$$', 'dupont', 'jean', 'pdupont@gmail.com'))
+        cons = Conseiller(1, 'ag1dupont', '2000-12-04', None, ('ag1dupont', 'fgfrhfXUkkde$$', 'dupont', 'jean', 'pdupont@gmail.com'))
         self.agents.append(cons)
         print(self.agents)
 
