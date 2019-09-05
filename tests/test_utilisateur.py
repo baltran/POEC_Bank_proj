@@ -2,7 +2,8 @@ import unittest
 import mysql.connector
 from modules.bdd import connexion_bdd, envoi_requete, fermeture
 from configs.config import DATABASE_TEST
-from classes.utilisateur import Utilisateur
+#from classes.utilisateur import Utilisateur
+from classes.admin import Utilisateur, Admin
 
 
 class TestUtilisateur(unittest.TestCase):
@@ -40,4 +41,5 @@ class TestUtilisateur(unittest.TestCase):
         donnees_test = ('admin', '*4ACFE3202A5FF5CF467898FC58AAB1D615029441', 'Smith', 'John', 'john.smith@domain.com')
         user = Utilisateur()
         result = user.connexion('admin', 'admin', TestUtilisateur.connexion)
-        self.assertTupleEqual(result, donnees_test)
+        #self.assertTupleEqual(result, donnees_test)
+        self.assertIsInstance(result, Admin)
