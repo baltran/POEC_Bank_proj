@@ -1,4 +1,5 @@
 from classes.utilisateur import Utilisateur
+from classes.demande import Demande
 
 
 class Conseiller(Utilisateur):
