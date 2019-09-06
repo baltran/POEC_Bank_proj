@@ -33,16 +33,18 @@ CREATE TABLE `utilisateur` (
   `password` LONGTEXT DEFAULT NULL,
   `nom` varchar(30) DEFAULT NULL,
   `prenom` varchar(20) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL
+  `email` varchar(50) DEFAULT NULL,
+  `type` ENUM('admin', 'conseiller', 'client')
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `employe`
 --
 
-INSERT INTO `utilisateur` (`login`,`password`,`nom`, `prenom`, `email`) VALUES
-('admin', 'admin', 'smith', 'jean', 'jean.smith@domain.com');
-
+INSERT INTO `utilisateur` (`login`,`password`,`nom`, `prenom`, `email`, `type`) VALUES
+('admin', password('admin'), 'smith', 'jean', 'jean.smith@domain.com', 'admin');
+INSERT INTO `utilisateur` (`login`,`password`,`nom`, `prenom`, `email`, `type`) VALUES
+('ag1dupont', password('jeandupont$'), 'dupont', 'jean','jeand.@gmail.com', 'conseiller');
 CREATE TABLE `agent` (
   `mle` int(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
    `login` varchar(20) ,
@@ -50,6 +52,9 @@ CREATE TABLE `agent` (
    `date_fin` datetime DEFAULT NULL,
    FOREIGN KEY (login) REFERENCES utilisateur(login)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `agent` (`mle`,`login`,`date_debut`, `date_fin`) VALUES
+(1, 'ag1dupont', '2000-12-04', NULL);
 
 CREATE TABLE `client` (
     `num_client` int(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -86,6 +91,13 @@ CREATE TABLE `compte_courant` (
     `taux_decouvert` float(2.1) DEFAULT 0,
     `entree_moyenne` int(10) DEFAULT 0,
     FOREIGN KEY (rib) REFERENCES compte(rib)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `operation` (
+    `num_operation` int(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `num_compte` VARCHAR(20) NOT NULL,
+    `type_opt` ENUM('debit', 'credit','virement'),
+     FOREIGN KEY (num_compte) REFERENCES compte(rib)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 COMMIT;
 
