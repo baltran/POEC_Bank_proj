@@ -83,6 +83,7 @@ CREATE TABLE `compte_courant` (
     `rib` varchar(20) NOT NULL,
     `autorisation_decouvert` tinyint(1) DEFAULT 0,
     `taux_decouvert` float(2.1) DEFAULT 0,
+    `entree_moyenne` int(10) DEFAULT 0,
     FOREIGN KEY (rib) REFERENCES compte(rib)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 COMMIT;
