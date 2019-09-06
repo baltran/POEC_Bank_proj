@@ -65,8 +65,8 @@ CREATE TABLE `compte` (
     `rib` varchar(20) PRIMARY KEY NOT NULL,
     `proprietaire` int(20) NOT NULL,
     `date_creation` datetime DEFAULT NULL,
-    `type` varchar(20) DEFAULT NULL,
     `solde` int(10) DEFAULT 0,
+    `type` varchar(20) DEFAULT NULL,
     FOREIGN KEY (proprietaire) REFERENCES client(num_client)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

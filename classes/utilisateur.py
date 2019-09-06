@@ -35,7 +35,7 @@ class Utilisateur:
             self.__class__.cnx, self.cursor = connexion_bdd()
         else:
             self.cursor = cnx.cursor()
-        requete = "select * from utilisateur where login=%s and password=PASSWORD(%s)"
+        requete = "select login from utilisateur where login=%s and password=PASSWORD(%s)"
         donnees = (login, pwd)
         try:
             envoi_requete(self.cursor, requete, donnees)
