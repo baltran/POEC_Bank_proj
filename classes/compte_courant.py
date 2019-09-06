@@ -5,7 +5,7 @@ from classes.compte import Compte
 class CompteCourant(Compte):
     def __init__(self, data_compte, data_compte_avancee):
         super().__init__(data_compte)
-        self.rib, self.proprietaire, self.date_creation, self.solde, self.type = data_compte_avancee
+        self.num_compte, self.rib, self.autorisation_decouvert, self.taux_decouvert, self.entree_moyenne = data_compte_avancee
         self.__class__.cnx, self.cursor = None, None
 
     def retrait(self, somme, cnx=None):
@@ -14,11 +14,12 @@ class CompteCourant(Compte):
         else:
             self.cursor = cnx.cursor()
         solde_tmp = self.solde - somme
-        if self.solde_tmp < 0:
+        if solde_tmp < 0:
             if not self.autorisation_decouvert:
                 return -1
             elif solde_tmp < (self.entree_moyenne * self.taux_decouvert):
                 return -1
+        #TODO prise en compte nouveau solde et ajout transaction dans la bdd
 
     def virement(self):
         pass
