@@ -4,7 +4,7 @@ import mysql.connector
 import modules.bdd as bdd
 from classes.utilisateur import Utilisateur
 from classes.conseiller import Conseiller
-from classes.conseiller import Conseiller
+
 
 
 class Admin(Utilisateur):
@@ -18,4 +18,7 @@ class Admin(Utilisateur):
 
 
 if __name__== "__main__":
+    # cons = Conseiller(data_user, data_conseiller)
+    # admin.agents.append(cons)
+    # return cons
     admin = Admin()
