@@ -22,7 +22,7 @@ class Demande():
         cnx_cons, cursor = bdd.connexion_bdd()
         data_demandeur_table = data_demandeur
         cursor = cnx_demandeur.cursor()
-        insert_stmt_user = (
+        insert_stmt_demand = (
             "INSERT INTO client (login, password, nom, prenom, email, revenu_mensuel, adresse, tel )"
             "VALUES (%s, password(%s), %s, %s, %s, %f, %s, %i)"
         )

@@ -57,6 +57,7 @@ CREATE TABLE `client` (
     `conseiller` int(20) NOT NULL,
     `adresse` varchar(50) DEFAULT NULL,
     `telephone` varchar(10) DEFAULT NULL,
+    `revenu_mensuel` float DEFAULT NULL,
     FOREIGN KEY (login) REFERENCES utilisateur(login),
     FOREIGN KEY (conseiller) REFERENCES agent(mle)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
