@@ -66,6 +66,7 @@ CREATE TABLE `compte` (
     `proprietaire` int(20) NOT NULL,
     `date_creation` datetime DEFAULT NULL,
     `type` varchar(20) DEFAULT NULL,
+    `solde` int(10) DEFAULT 0,
     FOREIGN KEY (proprietaire) REFERENCES client(num_client)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -81,6 +82,7 @@ CREATE TABLE `compte_courant` (
     `num_compte` int(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `rib` varchar(20) NOT NULL,
     `autorisation_decouvert` tinyint(1) DEFAULT 0,
+    `taux_decouvert` float(2.1) DEFAULT 0,
     FOREIGN KEY (rib) REFERENCES compte(rib)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 COMMIT;

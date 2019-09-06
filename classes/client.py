@@ -11,14 +11,12 @@ class Client(Utilisateur):
         self.num_client, self.adresse, self.telephone = data_client
 
     @classmethod
-    def creer(cls, data_user, data_client, data_compte, conseiller, cnx=None):
+    def creer(cls, data_user, data_client, data_compte, data_compte_avancee, cnx=None):
         if not cnx:
             cnx_client, cursor = bdd.connexion_bdd()
         else:
             cursor = cnx.cursor()
-        #cnx_admin, cursor = bdd.connexion_bdd()
         data_user_table = data_user
-        cursor = cnx_client.cursor()
         insert_stmt_user = (
             "INSERT INTO utilisateur (login, password, nom, prenom, email )"
             "VALUES (%s, password(%s), %s, %s, %s)"
@@ -27,23 +25,35 @@ class Client(Utilisateur):
             bdd.envoi_requete(cursor, insert_stmt_user, data_user_table)
         except mysql.connector.errors.IntegrityError:
             return -1
+
         data_client_table = data_client
         insert_stmt = (
-            "INSERT INTO client (num_client, login, adresse, telephone)"
-            "VALUES (%s, %s, %s, %s)"
+            "INSERT INTO client (num_client, login, conseiller, adresse, telephone)"
+            "VALUES (%s, %s, %s, %s, %s)"
         )
         bdd.envoi_requete(cursor, insert_stmt, data_client_table)
-        bdd.fermeture(cnx_client, cursor)
+        bdd.fermeture(cnx, cursor)
         client = Client(data_user, data_client)
+
         data_compte_table = data_compte
         insert_stmt = (
-            "INSERT INTO compte (rib, proprietaire, date_creation, type)"
-            "VALUES (%s, %s, %s, %s)"
+            "INSERT INTO compte (rib, proprietaire, date_creation, type, solde)"
+            "VALUES (%s, %s, %s, %s, %s)"
         )
         bdd.envoi_requete(cursor, insert_stmt, data_compte_table)
-        bdd.fermeture(cnx_client, cursor)
-        conseiller.clients.append(client)
-        return client
+        bdd.fermeture(cnx, cursor)
+
+        data_compte_table = data_compte_avancee
+        insert_stmt = (
+            "INSERT INTO compte_epargne (num_compte, rib, taux_remuneration, seuil_remuneration)"
+            "VALUES (%s, %s, %s, %s)"
+        ) if data_compte[-1] == "epargne" else (
+            "INSERT INTO compte_courant (num_compte, rib, autorisation_decouvert, taux_decouvert)"
+            "VALUES (%s, %s, %s, %s)"
+        )
+
+        bdd.envoi_requete(cursor, insert_stmt, data_compte_table)
+        bdd.fermeture(cnx, cursor)
 
     def modifier(self):
         pass
