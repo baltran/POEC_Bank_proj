@@ -28,11 +28,11 @@ class Utilisateur:
         self.email = email
 
         self.is_connected = False
-        self.__class__.cnx, self.cursor = None, None #bdd.connexion_bdd(database=DATABASE)
+        #self.cursor = None #bdd.connexion_bdd(database=DATABASE)
 
     def connexion(self, login, pwd, cnx=None):
         if not cnx:
-            self.__class__.cnx, self.cursor = connexion_bdd()
+            Utilisateur.cnx, self.cursor = connexion_bdd()
         else:
             self.cursor = cnx.cursor()
         requete = "select login from utilisateur where login=%s and password=PASSWORD(%s)"
@@ -48,7 +48,7 @@ class Utilisateur:
                 logging.info("connexion réussie")
                 print(self.cursor.rowcount)
                 print(result)
-                self.login, self.pwd, self.nom, self.prenom, self.email = result
+                login = result[0]
 
                 if login == "admin":
                     role = "admin"
@@ -57,7 +57,7 @@ class Utilisateur:
                 else:
                     role = "client"
                 self.is_connected = True
-                return role, result
+                return role, login
             else:
                 return None
 
