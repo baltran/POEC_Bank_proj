@@ -35,8 +35,27 @@ class Conseiller(Utilisateur):
         admin.agents.append(cons)
         return cons
 
-    def modifier(self, cnx=None):
-        pass
+    def modifier(self, mle_agent, cnx=None):
+        """erreur possible: agent n'existe pas"""
+        cnx_admin, cursor = bdd.connexion_bdd()
+        cursor = cnx_admin.cursor()
+        select_stmt = ("SELECT * FROM agent WHERE mle=mle_agent")
+        try:
+            bdd.envoi_requete(cursor, select_stmt)
+            ag = cursor.fetchall()
+        except mysql.connector.errors.IntegrityError:
+            return -1
+        alter_stmt = ("ALTER TABLE agent MODIFY login")
+
+
+
+        data_agent_table = data_conseiller
+        insert_stmt = (
+            "INSERT INTO agent (mle, login, date_debut, date_fin )"
+            "VALUES (%s, %s, %s, %s)"
+        )
+        bdd.envoi_requete(cursor, insert_stmt, data_agent_table)
+        bdd.fermeture(cnx_admin, cursor)
 
     def supprimmer(self, cnx=None):
         pass

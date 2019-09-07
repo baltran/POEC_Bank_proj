@@ -2,6 +2,8 @@ class Demande():
     def __init__(self):
         self.reponse = ""
 
+
+
     def accepter(self):
         print("""Accepter cette demande? (O/N) Pour quitter veuillez entrer "quitter".""")
         self.reponse = input()
