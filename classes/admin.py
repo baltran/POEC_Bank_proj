@@ -6,6 +6,7 @@ from classes.utilisateur import Utilisateur
 from classes.conseiller import Conseiller
 
 
+
 class Admin(Utilisateur):
 
     logging.basicConfig(filename='../log/admin_connexion.log', level=logging.INFO, format='%(name)s - %(levelname)s - %(message)s')
@@ -17,4 +18,7 @@ class Admin(Utilisateur):
 
 
 if __name__== "__main__":
+    # cons = Conseiller(data_user, data_conseiller)
+    # admin.agents.append(cons)
+    # return cons
     admin = Admin()

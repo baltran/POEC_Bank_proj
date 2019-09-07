@@ -33,18 +33,18 @@ CREATE TABLE `utilisateur` (
   `password` LONGTEXT DEFAULT NULL,
   `nom` varchar(30) DEFAULT NULL,
   `prenom` varchar(20) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL
+  `email` varchar(50) DEFAULT NULL,
+  `type` ENUM('admin', 'conseiller', 'client')
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `employe`
 --
 
-INSERT INTO `utilisateur` (`login`,`password`,`nom`, `prenom`, `email`) VALUES
-('admin', 'admin', 'smith', 'jean', 'jean.smith@domain.com');
-
-COMMIT;
-
+INSERT INTO `utilisateur` (`login`,`password`,`nom`, `prenom`, `email`, `type`) VALUES
+('admin', password('admin'), 'smith', 'jean', 'jean.smith@domain.com', 'admin');
+INSERT INTO `utilisateur` (`login`,`password`,`nom`, `prenom`, `email`, `type`) VALUES
+('ag1dupont', password('jeandupont$'), 'dupont', 'jean','jeand.@gmail.com', 'conseiller');
 CREATE TABLE `agent` (
   `mle` int(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
    `login` varchar(20) ,
@@ -53,6 +53,52 @@ CREATE TABLE `agent` (
    FOREIGN KEY (login) REFERENCES utilisateur(login)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `agent` (`mle`,`login`,`date_debut`, `date_fin`) VALUES
+(1, 'ag1dupont', '2000-12-04', NULL);
+
+CREATE TABLE `client` (
+    `num_client` int(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `login` varchar(20) ,
+    `conseiller` int(20) NOT NULL,
+    `adresse` varchar(50) DEFAULT NULL,
+    `telephone` varchar(10) DEFAULT NULL,
+    `revenu_mensuel` float DEFAULT NULL,
+    FOREIGN KEY (login) REFERENCES utilisateur(login),
+    FOREIGN KEY (conseiller) REFERENCES agent(mle)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `compte` (
+    `rib` varchar(20) PRIMARY KEY NOT NULL,
+    `proprietaire` int(20) NOT NULL,
+    `date_creation` datetime DEFAULT NULL,
+    `solde` int(10) DEFAULT 0,
+    `type` varchar(20) DEFAULT NULL,
+    FOREIGN KEY (proprietaire) REFERENCES client(num_client)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `compte_epargne` (
+    `num_compte` int(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `rib` varchar(20) NOT NULL,
+    `taux_remuneration` int(1) DEFAULT NULL,
+    `seuil_remuneration` int(5) DEFAULT NULL,
+    FOREIGN KEY (rib) REFERENCES compte(rib)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `compte_courant` (
+    `num_compte` int(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `rib` varchar(20) NOT NULL,
+    `autorisation_decouvert` tinyint(1) DEFAULT 0,
+    `taux_decouvert` float(2.1) DEFAULT 0,
+    `entree_moyenne` int(10) DEFAULT 0,
+    FOREIGN KEY (rib) REFERENCES compte(rib)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `operation` (
+    `num_operation` int(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `num_compte` VARCHAR(20) NOT NULL,
+    `type_opt` ENUM('debit', 'credit','virement'),
+     FOREIGN KEY (num_compte) REFERENCES compte(rib)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
