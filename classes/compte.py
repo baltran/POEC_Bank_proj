@@ -20,9 +20,9 @@ class Compte:
         except:
             return -1
         else:
-            data = (self.num_compte, "credit", somme)
+            data = (self.rib, "credit", somme)
             insert_stmt = (
-                "INSERT INTO operation (num_compte, type_opt, valeur)"
+                "INSERT INTO operation (rib_compte, type_opt, valeur)"
                 "VALUES (%s, %s, %s)"
             )
             try:

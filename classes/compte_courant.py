@@ -26,9 +26,9 @@ class CompteCourant(Compte):
         except:
             return -1
         else:
-            data = (self.num_compte, "debit", somme)
+            data = (self.rib, "debit", somme)
             insert_stmt = (
-                "INSERT INTO operation (num_compte, type_opt, valeur)"
+                "INSERT INTO operation (rib_compte, type_opt, valeur)"
                 "VALUES (%s, %s, %s)"
             )
             try:

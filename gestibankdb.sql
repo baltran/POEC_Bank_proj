@@ -95,10 +95,10 @@ CREATE TABLE `compte_courant` (
 
 CREATE TABLE `operation` (
     `num_operation` int(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    `num_compte` VARCHAR(20) NOT NULL,
+    `rib_compte` VARCHAR(20) NOT NULL,
     `type_opt` ENUM('debit', 'credit','virement'),
     `valeur` INT(20) DEFAULT NULL,
-     FOREIGN KEY (num_compte) REFERENCES compte(rib)
+     FOREIGN KEY (rib_compte) REFERENCES compte(rib)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 COMMIT;
 
