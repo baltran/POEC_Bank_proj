@@ -9,10 +9,10 @@ from classes.admin import Admin
 class TestUtilisateur(unittest.TestCase):
     connexion = None
     cursor = None
-
     @classmethod
     def setUpClass(cls):
-        TestUtilisateur.connexion, TestUtilisateur.cursor = connexion_bdd(database=DATABASE_TEST)
+        TestUtilisateur.connexion = connexion_bdd(database=DATABASE_TEST)
+        TestUtilisateur.cursor = TestUtilisateur.connexion.cursor()
 
     def setUp(self) -> None:
         req = """
@@ -32,6 +32,7 @@ class TestUtilisateur(unittest.TestCase):
     def tearDown(self) -> None:
         req = "DROP TABLE utilisateur"
         envoi_requete(TestUtilisateur.cursor, req)
+
 
     @classmethod
     def tearDownClass(cls):

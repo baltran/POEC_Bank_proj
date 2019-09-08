@@ -13,9 +13,8 @@ class Client(Utilisateur):
     @classmethod
     def creer(cls, data_user, data_client, data_compte, data_compte_avancee, cnx=None):
         if not cnx:
-            cnx_client, cursor = bdd.connexion_bdd()
-        else:
-            cursor = cnx.cursor()
+            cnx = bdd.connexion_bdd()
+        cursor = cnx.cursor()
         data_user_table = data_user
         insert_stmt_user = (
             "INSERT INTO utilisateur (login, password, nom, prenom, email )"
@@ -67,7 +66,7 @@ class Client(Utilisateur):
             return -1
         except mysql.connector.errors.DataError:
             return -2
-        bdd.fermeture(cnx, cursor)
+        cursor.close()
 
     def modifier(self):
         pass

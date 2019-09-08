@@ -1,12 +1,6 @@
 import logging
 import mysql.connector
 import re
-#try:
-#    from classes.admin import Admin
-#    from classes.conseiller import Conseiller
-#    from classes.client import Client
-#except ImportError:
-#    pass
 
 from modules.bdd import connexion_bdd, envoi_requete, fermeture
 from configs.config import DATABASE
@@ -18,8 +12,6 @@ logging.basicConfig(filename='connexion.log', level=logging.INFO, format='%(name
 
 #dfgfgh
 class Utilisateur:
-    #cnx, cursor = bdd.connexion_bdd(database=DATABASE)
-
     def __init__(self, login="", pwd="", nom="", prenom="", email=""):
         self.login = login
         self.pwd = pwd
@@ -28,25 +20,23 @@ class Utilisateur:
         self.email = email
 
         self.is_connected = False
-        #self.cursor = None #bdd.connexion_bdd(database=DATABASE)
 
     def connexion(self, login, pwd, cnx=None):
         if not cnx:
-            Utilisateur.cnx, self.cursor = connexion_bdd()
-        else:
-            self.cursor = cnx.cursor()
+            cnx = connexion_bdd()
+        cursor = cnx.cursor()
         requete = "select login from utilisateur where login=%s and password=PASSWORD(%s)"
         donnees = (login, pwd)
         try:
-            envoi_requete(self.cursor, requete, donnees)
+            envoi_requete(cursor, requete, donnees)
         except mysql.connector.errors.Error:
             logging.error("Utilisateur inconnu", exc_info=True)
             raise
         else:
-            result = self.cursor.fetchone()
+            result = cursor.fetchone()
             if result:
                 logging.info("connexion réussie")
-                print(self.cursor.rowcount)
+                print(cursor.rowcount)
                 print(result)
                 login = result[0]
 
@@ -60,6 +50,8 @@ class Utilisateur:
                 return role, login
             else:
                 return None
+        finally:
+            cursor.close()
 
     def deconnexion(self):
         self.is_connected = False
