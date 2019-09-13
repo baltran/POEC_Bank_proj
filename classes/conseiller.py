@@ -15,7 +15,9 @@ class Conseiller(Utilisateur):
     @classmethod
     def creer(self, data_user, data_conseiller, role, cnx=None):
         if role == "admin":
-            cnx_admin, cursor = bdd.connexion_bdd()
+            if not cnx:
+                cnx = bdd.connexion_bdd()
+            cursor = cnx.cursor()
             data_user_table = data_user
             insert_stmt_user = (
                 "INSERT INTO utilisateur (login, password, nom, prenom, email, type)"
@@ -25,34 +27,41 @@ class Conseiller(Utilisateur):
                 bdd.envoi_requete(cursor, insert_stmt_user, data_user_table)
             except mysql.connector.errors.IntegrityError:
                 return -1
-            data_agent_table = data_conseiller
-            insert_stmt = (
-                "INSERT INTO agent (mle, login, date_debut, date_fin )" 
-                "VALUES (%s, %s, %s, %s)"
-            )
-            bdd.envoi_requete(cursor, insert_stmt, data_agent_table)
-            bdd.fermeture(cnx_admin, cursor)
+            else:
+                data_agent_table = data_conseiller
+                insert_stmt = (
+                    "INSERT INTO agent (mle, login, date_debut, date_fin )" 
+                    "VALUES (%s, %s, %s, %s)"
+                )
+                try:
+                    bdd.envoi_requete(cursor, insert_stmt, data_agent_table)
+                except mysql.connector.errors.IntegrityError:
+                    return -1
+            finally:
+                cursor.close()
         else:
             return -1
 
-
     def modifier(self, mle_agent, date_sortie, cnx=None):
-        cnx, cursor = bdd.connexion_bdd()
-        data = (mle_agent, date_sortie)
+        if not cnx:
+            cnx = bdd.connexion_bdd()
+        cursor = cnx.cursor()
+        data_conseiller = (mle_agent, date_sortie)
         alter_stmt = (
             "Update agent set date_fin = %s where mle = %s"
         )
         try:
-            bdd.envoi_requete(cursor, alter_stmt, data)
+            bdd.envoi_requete(cursor, alter_stmt, data_conseiller)
         except:
             return -1
+
         data_agent_table = data_conseiller
         insert_stmt = (
             "INSERT INTO agent (mle, login, date_debut, date_fin )"
             "VALUES (%s, %s, %s, %s)"
         )
         bdd.envoi_requete(cursor, insert_stmt, data_agent_table)
-        bdd.fermeture(cnx_admin, cursor)
+        bdd.fermeture(cnx, cursor)
         cons = Conseiller(data_user, data_conseiller)
         admin.agents.append(cons)
         return cons
@@ -79,6 +88,10 @@ class Conseiller(Utilisateur):
         bdd.envoi_requete(cursor, insert_stmt, data_agent_table)
         bdd.fermeture(cnx_admin, cursor)
         bdd.fermeture(cnx, cursor)
+
+        finally:
+            cursor.close()
+
 
     def supprimmer(self, cnx=None):
         pass
