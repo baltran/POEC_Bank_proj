@@ -1,0 +1,57 @@
+{% extends "barre.html" %}
+{% block links_css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+{% block nav %}
+    {{ nav_link('index', 'Accueil') }}
+{% endblock %}
+{% block content %}
+        {% if current_user.is_authenticated %}
+            <h2>Hi, {{ user.username|capitalize }}!</h2>
+            <table>
+                <tr>
+                    <th>Matricule</th>
+                    <th>Nom</th>
+                    <th>Date de naissance</th>
+                    <th>Ville</th>
+                </tr>
+                {% for emp in employes %}
+                    <tr>
+                        {% for e in emp %}
+                            <td>{{ e|make_caps|center|date_format }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+            <label>Gagnant :</label><p>{{ participants|random }}</p>
+            <h2>Hi, {{ user.username|capitalize }}!</h2>
+            <table>
+                <tr>
+                    {% for col in users[0].__table__.columns %}
+                        <th>{{ col.name }}</th>
+                    {% endfor %}
+                </tr>
+                {% for user in users %}
+                    <tr>
+                        {% for col in user.__table__.columns %}
+                            <td>{{ user[col.name]|make_caps|center }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            {% for post in posts %}
+                <div>
+                    <p>
+                    {{ post.author.username }} dit: <b>{{ post.body }}</b>
+                    </p>
+                </div>
+            {% endfor %}
+            <h4>Desktop</h4>
+            <ul>
+                {% for fic in desktop %}
+                    <li>{{ fic }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+{% endblock %}}

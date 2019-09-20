@@ -1,16 +1,14 @@
 import mysql.connector
 
 import modules.bdd as bdd
-from classes.utilisateur import Utilisateur
-from classes.demande import Demande
+from webapp import db
+from webapp.classes.utilisateur import Utilisateur
 
 
 class Conseiller(Utilisateur):
-    def __init__(self, data_user, data_conseiller):
-        super().__init__(*data_user)
-        self.mle = data_conseiller[0]
-        self.date_debut = data_conseiller[2]
-        self.date_fin = data_conseiller[3]
+    mle = db.Column(db.Integer, primary_key=True)
+    date_debut = db.Column(db.String(40), index=True, unique=True)
+    date_fin = db.Column(db.String(40), index=True, unique=True)
 
     @classmethod
     def creer(self, data_user, data_conseiller, role, cnx=None):
@@ -62,8 +60,6 @@ class Conseiller(Utilisateur):
         )
         bdd.envoi_requete(cursor, insert_stmt, data_agent_table)
         bdd.fermeture(cnx, cursor)
-        cons = Conseiller(data_user, data_conseiller)
-        admin.agents.append(cons)
         return cons
 
     def modifier(self, mle_agent, cnx=None):
@@ -88,9 +84,6 @@ class Conseiller(Utilisateur):
         bdd.envoi_requete(cursor, insert_stmt, data_agent_table)
         bdd.fermeture(cnx_admin, cursor)
         bdd.fermeture(cnx, cursor)
-
-        finally:
-            cursor.close()
 
 
     def supprimmer(self, cnx=None):

@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+.comments_container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 30vw;
+    background-color: lightblue;
+    order: 1;
+}
+
+.comments_item {
+    border-radius: 57px 57px 57px 57px;
+    -moz-border-radius: 57px 57px 57px 57px;
+    -webkit-border-radius: 57px 57px 57px 57px;
+    border: 7px double #000000;
+    background-color: #e7a61a;
+    display: flex;
+    flex-direction: column;
+}
+
+.comments_item > p {
+    padding: 3%;
+    align-self: center;
+    text-align: center;
+    background-color: sandyBrown;
+    border-radius: 57px 57px 57px 57px;
+    -moz-border-radius: 57px 57px 57px 57px;
+    -webkit-border-radius: 57px 57px 57px 57px;
+    border: 7px double #000000;
+    flex-basis: 70%;
+    width: 70%;
+
+}

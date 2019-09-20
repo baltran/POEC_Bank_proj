@@ -1,10 +1,5 @@
 import logging
-from  configs.config import DATABASE
-import mysql.connector
-import modules.bdd as bdd
-from classes.utilisateur import Utilisateur
-from classes.conseiller import Conseiller
-
+from webapp.classes.utilisateur import Utilisateur
 
 
 class Admin(Utilisateur):

@@ -1,5 +1,5 @@
 import modules.bdd as bdd
-from classes.compte import Compte
+from webapp.classes.compte import Compte
 
 
 class CompteCourant(Compte):

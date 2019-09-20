@@ -1,4 +1,4 @@
-from classes.compte import Compte
+from webapp.classes.compte import Compte
 import modules.bdd as bdd
 
 

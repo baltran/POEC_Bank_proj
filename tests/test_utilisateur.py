@@ -1,8 +1,7 @@
 import unittest
-import mysql.connector
 from modules.bdd import connexion_bdd, envoi_requete, fermeture
 from configs.config import DATABASE_TEST
-from classes.utilisateur import Utilisateur
+from webapp.classes.utilisateur import Utilisateur
 from classes.admin import Admin
 
 

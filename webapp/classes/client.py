@@ -1,6 +1,6 @@
 import mysql.connector
 
-from classes.utilisateur import Utilisateur
+from webapp.classes.utilisateur import Utilisateur
 import modules.bdd as bdd
 
 

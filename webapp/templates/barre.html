@@ -1,0 +1,50 @@
+{% from "macros.html" import nav_link with context %}
+<html>
+    <head>
+    {% if title %}
+        <title>Microblog - {{ title }}</title>
+    {% else %}
+        <title>Bienvenue au Microblog</title>
+    {% endif %}
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/cuicui.png') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/barre.css') }}">
+        {% block links_css %}{% endblock %}
+    </head>
+    <body>
+        <header class="container">
+            <img src="{{ url_for('static', filename='img/logo.png') }}">
+            <h1>Microblog</h1>
+            <div id="profile">
+                {% if not current_user.is_authenticated %}
+                    <p><a class="btn_cnx" href="{{ url_for('login') }}">Connexion</a></p>
+                    <p><a class="btn_cnx" href="{{ url_for('signin') }}">Inscription</a></p>
+                    <!--<p><input type="button" class="btn_cnx" onclick="location.href='{{ url_for('signin') }}';" value="Inscription" /></p>-->
+                {% else %}
+                    <p>Bienvenue {{user.username|capitalize}}</p>
+                    <p><a class="btn_cnx" href="{{ url_for('blog') }}">Tchat</a></p>
+                    <p><a class="btn_cnx" href="{{ url_for('logout') }}">Deconnexion</a></p>
+                {% endif %}
+            </div>
+            <nav class="crumbs">
+                <ol>
+                    {% block nav %}{% endblock %}
+                </ol>
+            </nav>
+        </header>
+        <section>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                        <li style="color:red">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </section>
+        <footer>
+
+        </footer>
+    </body>
+</html>

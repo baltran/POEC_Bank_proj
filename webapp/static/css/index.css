@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+th, td {
+  border-bottom: 1px solid #ddd;
+  padding: 15px;
+  text-align: center;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+tr:hover, tr:hover td {
+    background-color: lightblue;
+    cursor: grab;
+}
+td:nth-child(even) {
+    background-color: lightgrey;
+
+}
+
+td:hover {
+    background-color: lightpink !important;
+}
