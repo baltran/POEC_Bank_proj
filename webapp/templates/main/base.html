@@ -1,0 +1,72 @@
+{% from "main/macros.html" import nav_link with context %}
+<html>
+    <head>
+    {% if title %}
+        <title>GestiBank - {{ title }}</title>
+    {% else %}
+        <title>{{ _('Bienvenue sur GestiBank
+            ') }}</title>
+    {% endif %}
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/cuicui.png') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/barre.css') }}">
+        {% block links_css %}{% endblock %}
+    </head>
+    <body>
+        <header class="container">
+            <img src="{{ url_for('static', filename='img/logo.png') }}">
+            <h1>Microblog</h1>
+            <div id="profile">
+                {% if not current_user.is_authenticated %}
+                    <p><a class="btn_cnx" href="{{ url_for('auth.login') }}">{{ _('Connexion') }}</a></p>
+                    <p><a class="btn_cnx" href="{{ url_for('auth.signin') }}">{{ _('Inscription') }}</a></p>
+                    <!--<p><input type="button" class="btn_cnx" onclick="location.href='{{ url_for('auth.signin') }}';" value="Inscription" /></p>-->
+                {% else %}
+                    <p>Bienvenue {{user.username|capitalize}}</p>
+                    <p><a class="btn_cnx" href="{{ url_for('auth.logout') }}">{{ _('Déconnexion') }}</a></p>
+                {% endif %}
+                <p>
+                    <label for="lang-select">{{ _('Langue') }}</label>
+                    <script type="text/javascript">
+                        function change_language(elem){
+                            if (elem.value) {
+                                regex = /lang=[a-z-]+/;
+                                tmp = window.location.search;
+                                if (tmp.search(regex) != -1) {
+                                    tmp = tmp.replace(regex, 'lang='+elem.value);
+                                    window.location.search = tmp;
+                                } else {
+                                    window.location.search += '&lang='+elem.value;
+                                }
+                            }
+                        }
+                    </script>
+                    <select id="lang-select" onchange="change_language(this);">
+                        <option value="">--{{ _('Choisir une langue') }}--</option>
+                        <option value="fr">{{ _('Français') }}</option>
+                        <option value="en">{{ _('Anglais') }}</option>
+                    </select>
+                </p>
+            </div>
+            <nav class="crumbs">
+                <ol>
+                    {% block nav %}{% endblock %}
+                </ol>
+            </nav>
+        </header>
+        <section>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                        <li style="color:red">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </section>
+        <footer>
+
+        </footer>
+    </body>
+</html>

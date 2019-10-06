@@ -1,8 +1,8 @@
 import unittest
 from modules.bdd import connexion_bdd, envoi_requete, fermeture
 from configs.config import DATABASE_TEST
-from webapp.classes.utilisateur import Utilisateur
-from classes.admin import Admin
+from webapp.main.classes.utilisateur import Utilisateur
+from webapp.main.classes.admin import Admin
 
 
 class TestUtilisateur(unittest.TestCase):

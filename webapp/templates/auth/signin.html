@@ -1,10 +1,10 @@
-{% extends "barre.html" %}
+{% extends "main/base.html" %}
 {% block nav %}
-    {{ nav_link('index', 'Accueil') }}
-    {{ nav_link('login', 'Connexion') }}
+    {{ nav_link('main.index', 'Accueil') }}
+    {{ nav_link('auth.signin', 'Inscription') }}
 {% endblock %}}
 {% block content %}
-    <h2>Me connecter</h2>
+    <h2>M'inscrire</h2>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
@@ -21,7 +21,20 @@
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <p>
+            {{ form.password_bis.label }}<br>
+            {{ form.password_bis(size=32) }}
+            {% for error in form.password_bis.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=32) }}
+            {% for error in form.email.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
         <p>{{ form.submit() }}</p>
     </form>
 {% endblock %}

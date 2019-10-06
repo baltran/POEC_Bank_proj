@@ -1,0 +1,30 @@
+{% extends "main/base.html" %}
+{% block nav %}
+    {{ nav_link('main.index', 'Accueil') }}
+    {{ nav_link('auth.login', 'Connexion') }}
+{% endblock %}}
+{% block content %}
+    <h2>Me connecter</h2>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}
+            {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+            {% for error in form.password.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p> {{ _('Mot de passe oublié ?') }}
+            <a href="{{ url_for('auth.reset_password_request') }}">{{ _('cliquer pour réinitialiser') }}</a>
+        </p>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
