@@ -25,8 +25,8 @@ app = current_app
 class Utilisateur(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), index=True, unique=True)
-    nom = db.Column(db.String(40), index=True, unique=True)
-    prenom = db.Column(db.String(40), index=True, unique=True)
+    nom = db.Column(db.String(40), index=True, unique=False)
+    prenom = db.Column(db.String(40), index=True, unique=False)
     email = db.Column(db.String(40), index=True, unique=True)
     password = db.Column(db.String(50))
     discriminator = db.Column('type', db.String(50))
@@ -87,6 +87,17 @@ class Utilisateur(UserMixin, db.Model):
         if user is None or user.token_expiration < datetime.utcnow():
             return None
         return user
+
+    def afficher(self):
+        return {
+            'id' : self.id,
+            'username' : self.username,
+            'nom' : self.nom,
+            'prenom' : self.prenom,
+            'email' : self.email,
+             # 'password' : self.password,
+            'discriminator' : self.discriminator
+        }
 
 
 @login.user_loader

@@ -16,7 +16,7 @@ class TestUtilisateur(unittest.TestCase):
     def setUp(self) -> None:
         req = """
         CREATE TABLE `utilisateur` (
-            `login` varchar(20) PRIMARY KEY NOT NULL,
+            `username` varchar(20) PRIMARY KEY NOT NULL,
             `password` LONGTEXT DEFAULT NULL,
             `nom` varchar(30) DEFAULT NULL,
             `prenom` varchar(20) DEFAULT NULL,
@@ -24,7 +24,7 @@ class TestUtilisateur(unittest.TestCase):
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"""
         envoi_requete(TestUtilisateur.cursor, req)
         req = """
-        INSERT INTO `utilisateur` (`login`,`password`,`nom`, `prenom`, `email`) VALUES
+        INSERT INTO `utilisateur` (`username`,`password`,`nom`, `prenom`, `email`) VALUES
 ('admin', password('admin'), 'Smith', 'John', 'john.smith@domain.com');"""
         envoi_requete(TestUtilisateur.cursor, req)
 

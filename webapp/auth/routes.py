@@ -41,24 +41,29 @@ def logout():
 def signin():
     form = SigninForm()
     if form.validate_on_submit():
-        if form.password.data == form.password_bis.data:
-            data = {
-                form.username.name: form.username.data,
-                form.password.name: generate_password_hash(form.password.data),
-                form.email.name: form.email.data
-            }
-            u = Utilisateur(**data)
-            insertion = inserer(u)
-            if insertion == -1:
-                flash("l'utilisateur existe déjà !")
-            elif not insertion:
-                flash("Erreur dans la base de donnée !")
-            else:
-                return redirect(url_for('main.index'))
+        data = {
+            form.prenom.name: form.prenom.data,
+            form.nom.name: form.nom.data,
+            form.username.name: form.username.data,
+            # form.password.name: generate_password_hash(form.password.data),
+            form.email.name: form.email.data
+        }
+        u = Utilisateur(**data)
+        insertion = inserer(u)
+        if insertion == -1:
+            flash("l'utilisateur existe déjà !")
+        elif not insertion:
+            flash("Erreur dans la base de donnée !")
         else:
-            form.password_bis.errors.append('Mot de passe non confirmé !')
+            return redirect(url_for('auth.signin_confirmation'))
     return render_template('auth/signin.html', title='Inscription',
                            form=form)
+
+
+@bp.route('/signin_confirmation', methods=['GET', 'POST'])
+@bp.endpoint('signin_confirmation')
+def signin_confirmation():
+    return render_template('auth/signin_confirmation.html', title='Confirmation de demande')
 
 
 @bp.route('/reset_password_request', methods=['GET', 'POST'])

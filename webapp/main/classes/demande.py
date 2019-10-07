@@ -1,20 +1,25 @@
-class Demande():
-    def __init__(self, data_demandeur, justificatifs, conseiller):
-        self.nom = data_demandeur[0]
-        self.prenom = data_demandeur[1]
-        self.email = data_demandeur[2]
-        self.login = data_demandeur[3]
-        self.password = data_demandeur[4]
-        self.revenu_mensuel = data_demandeur[5]
-        self.adresse = data_demandeur[6]
-        self.tel = data_demandeur[7]
-        """Manquent (?) :
-            -> nombre d’enfants
-            -> situation matrimoniale
-        """
-        self.piece_id = justificatifs[0]
-        self.just_salaire = justificatifs[1]
-        self.just_domicile = justificatifs[2]
+from webapp import db
+from webapp.main.classes.utilisateur import Utilisateur
+
+
+class Demande(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nom = db.Column(db.String(40), index=True, unique=False)
+    prenom = db.Column(db.String(40), index=True, unique=False)
+    email = db.Column(db.String(40), index=True, unique=True)
+    username = db.Column(db.String(40), index=True, unique=True)
+    password = db.Column(db.String(50))
+    revenu_mensuel = db.Column(db.Integer, index=True, primary_key=False)
+    adresse = db.Column(db.String(100), index=True, unique=True)
+    tel = db.Column(db.String(20), index=True, unique=True)
+    # """Manquent (?) :
+    # -> nombre d’enfants
+    # -> situation matrimoniale
+    # """
+    piece_id = db.Column(db.String(100), index=True, unique=True)
+    just_salaire = db.Column(db.String(100), index=True, unique=True)
+    just_domicile = db.Column(db.String(100), index=True, unique=True)
+    conseiller = db.Column(db.Integer, index=True, unique=True)
 
 
 

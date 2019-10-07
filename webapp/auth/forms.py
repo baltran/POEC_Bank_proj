@@ -11,11 +11,13 @@ class LoginForm(FlaskForm):
 
 
 class SigninForm(FlaskForm):
+    prenom = StringField('Prénom', validators=[DataRequired()])
+    nom = StringField('Nom', validators=[DataRequired()])
     username = StringField('Utilisateur', validators=[DataRequired()])
-    password = PasswordField('Mot de passe', validators=[DataRequired()])
-    password_bis = PasswordField('Confirmation du mot de passe', validators=[DataRequired()])
+    # password = PasswordField('Mot de passe', validators=[DataRequired()])
+    # password_bis = PasswordField('Confirmation du mot de passe', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired()])
-    submit = SubmitField("M'inscrire")
+    submit = SubmitField("Demander mon compte")
 
 
 class ResetPasswordRequestForm(FlaskForm):
