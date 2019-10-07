@@ -4,7 +4,7 @@ import logging
 import os
 import re
 from datetime import datetime, timedelta
-
+from time import time
 import jwt
 from flask import current_app
 from flask_login import UserMixin
@@ -24,7 +24,7 @@ app = current_app
 
 class Utilisateur(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    login = db.Column(db.String(40), index=True, unique=True)
+    username = db.Column(db.String(40), index=True, unique=True)
     nom = db.Column(db.String(40), index=True, unique=True)
     prenom = db.Column(db.String(40), index=True, unique=True)
     email = db.Column(db.String(40), index=True, unique=True)
@@ -36,8 +36,16 @@ class Utilisateur(UserMixin, db.Model):
     token_expiration = db.Column(db.DateTime)
 
     def __repr__(self):
-        return '<Utilisateur {}>'.format(self.login)
+        return '<Utilisateur {}>'.format(self.username)
 
+    def afficher(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'password': self.password,
+            'type': self.discriminator
+        }
     def check_password(self, password):
         return check_password_hash(self.password, password)
 

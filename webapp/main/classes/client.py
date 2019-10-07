@@ -25,3 +25,8 @@ class Client(Utilisateur):
     def changer_password(self, new_password, cnx=None):
         pass
 
+    def afficher(self):
+        super().afficher().update({
+            'adresse': self.adresse
+        })
+        return super().afficher()

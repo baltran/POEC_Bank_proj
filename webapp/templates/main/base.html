@@ -14,7 +14,7 @@
     <body>
         <header class="container">
             <img src="{{ url_for('static', filename='img/logo.png') }}">
-            <h1>Microblog</h1>
+            <h1>GestiBank</h1>
             <div id="profile">
                 {% if not current_user.is_authenticated %}
                     <p><a class="btn_cnx" href="{{ url_for('auth.login') }}">{{ _('Connexion') }}</a></p>

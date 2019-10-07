@@ -1,21 +1,37 @@
 
-from flask import Flask, request, session, current_app
+from flask import Flask, request, session, current_app, url_for
+from flask_admin.contrib import sqla
 from flask_babel import Babel
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+from werkzeug.utils import redirect
 
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 from flask_mail import Mail
 
 #app = Flask(__name__)
 #app.config.from_object(Config)
+#from webapp.main.classes.utilisateur import Utilisateur
+
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
 login.login_view = 'auth.login'
 mail = Mail()
 babel = Babel()
+
+
+class GestiBankModelView(sqla.ModelView):
+
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.discriminator == 'admin'
+
+    def inaccessible_callback(self, name, **kwargs):
+        # redirect to login page if user doesn't have access
+        return redirect(url_for('auth.login', next=request.url))
 
 
 def create_app(config_class=Config):
@@ -28,8 +44,11 @@ def create_app(config_class=Config):
     mail.init_app(app)
     #bootstrap.init_app(app)
     #moment.init_app(app)
-    babel.init_app(app)
 
+
+    babel.init_app(app)
+    admin = Admin(app, name='GestiBank')
+    admin.add_view(GestiBankModelView(models.Client, db.session))
     # ... no changes to blueprint registration
     from webapp.auth import bp as auth_bp
     from webapp.main import bp as main_bp

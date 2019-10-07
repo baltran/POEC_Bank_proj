@@ -12,11 +12,20 @@ from webapp.main.requetes import inserer
 from webapp.auth.email import send_password_reset_email
 
 
+def redirect_by_role(user):
+    if user.discriminator == "client":
+        return redirect(url_for('client.index'))
+    elif user.discriminator == "conseiller":
+        return redirect(url_for('conseiller.index'))
+    else:
+        return redirect(url_for('admin.index'))
+
+
 @bp.route('login', methods=['GET', 'POST'])
 @bp.endpoint('login')
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
+        return redirect_by_role(current_user)
     form = LoginForm()
     if form.validate_on_submit():
         user = Utilisateur.query.filter_by(username=form.username.data).first()
@@ -24,7 +33,8 @@ def login():
             flash('Login ou mot de passe invalide')
             return redirect(url_for('auth.login'))
         login_user(user, remember=form.remember_me.data)
-        return redirect(url_for('main.index'))
+        return redirect_by_role(user)
+        #return redirect(url_for('main.index'))
     return render_template('auth/login.html', title='Authentification',
                            form=form)
 
