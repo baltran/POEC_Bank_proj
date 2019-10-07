@@ -3,7 +3,7 @@ import logging
 #import mysql.connector
 import os
 import re
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 
 import jwt
 from flask import current_app
@@ -15,16 +15,16 @@ from configs.config import DATABASE
 from webapp import db, login
 
 logging.basicConfig(filename='connexion.log', level=logging.INFO, format='%(name)s - %(levelname)s - %(message)s')
-#logging.config.fileConfig(fname='../configs/log.conf', disable_existing_loggers=False)
+# logging.config.fileConfig(fname='../configs/log.conf', disable_existing_loggers=False)
 # Récupère le logger spécifié dans le fichier
-#logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 app = current_app
 
 
 class Utilisateur(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    login = db.Column(db.String(40), index=True, unique=True)
+    username = db.Column(db.String(40), index=True, unique=True)
     nom = db.Column(db.String(40), index=True, unique=True)
     prenom = db.Column(db.String(40), index=True, unique=True)
     email = db.Column(db.String(40), index=True, unique=True)
@@ -36,7 +36,7 @@ class Utilisateur(UserMixin, db.Model):
     token_expiration = db.Column(db.DateTime)
 
     def __repr__(self):
-        return '<Utilisateur {}>'.format(self.login)
+        return '<Utilisateur {}>'.format(self.username)
 
     def check_password(self, password):
         return check_password_hash(self.password, password)

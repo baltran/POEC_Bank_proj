@@ -26,7 +26,7 @@ def index():
             'body': 'Mais non, il suffit de bien le configurer'
         }
     ]
-    bureau = os.listdir("c:")
+    bureau = os.listdir(os.path.abspath(os.path.dirname(__file__)))
     users = select_all(Utilisateur)
     return render_template('main/index.html',
                            #title="Page d'accueil",
