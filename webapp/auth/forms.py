@@ -17,6 +17,9 @@ class SigninForm(FlaskForm):
     # password = PasswordField('Mot de passe', validators=[DataRequired()])
     # password_bis = PasswordField('Confirmation du mot de passe', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired()])
+    adresse = StringField('Adresse', validators=[DataRequired()])
+    tel = StringField('Téléphone', validators=[DataRequired()])
+    revenu_mensuel = StringField('Revenu mensuel moyen', validators=[DataRequired()])
     submit = SubmitField("Demander mon compte")
 
 

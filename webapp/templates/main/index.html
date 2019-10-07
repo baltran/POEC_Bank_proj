@@ -24,6 +24,20 @@
                     </tr>
                 {% endfor %}
             </table>
+            <table>
+                <tr>
+                    {% for col in requests[0].afficher().keys() %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+                {% for request in requests %}
+                    <tr>
+                        {% for e in request.afficher().values() %}
+                            <td>{{ e|make_caps|center }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
         {% else %}
             {% for post in posts %}
                 <div>

@@ -7,6 +7,7 @@ from webapp.main import bp
 from webapp.main.forms import CommentForm
 from flask_login import current_user, login_required
 from webapp.main.classes.utilisateur import Utilisateur
+from webapp.main.classes.demande import Demande
 from webapp.main.requetes import select_all, inserer
 
 
@@ -28,12 +29,14 @@ def index():
     ]
     bureau = os.listdir(os.path.abspath(os.path.dirname(__file__)))
     users = select_all(Utilisateur)
+    requests = select_all(Demande)
     return render_template('main/index.html',
                            #title="Page d'accueil",
                            user=current_user,
                            posts=posts,
                            desktop=bureau,
                            users=users,
+                           requests=requests,
                            participants=[])
 
 

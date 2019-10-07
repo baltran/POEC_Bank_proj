@@ -10,14 +10,14 @@
         <p>
             {{ form.prenom.label }}<br>
             {{ form.prenom(size=32) }}
-            {% for error in form.username.errors %}
+            {% for error in form.prenom.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
             {{ form.nom.label }}<br>
             {{ form.nom(size=32) }}
-            {% for error in form.username.errors %}
+            {% for error in form.nom.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
@@ -32,6 +32,27 @@
             {{ form.email.label }}<br>
             {{ form.email(size=32) }}
             {% for error in form.email.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.adresse.label }}<br>
+            {{ form.adresse(size=32) }}
+            {% for error in form.adresse.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.tel.label }}<br>
+            {{ form.tel(size=32) }}
+            {% for error in form.tel.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.revenu_mensuel.label }}<br>
+            {{ form.revenu_mensuel(size=32) }}
+            {% for error in form.revenu_mensuel.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>

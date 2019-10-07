@@ -8,6 +8,7 @@ from webapp.auth import bp
 from webapp.auth.forms import LoginForm, SigninForm, ResetPasswordRequestForm, ResetPasswordForm
 from flask_login import current_user, login_user, logout_user
 from webapp.main.classes.utilisateur import Utilisateur
+from webapp.main.classes.demande import Demande
 from webapp.main.requetes import inserer
 from webapp.auth.email import send_password_reset_email
 
@@ -46,14 +47,17 @@ def signin():
             form.nom.name: form.nom.data,
             form.username.name: form.username.data,
             # form.password.name: generate_password_hash(form.password.data),
-            form.email.name: form.email.data
+            form.email.name: form.email.data,
+            form.adresse.name: form.adresse.data,
+            form.tel.name: form.telephone.data,
+            form.revenu_mensuel.name: form.revenu_mensuel.data
         }
-        u = Utilisateur(**data)
-        insertion = inserer(u)
+        demande = Demande(**data)
+        insertion = inserer(demande)
         if insertion == -1:
-            flash("l'utilisateur existe déjà !")
+            flash("Demande déjà effectuée.")
         elif not insertion:
-            flash("Erreur dans la base de donnée !")
+            flash("Erreur dans la base de données.")
         else:
             return redirect(url_for('auth.signin_confirmation'))
     return render_template('auth/signin.html', title='Inscription',
