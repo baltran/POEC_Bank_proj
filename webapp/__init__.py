@@ -1,20 +1,14 @@
 from flask import Flask, request, session, current_app, url_for
-from flask_admin.contrib import sqla
-from flask_admin.contrib.sqla.ajax import QueryAjaxModelLoader
-from flask_admin.model import BaseModelView
+
 from flask_babel import Babel
-from flask_admin import Admin, AdminIndexView
-from flask_admin.contrib.sqla import ModelView
-from werkzeug.utils import redirect
+from flask_admin import Admin
 
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_login import LoginManager, current_user
+from flask_login import LoginManager
 from flask_mail import Mail
 
-# app = Flask(__name__)
-# app.config.from_object(Config)
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -22,41 +16,10 @@ login = LoginManager()
 login.login_view = 'auth.login'
 mail = Mail()
 babel = Babel()
+admin_flask = Admin(name='Administration')
 
 
 def create_app(config_class=Config):
-    class GestiBankModelView(sqla.ModelView):
-
-        def is_accessible(self):
-            return current_user.is_authenticated and current_user.discriminator == 'admin'
-
-        def inaccessible_callback(self, name, **kwargs):
-            # redirect to login page if user doesn't have access
-            return redirect(url_for('auth.login', next=request.url))
-
-    class DemandeModelView(GestiBankModelView):
-        can_create = False
-        can_edit = True
-        form_columns = ['mon_conseiller']
-        column_exclude_list = (
-            'password',
-        )
-
-    class ConseillerModelView(GestiBankModelView):
-        column_exclude_list = (
-            'discriminator',
-            'token',
-            'token_expiration')
-        form_columns = ['username', 'password', 'nom', 'prenom', 'email', 'date_debut', 'date_fin']
-
-    class MyAdminIndexView(AdminIndexView):
-
-        def is_accessible(self):
-            return current_user.is_authenticated and current_user.discriminator == 'admin'
-
-        def inaccessible_callback(self, name, **kwargs):
-            # redirect to login page if user doesn't have access
-            return redirect(url_for('auth.login', next=request.url))
 
     app = Flask(__name__)
     app.config.from_object(config_class)
@@ -68,11 +31,10 @@ def create_app(config_class=Config):
     # bootstrap.init_app(app)
     # moment.init_app(app)
     babel.init_app(app)
+    admin_flask.init_app(app)
 
-    admin = Admin(app, name='GestiBank', index_view=MyAdminIndexView())
-    admin.add_view(DemandeModelView(models.Demande, db.session))
-    admin.add_view(ConseillerModelView(models.Conseiller, db.session))
-    admin.add_view(GestiBankModelView(models.Utilisateur, db.session))
+    #admin = Admin(app, name='Administration', index_view=views.MyAdminIndexView())
+
     # ... no changes to blueprint registration
     from webapp.auth import bp as auth_bp
     from webapp.main import bp as main_bp
@@ -87,12 +49,17 @@ def create_app(config_class=Config):
         # ... no changes to logging setup
         pass
     with app.app_context():
-        pass
+        admin_flask.index_view = views.MyAdminIndexView()
+        admin_flask.template_mode='bootstrap3'
+        admin_flask.add_view(views.DemandeModelView(models.Demande, db.session))
+        admin_flask.add_view(views.ConseillerModelView(models.Conseiller, db.session))
+        admin_flask.add_link(views.LogoutMenuLink(name='Logout', category='', url='/auth/logout'))
 
     return app
 
 
 from webapp.main import models, filters
+from webapp.admin import views
 
 
 @babel.localeselector
