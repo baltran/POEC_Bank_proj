@@ -1,6 +1,7 @@
 
 from flask import Flask, request, session, current_app, url_for
 from flask_admin.contrib import sqla
+from flask_admin.contrib.sqla.ajax import QueryAjaxModelLoader
 from flask_babel import Babel
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
@@ -14,7 +15,6 @@ from flask_mail import Mail
 
 #app = Flask(__name__)
 #app.config.from_object(Config)
-#from webapp.main.classes.utilisateur import Utilisateur
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -24,27 +24,34 @@ mail = Mail()
 babel = Babel()
 
 
-class GestiBankModelView(sqla.ModelView):
-
-    def is_accessible(self):
-        return current_user.is_authenticated and current_user.discriminator == 'admin'
-
-    def inaccessible_callback(self, name, **kwargs):
-        # redirect to login page if user doesn't have access
-        return redirect(url_for('auth.login', next=request.url))
-
-
-class MyAdminIndexView(AdminIndexView):
-
-    def is_accessible(self):
-        return current_user.is_authenticated and current_user.discriminator == 'admin'
-
-    def inaccessible_callback(self, name, **kwargs):
-        # redirect to login page if user doesn't have access
-        return redirect(url_for('auth.login', next=request.url))
-
-
 def create_app(config_class=Config):
+    class GestiBankModelView(sqla.ModelView):
+
+        def is_accessible(self):
+            return current_user.is_authenticated and current_user.discriminator == 'admin'
+
+        def inaccessible_callback(self, name, **kwargs):
+            # redirect to login page if user doesn't have access
+            return redirect(url_for('auth.login', next=request.url))
+
+    class DemandeModelView(GestiBankModelView):
+        form_ajax_refs = {
+            'conseiller': QueryAjaxModelLoader('conseiller', db.session, models.Conseiller, fields=['id'],
+                                                  page_size=10)
+        }
+
+    class ConseillerModelView(GestiBankModelView):
+        pass
+
+    class MyAdminIndexView(AdminIndexView):
+
+        def is_accessible(self):
+            return current_user.is_authenticated and current_user.discriminator == 'admin'
+
+        def inaccessible_callback(self, name, **kwargs):
+            # redirect to login page if user doesn't have access
+            return redirect(url_for('auth.login', next=request.url))
+
     app = Flask(__name__)
     app.config.from_object(config_class)
 
@@ -57,8 +64,8 @@ def create_app(config_class=Config):
     babel.init_app(app)
 
     admin = Admin(app, name='GestiBank', index_view=MyAdminIndexView())
-    admin.add_view(GestiBankModelView(models.Client, db.session))
-
+    admin.add_view(DemandeModelView(models.Demande, db.session))
+    admin.add_view(ConseillerModelView(models.Conseiller, db.session))
     # ... no changes to blueprint registration
     from webapp.auth import bp as auth_bp
     from webapp.main import bp as main_bp
@@ -87,3 +94,4 @@ def get_locale():
         session['lang'] = request.args.get('lang')
     local_language = session.get('lang', request.accept_languages.best_match(current_app.config['LANGUAGES']))
     return local_language
+

@@ -19,7 +19,7 @@ class Demande(db.Model):
     piece_id = db.Column(db.String(100), index=True, unique=True)
     just_salaire = db.Column(db.String(100), index=True, unique=True)
     just_domicile = db.Column(db.String(100), index=True, unique=True)
-    conseiller = db.Column(db.Integer, index=True, unique=True)
+    conseiller_id = db.Column(db.Integer, db.ForeignKey('conseiller.id'))
 
 
     def accepter(self):
