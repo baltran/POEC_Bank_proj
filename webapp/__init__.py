@@ -2,6 +2,7 @@
 from flask import Flask, request, session, current_app, url_for
 from flask_admin.contrib import sqla
 from flask_admin.contrib.sqla.ajax import QueryAjaxModelLoader
+from flask_admin.model import BaseModelView
 from flask_babel import Babel
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
@@ -35,10 +36,7 @@ def create_app(config_class=Config):
             return redirect(url_for('auth.login', next=request.url))
 
     class DemandeModelView(GestiBankModelView):
-        form_ajax_refs = {
-            'conseiller': QueryAjaxModelLoader('conseiller', db.session, models.Conseiller, fields=['id'],
-                                                  page_size=10)
-        }
+        pass
 
     class ConseillerModelView(GestiBankModelView):
         pass
@@ -51,6 +49,7 @@ def create_app(config_class=Config):
         def inaccessible_callback(self, name, **kwargs):
             # redirect to login page if user doesn't have access
             return redirect(url_for('auth.login', next=request.url))
+
 
     app = Flask(__name__)
     app.config.from_object(config_class)
@@ -66,6 +65,7 @@ def create_app(config_class=Config):
     admin = Admin(app, name='GestiBank', index_view=MyAdminIndexView())
     admin.add_view(DemandeModelView(models.Demande, db.session))
     admin.add_view(ConseillerModelView(models.Conseiller, db.session))
+    admin.add_view(GestiBankModelView(models.Utilisateur, db.session))
     # ... no changes to blueprint registration
     from webapp.auth import bp as auth_bp
     from webapp.main import bp as main_bp
