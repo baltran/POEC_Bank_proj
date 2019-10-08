@@ -1,0 +1,40 @@
+<!--Ce fichier stocke le modèle de connexion-->
+{% extends "barre.html" %}
+{% block content %}
+    <h1>Nouveau compte</h1>
+    <!--L'élément HTML <form> est utilisé comme conteneur pour le formulaire Web.-->
+
+    <!--L'attribut action du formulaire est utilisé pour indiquer au navigateur
+    l'URL à utiliser lors de la soumission des informations saisies par
+    l'utilisateur dans le formulaire.-->
+
+    <!--L'attribut method spécifie la méthode de requête HTTP à utiliser lors
+    de la soumission du formulaire au serveur-->
+
+    <!--L'attribut novalidate est utilisé pour indiquer au navigateur Web
+    de ne pas appliquer de validation aux champs de ce formulaire, ce
+    qui laisse cette tâche à l'application Flask s'exécutant sur le serveur.-->
+    <form action="" method="post" novalidate>
+        <!--L'argument de modèle form.hidden_tag() génère un champ
+        masqué comprenant un jeton utilisé pour protéger le
+        formulaire contre les attaques CSRF.-->
+        {{ form.hidden_tag() }}
+        <p>
+<!--        positionne le libellé du champ "username" : -->
+            {{ form.username.label }} <br>
+<!--            positionne le champ "username" :-->
+            {{ form.username(size=32) }}
+        </p>
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email }}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+        </p>
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+{% endblock %}

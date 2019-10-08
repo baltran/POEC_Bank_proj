@@ -8,6 +8,7 @@ def inserer(objet):
         db.session.commit()
     except exc.IntegrityError as e:
         db.session.rollback()
+        print(e)
         return -1
     except exc.SQLAlchemyError as e:
         print(e)
