@@ -3,8 +3,9 @@ import logging
 #import mysql.connector
 import os
 import re
-from datetime import datetime, timedelta, time
 
+from datetime import datetime, timedelta
+from time import time
 import jwt
 from flask import current_app
 from flask_login import UserMixin

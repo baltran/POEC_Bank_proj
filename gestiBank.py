@@ -9,5 +9,4 @@ cli.register(app)
 
 @app.shell_context_processor
 def make_shell_context():
-    return {'db': db, 'User': Utilisateur, 'Conseiller' : Conseiller, 'Demande' : Demande, gph': gph, 'Message': Message, 'mail': mail}
-
+    return {'db': db, 'User': Utilisateur, 'Conseiller' : Conseiller, 'Demande' : Demande, 'gph': gph, 'Message': Message, 'mail': mail}
