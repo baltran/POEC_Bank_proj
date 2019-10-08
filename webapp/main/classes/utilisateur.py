@@ -3,6 +3,7 @@ import logging
 #import mysql.connector
 import os
 import re
+
 from datetime import datetime, timedelta
 from time import time
 import jwt
@@ -15,9 +16,9 @@ from configs.config import DATABASE
 from webapp import db, login
 
 logging.basicConfig(filename='connexion.log', level=logging.INFO, format='%(name)s - %(levelname)s - %(message)s')
-#logging.config.fileConfig(fname='../configs/log.conf', disable_existing_loggers=False)
+# logging.config.fileConfig(fname='../configs/log.conf', disable_existing_loggers=False)
 # Récupère le logger spécifié dans le fichier
-#logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 app = current_app
 
@@ -38,14 +39,6 @@ class Utilisateur(UserMixin, db.Model):
     def __repr__(self):
         return '<Utilisateur {}>'.format(self.username)
 
-    def afficher(self):
-        return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email,
-            'password': self.password,
-            'type': self.discriminator
-        }
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
@@ -95,6 +88,17 @@ class Utilisateur(UserMixin, db.Model):
         if user is None or user.token_expiration < datetime.utcnow():
             return None
         return user
+
+    def afficher(self):
+        return {
+            'id' : self.id,
+            'username' : self.username,
+            'nom' : self.nom,
+            'prenom' : self.prenom,
+            'email' : self.email,
+            'password' : self.password,
+            'discriminator' : self.discriminator
+        }
 
 
 @login.user_loader

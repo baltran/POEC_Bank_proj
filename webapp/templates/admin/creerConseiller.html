@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{% extends "main/base.html" %}
+{% block content %}
+<form action="{{ url_for('admin.creerConseiller') }}" method="post">
+        {{form.hidden_tag() }}
+        <p>
+        {{form.date_debut.label}}<br>
+        {{form.date_debut(size=32)}}<br>
+
+            {% for error in form.date_debut.errors %}
+                <span style='color:red'>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+        {{form.date_fin.label}}<br>
+        {{form.date_fin(size=32)}}<br>
+
+            {% for error in form.date_fin.errors %}
+                <span style='color:red'>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{form.password.label}}<br>
+            {{form.password(size=32)}}
+
+            {% for error in form.password.errors %}
+                <span style='color:red'>[{{ error }}]</span>
+            {% endfor %}
+
+        </p>
+        <p>
+            {{form.password_bis.label }}<br>
+            {{form.password_bis(size=32)}}
+
+            {% for error in form.password_bis.errors %}
+                <span style='color:red'>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p>{{form.submit}}</p>
+    {% endblock %}
+</form>
+{%endblock %}
+</html>
