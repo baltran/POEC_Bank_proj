@@ -3,14 +3,17 @@ import mysql.connector
 import modules.bdd as bdd
 from webapp import db
 from webapp.main.classes.utilisateur import Utilisateur
-import  datetime
+from webapp.main.classes.demande import Demande
+import datetime
+
 
 class Conseiller(Utilisateur):
-    __tablename__ = 'conseiller'
+    # __tablename__ = 'conseiller'
     __mapper_args__ = {'polymorphic_identity': 'conseiller'}
     id = db.Column(db.Integer, db.ForeignKey('utilisateur.id'), primary_key=True)
     date_debut = db.Column(db.DateTime, index=True, default=datetime.datetime.utcnow)
     date_fin = db.Column(db.DateTime, index=True, default=None)
+    demande = db.relationship('Demande', backref='mon_conseiller', lazy='dynamic')
 
     @classmethod
     def creer(cls, data_user, data_conseiller, role, cnx=None):
@@ -19,7 +22,7 @@ class Conseiller(Utilisateur):
     def modifier(self, mle_agent, date_sortie, cnx=None):
         pass
 
-    #def modifier(self, mle_agent, cnx=None):
+    # def modifier(self, mle_agent, cnx=None):
     #    pass
 
     def supprimmer(self, cnx=None):
