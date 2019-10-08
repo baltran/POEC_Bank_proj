@@ -36,7 +36,7 @@ def create_app(config_class=Config):
 
     class DemandeModelView(GestiBankModelView):
         form_ajax_refs = {
-            'ConseillerBis': QueryAjaxModelLoader('conseiller', db.session, models.Conseiller, fields=['id'],
+            'conseiller': QueryAjaxModelLoader('conseiller', db.session, models.Conseiller, fields=['id'],
                                                   page_size=10)
         }
 
