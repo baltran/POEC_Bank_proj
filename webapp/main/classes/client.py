@@ -1,6 +1,7 @@
 #import mysql.connector
 from webapp import db
 from webapp.main.classes.utilisateur import Utilisateur
+from webapp.main.classes.compte import Compte
 import modules.bdd as bdd
 
 
