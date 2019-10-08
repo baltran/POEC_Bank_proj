@@ -45,8 +45,7 @@ class Utilisateur(UserMixin, db.Model):
     @password.setter
     def password(self, password):
         """Salt/Hash and save the user's new password."""
-        new_password_hash = generate_password_hash(password)
-        self._password = new_password_hash
+        self._password = generate_password_hash(password)
 
     @password.getter
     def password(self):
@@ -60,7 +59,7 @@ class Utilisateur(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def set_password(self, password):
-        self.password = generate_password_hash(password)
+        self.password = password
 
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode(

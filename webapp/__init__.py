@@ -50,7 +50,7 @@ def create_app(config_class=Config):
         pass
     with app.app_context():
         admin_flask.index_view = views.MyAdminIndexView()
-        admin_flask.template_mode='bootstrap3'
+        admin_flask.template_mode = 'bootstrap3'
         admin_flask.add_view(views.DemandeModelView(models.Demande, db.session))
         admin_flask.add_view(views.ConseillerModelView(models.Conseiller, db.session))
         admin_flask.add_link(views.LogoutMenuLink(name='Logout', category='', url='/auth/logout'))

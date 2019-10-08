@@ -28,6 +28,7 @@ class DemandeModelView(GestiBankModelView):
 class ConseillerModelView(GestiBankModelView):
     column_exclude_list = (
         'discriminator',
+        '_password',
         'token',
         'token_expiration')
     form_columns = ['username', 'password', 'nom', 'prenom', 'email', 'date_debut', 'date_fin']
