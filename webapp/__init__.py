@@ -1,4 +1,3 @@
-
 from flask import Flask, request, session, current_app, url_for
 from flask_admin.contrib import sqla
 from flask_admin.contrib.sqla.ajax import QueryAjaxModelLoader
@@ -14,8 +13,8 @@ from flask_migrate import Migrate
 from flask_login import LoginManager, current_user
 from flask_mail import Mail
 
-#app = Flask(__name__)
-#app.config.from_object(Config)
+# app = Flask(__name__)
+# app.config.from_object(Config)
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -36,10 +35,19 @@ def create_app(config_class=Config):
             return redirect(url_for('auth.login', next=request.url))
 
     class DemandeModelView(GestiBankModelView):
-        pass
+        can_create = False
+        can_edit = True
+        form_columns = ['mon_conseiller']
+        column_exclude_list = (
+            'password',
+        )
 
     class ConseillerModelView(GestiBankModelView):
-        pass
+        column_exclude_list = (
+            'discriminator',
+            'token',
+            'token_expiration')
+        form_columns = ['username', 'password', 'nom', 'prenom', 'email', 'date_debut', 'date_fin']
 
     class MyAdminIndexView(AdminIndexView):
 
@@ -50,7 +58,6 @@ def create_app(config_class=Config):
             # redirect to login page if user doesn't have access
             return redirect(url_for('auth.login', next=request.url))
 
-
     app = Flask(__name__)
     app.config.from_object(config_class)
 
@@ -58,8 +65,8 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     login.init_app(app)
     mail.init_app(app)
-    #bootstrap.init_app(app)
-    #moment.init_app(app)
+    # bootstrap.init_app(app)
+    # moment.init_app(app)
     babel.init_app(app)
 
     admin = Admin(app, name='GestiBank', index_view=MyAdminIndexView())
@@ -70,12 +77,12 @@ def create_app(config_class=Config):
     from webapp.auth import bp as auth_bp
     from webapp.main import bp as main_bp
     from webapp.admin import bp as admin_bp
-    #from webapp.api import bp as api_bp
+    # from webapp.api import bp as api_bp
 
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(main_bp)
     app.register_blueprint(admin_bp)
-    #app.register_blueprint(api_bp, url_prefix='/api')
+    # app.register_blueprint(api_bp, url_prefix='/api')
     if not app.debug and not app.testing:
         # ... no changes to logging setup
         pass
@@ -94,4 +101,3 @@ def get_locale():
         session['lang'] = request.args.get('lang')
     local_language = session.get('lang', request.accept_languages.best_match(current_app.config['LANGUAGES']))
     return local_language
-

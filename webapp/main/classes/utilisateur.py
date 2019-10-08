@@ -9,6 +9,7 @@ from time import time
 import jwt
 from flask import current_app
 from flask_login import UserMixin
+from sqlalchemy.ext.hybrid import hybrid_property
 from werkzeug.security import check_password_hash, generate_password_hash
 
 #from modules.bdd import connexion_bdd, envoi_requete, fermeture
@@ -29,12 +30,23 @@ class Utilisateur(UserMixin, db.Model):
     nom = db.Column(db.String(40), index=True, unique=False)
     prenom = db.Column(db.String(40), index=True, unique=False)
     email = db.Column(db.String(40), index=True, unique=True)
-    password = db.Column(db.String(50))
+    _password = db.Column('password', db.String(50))
     discriminator = db.Column('type', db.String(50))
     __mapper_args__ = {'polymorphic_on': discriminator}
 
     token = db.Column(db.String(32), index=True, unique=True)
     token_expiration = db.Column(db.DateTime)
+
+    #@hybrid_property
+    #def password(self):
+    #    """Return the hashed user password."""
+    #    return self._password
+    #
+    #@password.setter
+    #def password(self, password):
+    #    """Salt/Hash and save the user's new password."""
+    #    new_password_hash = generate_password_hash(password)
+    #    self._password = new_password_hash
 
     def __repr__(self):
         return '<Utilisateur {}>'.format(self.username)
