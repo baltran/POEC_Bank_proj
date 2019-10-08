@@ -17,7 +17,11 @@ from webapp.main.classes.conseiller import Conseiller
 #@roles_required('admin')
 def espaceClient():
     if current_user.is_authenticated:
+        """consulter le compte"""
         render_template('client/espaceClient.html')
+    else:
+        redirect(url_for('auth.login'))
+
 
 
 
