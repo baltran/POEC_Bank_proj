@@ -6,8 +6,16 @@
 </head>
 {% extends "main/base.html" %}
 {% block content %}
-<form action="{{ url_for('admin.creerConseiller') }}" method="post">
+<form action="{{ url_for('admins.creerConseiller') }}" method="post">
         {{form.hidden_tag() }}
+        <p>
+            {{form.login.label}}<br>
+            {{form.login(size=32)}}<br>
+
+            {% for error in form.login.errors %}
+                <span style='color:red'>[{{ error }}]</span>
+            {% endfor %}
+        </p>
         <p>
         {{form.date_debut.label}}<br>
         {{form.date_debut(size=32)}}<br>
@@ -43,7 +51,7 @@
         </p>
 
         <p>{{form.submit}}</p>
-    {% endblock %}
+
 </form>
-{%endblock %}
+{% endblock %}
 </html>

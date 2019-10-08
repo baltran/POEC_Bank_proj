@@ -10,7 +10,7 @@ from webapp.main.classes.utilisateur import Utilisateur
 from webapp.admin.forms import ConseillerCreationForm
 from webapp.main.requetes import inserer
 from webapp.auth.email import send_password_reset_email
-from flask_user import roles_required
+
 from webapp.main.classes.conseiller import Conseiller
 
 @bp.route('/creerConseiller', methods=['GET', 'POST'])
@@ -21,7 +21,7 @@ def creerConseiller():
     if form.validate_on_submit():
         if form.password.data == form.password_bis.data:
             data = {
-                form.id: form.id.data,
+                form.login.name: form.login.data,
                 form.password.name: generate_password_hash(form.password.data),
                 form.date_debut.name: form.date_debut.data,
                 form.date_fin.name: form.date_fin.data
@@ -38,4 +38,4 @@ def creerConseiller():
         else:
             form.password_bis.errors.append('Mot de passe non confirmé !')
     return render_template('admin/creerConseiller.html', title='creation consieller',
-                           form=form)
+                           user=current_user, form=form)
