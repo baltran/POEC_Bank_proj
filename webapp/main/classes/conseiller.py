@@ -15,6 +15,9 @@ class Conseiller(Utilisateur):
     date_fin = db.Column(db.DateTime, index=True, default=None)
     demande = db.relationship('Demande', backref='mon_conseiller', lazy='dynamic')
 
+    def __repr__(self):
+        return '<Conseiller {}>'.format(self.username)
+
     @classmethod
     def creer(cls, data_user, data_conseiller, role, cnx=None):
         pass
