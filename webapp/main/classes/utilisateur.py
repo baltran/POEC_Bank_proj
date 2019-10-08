@@ -37,16 +37,21 @@ class Utilisateur(UserMixin, db.Model):
     token = db.Column(db.String(32), index=True, unique=True)
     token_expiration = db.Column(db.DateTime)
 
-    #@hybrid_property
-    #def password(self):
-    #    """Return the hashed user password."""
-    #    return self._password
-    #
-    #@password.setter
-    #def password(self, password):
-    #    """Salt/Hash and save the user's new password."""
-    #    new_password_hash = generate_password_hash(password)
-    #    self._password = new_password_hash
+    @hybrid_property
+    def password(self):
+        """Return the hashed user password."""
+        return self._password
+
+    @password.setter
+    def password(self, password):
+        """Salt/Hash and save the user's new password."""
+        new_password_hash = generate_password_hash(password)
+        self._password = new_password_hash
+
+    @password.getter
+    def password(self):
+        """Return the hashed user password."""
+        return self._password
 
     def __repr__(self):
         return '<Utilisateur {}>'.format(self.username)
