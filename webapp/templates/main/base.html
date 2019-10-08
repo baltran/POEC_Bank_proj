@@ -23,7 +23,7 @@
                     <!--<p><input type="button" class="btn_cnx" onclick="location.href='{{ url_for('auth.signin') }}';" value="Inscription" /></p>-->
                 {% else %}
                     <p>Bienvenue {{user.username|capitalize}}</p>
-                    <p><a class="btn_cnx" href="{{ url_for('admin.creerConseiller') }}">{{ _('Création de conseiller') }}</a></p>
+                    <p><a class="btn_cnx" href="{{ url_for('admins.creerConseiller') }}">{{ _('Création de conseiller') }}</a></p>
                     <p><a class="btn_cnx" href="{{ url_for('auth.logout') }}">{{ _('Déconnexion') }}</a></p>
                 {% endif %}
                 <p>
