@@ -18,15 +18,17 @@ from webapp.main.classes.conseiller import Conseiller
 #@roles_required('admin')
 def creerConseiller():
     form = ConseillerCreationForm()
+
     if form.validate_on_submit():
         if form.password.data == form.password_bis.data:
             data = {
-                form.login.name: form.login.data,
-                form.password.name: generate_password_hash(form.password.data),
+                form.username.name: form.username.data,
                 form.date_debut.name: form.date_debut.data,
-                form.date_fin.name: form.date_fin.data
+                form.date_fin.name: form.date_fin.data,
+                form.password.name: generate_password_hash(form.password.data)
 
             }
+            print(data)
             u = Conseiller(**data)
             insertion = inserer(u)
             if insertion == -1:

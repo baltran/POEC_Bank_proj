@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
 {% extends "main/base.html" %}
 {% block content %}
 <form action="{{ url_for('admins.creerConseiller') }}" method="post">
         {{form.hidden_tag() }}
         <p>
-            {{form.login.label}}<br>
-            {{form.login(size=32)}}<br>
+            {{form.username.label}}<br>
+            {{form.username(size=32)}}<br>
 
-            {% for error in form.login.errors %}
+            {% for error in form.username.errors %}
                 <span style='color:red'>[{{ error }}]</span>
             {% endfor %}
         </p>
