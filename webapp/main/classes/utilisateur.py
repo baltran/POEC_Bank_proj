@@ -4,7 +4,7 @@ import logging
 import os
 import re
 from datetime import datetime, timedelta
-
+from time import time
 import jwt
 from flask import current_app
 from flask_login import UserMixin
@@ -24,7 +24,7 @@ app = current_app
 
 class Utilisateur(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    login = db.Column(db.String(40), index=True, unique=True)
+    username = db.Column(db.String(40), index=True, unique=True)
     nom = db.Column(db.String(40), index=True, unique=True)
     prenom = db.Column(db.String(40), index=True, unique=True)
     email = db.Column(db.String(40), index=True, unique=True)

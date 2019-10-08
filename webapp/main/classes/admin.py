@@ -1,5 +1,5 @@
 import logging
-from webapp.main.classes import Utilisateur
+from webapp.main.classes.utilisateur import Utilisateur
 
 
 class Admin(Utilisateur):

@@ -3,14 +3,13 @@ import mysql.connector
 import modules.bdd as bdd
 from webapp import db
 from webapp.main.classes.utilisateur import Utilisateur
-
+import  datetime
 
 class Conseiller(Utilisateur):
     __tablename__ = 'conseiller'
     __mapper_args__ = {'polymorphic_identity': 'conseiller'}
     id = db.Column(db.Integer, db.ForeignKey('utilisateur.id'), primary_key=True)
-    #mle = db.Column('id', db.Integer, primary_key=True)
-    date_debut = db.Column(db.DateTime, index=True, default=None)
+    date_debut = db.Column(db.DateTime, index=True, default=datetime.datetime.utcnow)
     date_fin = db.Column(db.DateTime, index=True, default=None)
 
     @classmethod
