@@ -1,0 +1,91 @@
+# English translations for PROJECT.
+# Copyright (C) 2019 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-10-09 12:14+0200\n"
+"PO-Revision-Date: 2019-10-09 11:29+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: webapp/templates/auth/login.html:3
+#: webapp/templates/auth/reset_password.html:3
+#: webapp/templates/main/index.html:6
+msgid "Accueil"
+msgstr "Toto"
+
+#: webapp/templates/auth/login.html:4 webapp/templates/main/base.html:19
+msgid "Connexion"
+msgstr ""
+
+#: webapp/templates/auth/login.html:7
+msgid "Me connecter"
+msgstr ""
+
+#: webapp/templates/auth/login.html:24
+msgid "Mot de passe oublié ?"
+msgstr ""
+
+#: webapp/templates/auth/login.html:25
+msgid "cliquer pour réinitialiser"
+msgstr ""
+
+#: webapp/templates/auth/reset_password.html:4
+msgid "Réinitialisation Password"
+msgstr ""
+
+#: webapp/templates/auth/reset_password.html:7
+msgid "Nouveau Password"
+msgstr ""
+
+#: webapp/templates/auth/reset_password.html:32
+msgid "Procédure de réinitialisation de mot de passe expirée!"
+msgstr "Time OUT !"
+
+#: webapp/templates/main/base.html:7
+msgid "Bienvenue sur GestiBank"
+msgstr ""
+
+#: webapp/templates/main/base.html:20
+msgid "Inscription"
+msgstr ""
+
+#: webapp/templates/main/base.html:24
+#, python-format
+msgid "Bienvenue %(username)s"
+msgstr ""
+
+#: webapp/templates/main/base.html:25
+msgid "Création de conseiller"
+msgstr ""
+
+#: webapp/templates/main/base.html:26
+msgid "Déconnexion"
+msgstr ""
+
+#: webapp/templates/main/base.html:29
+msgid "Langue"
+msgstr ""
+
+#: webapp/templates/main/base.html:45
+msgid "Choisir une langue"
+msgstr ""
+
+#: webapp/templates/main/base.html:46
+msgid "Français"
+msgstr ""
+
+#: webapp/templates/main/base.html:47
+msgid "Anglais"
+msgstr ""
+

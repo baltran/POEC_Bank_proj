@@ -1,35 +1,35 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo
-
+from flask_babel import lazy_gettext as _l
 
 class LoginForm(FlaskForm):
-    username = StringField('Utilisateur', validators=[DataRequired()])
-    password = PasswordField('Mot de passe', validators=[DataRequired()])
-    remember_me = BooleanField('Se rappeler de moi')
-    submit = SubmitField('Me connecter')
+    username = StringField(_l('Utilisateur'), validators=[DataRequired()])
+    password = PasswordField(_l('Mot de passe'), validators=[DataRequired()])
+    remember_me = BooleanField(_l('Se rappeler de moi'))
+    submit = SubmitField(_l('Me connecter'))
 
 
 class SigninForm(FlaskForm):
-    prenom = StringField('Prénom', validators=[DataRequired()])
-    nom = StringField('Nom', validators=[DataRequired()])
-    username = StringField('Utilisateur', validators=[DataRequired()])
+    prenom = StringField(_l('Prénom'), validators=[DataRequired()])
+    nom = StringField(_l('Nom'), validators=[DataRequired()])
+    username = StringField(_l('Utilisateur'), validators=[DataRequired()])
     # password = PasswordField('Mot de passe', validators=[DataRequired()])
     # password_bis = PasswordField('Confirmation du mot de passe', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired()])
-    adresse = StringField('Adresse', validators=[DataRequired()])
-    tel = StringField('Téléphone', validators=[DataRequired()])
-    revenu_mensuel = StringField('Revenu mensuel moyen', validators=[DataRequired()])
-    submit = SubmitField("Demander mon compte")
+    email = StringField(_l('Email'), validators=[DataRequired()])
+    adresse = StringField(_l('Adresse'), validators=[DataRequired()])
+    tel = StringField(_l('Téléphone'), validators=[DataRequired()])
+    revenu_mensuel = StringField(_l('Revenu mensuel moyen'), validators=[DataRequired()])
+    submit = SubmitField(_l("Demander mon compte"))
 
 
 class ResetPasswordRequestForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Request Password Reset')
+    email = StringField(_l('Email'), validators=[DataRequired(), Email()])
+    submit = SubmitField(_l('Request Password Reset'))
 
 
 class ResetPasswordForm(FlaskForm):
-    password = PasswordField('Mot de passe', validators=[DataRequired()])
-    password_bis = PasswordField('Repeter votre mot de passe',
+    password = PasswordField(_l('Mot de passe'), validators=[DataRequired()])
+    password_bis = PasswordField(_l('Repeter votre mot de passe'),
                                  validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Réinitialisez votre mot de passe')
+    submit = SubmitField(_l('Réinitialisez votre mot de passe'))

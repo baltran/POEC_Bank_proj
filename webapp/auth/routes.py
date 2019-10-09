@@ -7,6 +7,7 @@ from webapp import db
 from webapp.auth import bp
 from webapp.auth.forms import LoginForm, SigninForm, ResetPasswordRequestForm, ResetPasswordForm
 from flask_login import current_user, login_user, logout_user
+from flask_babel import lazy_gettext as _l
 from webapp.main.classes.utilisateur import Utilisateur
 from webapp.main.classes.demande import Demande
 from webapp.main.requetes import inserer
@@ -31,12 +32,12 @@ def login():
     if form.validate_on_submit():
         user = Utilisateur.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Login ou mot de passe invalide')
+            flash(_l('Login ou mot de passe invalide'))
             return redirect(url_for('auth.login'))
         login_user(user, remember=form.remember_me.data)
         return redirect_by_role(user)
         #return redirect(url_for('main.index'))
-    return render_template('auth/login.html', title='Authentification',
+    return render_template('auth/login.html', title=_l('Authentification'),
                            form=form)
 
 
@@ -65,19 +66,19 @@ def signin():
         demande = Demande(**data)
         insertion = inserer(demande)
         if insertion == -1:
-            flash("Demande déjà effectuée.")
+            flash(_l("Demande déjà effectuée."))
         elif not insertion:
-            flash("Erreur dans la base de données.")
+            flash(_("Erreur dans la base de données."))
         else:
             return redirect(url_for('auth.signin_confirmation'))
-    return render_template('auth/signin.html', title='Inscription',
+    return render_template('auth/signin.html', title=_l('Inscription'),
                            form=form)
 
 
 @bp.route('/signin_confirmation', methods=['GET', 'POST'])
 @bp.endpoint('signin_confirmation')
 def signin_confirmation():
-    return render_template('auth/signin_confirmation.html', title='Confirmation de demande')
+    return render_template('auth/signin_confirmation.html', title=_l('Confirmation de demande'))
 
 
 @bp.route('/reset_password_request', methods=['GET', 'POST'])
@@ -89,7 +90,7 @@ def reset_password_request():
         user = Utilisateur.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash('Consultez votre email pour et suivez les instructions')
+        flash(_l('Consultez votre email pour et suivez les instructions'))
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password_request.html', form=form)
 
@@ -105,7 +106,7 @@ def reset_password(token):
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
-        flash('Votre mot de passe a été réinitialisé.')
+        flash(_l('Votre mot de passe a été réinitialisé.'))
         return redirect(url_for('auth.login'))
     exp = int(Utilisateur.get_exp_token(token) - time.time())
     return render_template('auth/reset_password.html', form=form, exp=exp)

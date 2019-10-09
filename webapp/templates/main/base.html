@@ -4,8 +4,7 @@
     {% if title %}
         <title>GestiBank - {{ title }}</title>
     {% else %}
-        <title>{{ _('Bienvenue sur GestiBank
-            ') }}</title>
+        <title>{{ _('Bienvenue sur GestiBank') }}</title>
     {% endif %}
         <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/cuicui.png') }}" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/barre.css') }}">
@@ -22,7 +21,7 @@
 
                     <!--<p><input type="button" class="btn_cnx" onclick="location.href='{{ url_for('auth.signin') }}';" value="Inscription" /></p>-->
                 {% else %}
-                    <p>Bienvenue {{user.username|capitalize}}</p>
+                    <p>{{ _('Bienvenue %(username)s', username=(user.username|capitalize))}}</p>
                     <p><a class="btn_cnx" href="{{ url_for('admins.creerConseiller') }}">{{ _('Création de conseiller') }}</a></p>
                     <p><a class="btn_cnx" href="{{ url_for('auth.logout') }}">{{ _('Déconnexion') }}</a></p>
                 {% endif %}

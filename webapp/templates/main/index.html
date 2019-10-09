@@ -3,7 +3,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 {% block nav %}
-    {{ nav_link('main.index', 'Accueil') }}
+    {{ nav_link('main.index', _('Accueil')) }}
 {% endblock %}
 {% block content %}
         {% if current_user.is_authenticated %}
