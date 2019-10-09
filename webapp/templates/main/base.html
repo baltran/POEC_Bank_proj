@@ -19,12 +19,14 @@
                 {% if not current_user.is_authenticated %}
                     <p><a class="btn_cnx" href="{{ url_for('auth.login') }}">{{ _('Connexion') }}</a></p>
                     <p><a class="btn_cnx" href="{{ url_for('auth.signin') }}">{{ _('Inscription') }}</a></p>
+                    <p><a class="btn_cnx" href="{{ url_for('client.espaceClient') }}">{{ _('Espace Client') }}</a></p>
 
                     <!--<p><input type="button" class="btn_cnx" onclick="location.href='{{ url_for('auth.signin') }}';" value="Inscription" /></p>-->
                 {% else %}
                     <p>Bienvenue {{user.username|capitalize}}</p>
                     <p><a class="btn_cnx" href="{{ url_for('admins.creerConseiller') }}">{{ _('Création de conseiller') }}</a></p>
                     <p><a class="btn_cnx" href="{{ url_for('auth.logout') }}">{{ _('Déconnexion') }}</a></p>
+
                 {% endif %}
                 <p>
                     <label for="lang-select">{{ _('Langue') }}</label>

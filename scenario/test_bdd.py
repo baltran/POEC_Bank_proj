@@ -9,6 +9,7 @@ data_admin = {'username': 'admin', 'password': gph('admin'), 'email': 'admin@ges
 
 data_conseiller = {'username': 'Bob', 'password': gph('bob'), 'email': 'bob@bip.fr'}
 data_demande = {'username': 'Bernard', 'password': gph('bernard'), 'email': 'bern@bip.fr', 'tel': '0147852369'}
+data_client=
 delete_database_data(Client, Utilisateur, Demande, Conseiller)
 populate = []
 populate.append(Admin(**data_admin))
