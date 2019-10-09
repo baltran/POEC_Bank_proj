@@ -5,6 +5,7 @@
 {% endblock %}}
 {% block content %}
     <h2>Demande de création de compte</h2>
+    <p>{{ nav_link('conseiller.gerer_demandes', 'gerer') }}</p>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>

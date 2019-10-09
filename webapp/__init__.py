@@ -39,20 +39,23 @@ def create_app(config_class=Config):
     from webapp.auth import bp as auth_bp
     from webapp.main import bp as main_bp
     from webapp.admin import bp as admin_bp
+    from webapp.conseiller import bp as conseiller_bp
     # from webapp.api import bp as api_bp
 
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(main_bp)
     app.register_blueprint(admin_bp)
+    app.register_blueprint(conseiller_bp, url_prefix='/conseiller')
     # app.register_blueprint(api_bp, url_prefix='/api')
     if not app.debug and not app.testing:
         # ... no changes to logging setup
         pass
     with app.app_context():
+        # admin_flask.endpoint = 'bp_admin'
         admin_flask.index_view = views.MyAdminIndexView()
         admin_flask.template_mode = 'bootstrap3'
-        admin_flask.add_view(views.DemandeModelView(models.Demande, db.session))
-        admin_flask.add_view(views.ConseillerModelView(models.Conseiller, db.session))
+        admin_flask.add_view(views.DemandeModelView(models.Demande, db.session, endpoint = 'demande_'))
+        admin_flask.add_view(views.ConseillerModelView(models.Conseiller, db.session, endpoint = 'conseiller_'))
         admin_flask.add_link(views.LogoutMenuLink(name='Logout', category='', url='/auth/logout'))
 
     return app

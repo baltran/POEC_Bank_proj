@@ -1,6 +1,8 @@
 {% extends "main/base.html" %}
 {% block nav %}
     {{ nav_link('main.index', 'Accueil') }}
+    {{ nav_link('auth.signin', 'Inscription') }}
+    {{ nav_link('auth.signin_confirmation', "Confirmation d'inscription") }}
 {% endblock %}}
 {% block content %}
     <h2>
