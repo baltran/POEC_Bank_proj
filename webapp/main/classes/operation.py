@@ -8,3 +8,11 @@ class Operation(db.Model):
     valeur = db.Column(db.Integer)
     compte_src = db.Column(db.Integer, db.ForeignKey('compte.id'))
     compte_dest = db.Column(db.Integer, db.ForeignKey('compte.id'))
+
+    def afficher(self):
+        return {
+            'done_at' : self.done_at,
+            'valeur' : self.valeur,
+            'compte source' : self.compte_src,
+            'compte destination': self.compte_dest
+        }

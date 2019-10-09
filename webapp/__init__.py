@@ -47,7 +47,7 @@ def create_app(config_class=Config):
     app.register_blueprint(main_bp)
     app.register_blueprint(admin_bp)
 
-    app.register_blueprint(client_pb)
+    app.register_blueprint(client_pb, url_prefix='/client')
     # app.register_blueprint(api_bp, url_prefix='/api')
 
     if not app.debug and not app.testing:
