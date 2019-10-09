@@ -1,12 +1,14 @@
 from flask import render_template
-from webapp.auth import bp
+from webapp.conseiller import bp
 from webapp.main.classes.demande import Demande
+# from webapp.main.classes.conseiller import Conseiller
 
 
 @bp.route('/conseiller/gerer_demandes')
 # @login_required
 def index():
     requests = select_all(Demande)
-    return render_template('main/index.html',
+    # conseillers = select_all(Conseiller)
+    return render_template('conseiller/gerer_demandes.html',
                            title="Gestion des demandes",
-                           requests=requests))
+                           requests=requests)
