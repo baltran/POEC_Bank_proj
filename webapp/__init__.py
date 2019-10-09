@@ -39,11 +39,13 @@ def create_app(config_class=Config):
     from webapp.auth import bp as auth_bp
     from webapp.main import bp as main_bp
     from webapp.admin import bp as admin_bp
+    from webapp.conseiller import bp as conseiller_bp
     # from webapp.api import bp as api_bp
 
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(main_bp)
     app.register_blueprint(admin_bp)
+    app.register_blueprint(conseiller_bp)
     # app.register_blueprint(api_bp, url_prefix='/api')
     if not app.debug and not app.testing:
         # ... no changes to logging setup
