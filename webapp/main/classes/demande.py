@@ -9,7 +9,7 @@ class Demande(db.Model):
     email = db.Column(db.String(40), index=True, unique=True)
     username = db.Column(db.String(40), index=True, unique=True)
     password = db.Column(db.String(50))
-    adresse = db.Column(db.String(100), index=True, unique=True)
+    adresse = db.Column(db.String(100), index=True, unique=False)
     tel = db.Column(db.String(20), index=True, unique=True)
     revenu_mensuel = db.Column(db.Integer, index=True, primary_key=False)
     # """Manquent (?) :

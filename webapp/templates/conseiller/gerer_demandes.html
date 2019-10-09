@@ -1,0 +1,29 @@
+{% extends "main/base.html" %}
+{% block links_css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+{% block nav %}
+    {{ nav_link('conseiller.gerer_demandes', 'Gestion de demandes') }}
+{% endblock %}
+{% block content %}
+            <table>
+                <tr>
+                    {% for col in requests[0].afficher().keys() %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
+                    <th>Cocher pour accepter</th>
+                    <th>Choisissez une action</th>
+                </tr>
+                {% for request in requests %}
+                    <tr>
+                        {% for e in request.afficher().values() %}
+                            <td>{{ e|make_caps|center }}</td>
+                        {% endfor %}
+                    <td><input type="checkbox" id="Accepter" name="Accepter"></td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-lg" onclick="Accept()">Accepter</button>
+                        <button type="button" class="btn btn-primary btn-lg" onclick="Refuse()">Refuser</button></td>
+                    </tr>
+                {% endfor %}
+            </table>
+{% endblock %}}
