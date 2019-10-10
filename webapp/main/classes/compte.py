@@ -10,9 +10,10 @@ class Compte(db.Model):
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     solde = db.Column(db.Integer)
     titulaire_id = db.Column(db.Integer, db.ForeignKey('client.id'))
-
     discriminator = db.Column('type', db.String(50))
     __mapper_args__ = {'polymorphic_on': discriminator}
+    operations = db.relationship('Operation', backref='compte_src', lazy='dynamic', foreign_keys='Operation.compte_id')
+    virements = db.relationship('Operation', backref='compte_bis', lazy='dynamic', foreign_keys='Operation.compte_bis_id')
 
     #def __init__(self, data_compte):
     #    self.rib, self.proprietaire, self.date_creation, self.solde, self.type = data_compte
@@ -20,3 +21,6 @@ class Compte(db.Model):
 
     def depot(self, somme, cnx=None):
         pass
+
+    def __repr__(self):
+        return '<Compte {}>'.format(self.id)

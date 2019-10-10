@@ -12,6 +12,7 @@ data_conseiller = {'username': 'Bob', 'password': 'bob', 'email': 'bob@bip.fr'}
 data_demande = {'username': 'Bernard', 'password': 'bernard', 'email': 'bern@bip.fr', 'tel': '0147852369'}
 data_demande2 = {'username': 'Jean', 'password': 'jean', 'email': 'abd@bip.fr', 'tel': '0145879632'}
 
+
 delete_database_data(Client, Utilisateur, Demande, Conseiller)
 populate = []
 populate.append(Admin(**data_admin))

@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+{% block content %}
+<form action="{{ url_for('client.index') }}" method="post">
+
+        <p> Bienvenue dans vôtre espace</p>
+        {% if current_user.is_authenticated %}
+                <p><a class="btn_cnx" href="{{ url_for('client.compteCourant') }}">{{ _('Compte Courant') }}</a></p>
+
+                        <p><a class="btn_cnx" href="{{ url_for('client.compteEpargne') }}"
+                        {% if comptes.__len__() == 1 %}
+                                style='color:green'
+                        {% endif %}
+                        >{{ _('Compte Epargne') }}</a></p>
+
+        {% endif %}
+</form>
+{% endblock %}
+</html>
