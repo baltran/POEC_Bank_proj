@@ -23,10 +23,8 @@
                         {% endfor %}
                     <td>
                         <form>
-                        <button type="submit" name="accepter" value="{{ demande.afficher()['id'] }}"
-                                onclick="alert('Demande '+{{demande.afficher().id}}+' acceptée.')">Accepter</button>
-                    <form><button type="submit" name="refuser" value="{{ demande.afficher()['id'] }}"
-                                  onclick="alert('Demande '+{{demande.afficher().id}}+' refusée.')">Refuser</button></form>
+                        <button type="submit" name="accepter" value=demande.afficher().id() onclick="alert('Demande '+{{demande.afficher().id}}+' acceptée.')">Accepter</button>
+                    <form><button type="submit" name="refuser" value=demande.afficher().id() onclick="alert('Demande '+{{demande.afficher().id}}+' refusée.')">Refuser</button></form>
                     </td>
                     </tr>
                 {% endfor %}

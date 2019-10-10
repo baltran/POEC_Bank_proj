@@ -29,14 +29,14 @@ def index():
     ]
     bureau = os.listdir(os.path.abspath(os.path.dirname(__file__)))
     users = select_all(Utilisateur)
-    requests = select_all(Demande)
+    demandes = select_all(Demande)
     return render_template('main/index.html',
                            #title="Page d'accueil",
                            user=current_user,
                            posts=posts,
                            desktop=bureau,
                            users=users,
-                           requests=requests,
+                           demandes=demandes,
                            participants=[])
 
 
@@ -47,6 +47,6 @@ def profile(username):
 
 
 if __name__ == '__main__':
-    with bp.test_request_context():
+    with bp.test_demande_context():
         print(url_for('main.index'))
         print(url_for('auth.login'))
