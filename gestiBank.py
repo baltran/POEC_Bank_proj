@@ -17,6 +17,9 @@ def make_shell_context():
             'gph': gph,
             'Message': Message,
             'mail': mail,
-            'CompteEpargne': CompteEpargne
+            'Compte': Compte,
+             'CompteCourant':CompteCourant,
+            'CompteEpargne': CompteEpargne,
+            'Operation': Operation
             }
 

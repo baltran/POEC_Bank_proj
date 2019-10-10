@@ -8,8 +8,9 @@ class Operation(db.Model):
     valeur = db.Column(db.Integer)
     compte_id = db.Column(db.Integer, db.ForeignKey('compte.id'))
     compte_bis_id = db.Column(db.Integer, db.ForeignKey('compte.id'))
-    operations = db.relationship('Compte', foreign_keys=[compte_id])
-    virements= db.relationship('Compte', foreign_keys=[compte_bis_id])
+
+    def __repr__(self):
+        return '<Operation {}>'.format(self.id)
 
     def afficher(self):
         return {
