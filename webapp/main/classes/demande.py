@@ -9,9 +9,9 @@ class Demande(db.Model):
     email = db.Column(db.String(40), index=True, unique=True)
     username = db.Column(db.String(40), index=True, unique=True)
     password = db.Column(db.String(50))
-    adresse = db.Column(db.String(100), index=True, unique=False)
-    tel = db.Column(db.String(20), index=True, unique=True)
-    revenu_mensuel = db.Column(db.Integer, index=True, primary_key=False)
+    adresse = db.Column(db.String(100), index=False, unique=False)
+    tel = db.Column(db.String(20), unique=False)
+    revenu_mensuel = db.Column(db.Integer, index=False)
     # """Manquent (?) :
     # -> nombre d’enfants
     # -> situation matrimoniale
@@ -32,4 +32,6 @@ class Demande(db.Model):
             'nom' : self.nom,
             'prenom' : self.prenom,
             'email' : self.email,
+            'tel': self.tel,
+            'adresse': self.adresse,
         }

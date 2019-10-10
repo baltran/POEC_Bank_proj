@@ -11,7 +11,7 @@ class Client(Utilisateur):
     id = db.Column(db.Integer, db.ForeignKey('utilisateur.id'), primary_key=True)
     num_client = db.Column(db.Integer, index=True, unique=True)
     adresse = db.Column(db.String(50))
-    telephone = db.Column(db.String(10))
+    tel = db.Column(db.String(10))
     revenu_mensuel = db.Column(db.Float)
     conseiller_id = db.Column(db.Integer, db.ForeignKey('conseiller.id'))
     comptes = db.relationship('Compte', backref='titulaire', lazy='dynamic')
@@ -28,6 +28,7 @@ class Client(Utilisateur):
 
     def afficher(self):
         super().afficher().update({
+            'tel': self.tel,
             'adresse': self.adresse
         })
         return super().afficher()
