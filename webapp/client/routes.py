@@ -36,9 +36,10 @@ def compteCourant():
         print(type(current_user.comptes))
         for compte in current_user.comptes:
             print(compte)
+            print(compte.operations)
         print(list(current_user.comptes).__len__())
         if compte.operations is None:
-            flash(_l('Aucune opération n a été effectuée sur ce compte'))
+            flash(_l('Aucune opération n\' a été effectuée sur ce compte'))
         else:
             pass
 
