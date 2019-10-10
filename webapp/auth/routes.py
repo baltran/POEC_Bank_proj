@@ -8,6 +8,10 @@ from webapp.auth import bp
 from webapp.auth.forms import LoginForm, SigninForm, ResetPasswordRequestForm, ResetPasswordForm
 from flask_login import current_user, login_user, logout_user
 from webapp.main.classes.utilisateur import Utilisateur
+from webapp.main.classes.client import Client
+from webapp.main.classes.conseiller import Conseiller
+
+
 from webapp.main.classes.demande import Demande
 from webapp.main.requetes import inserer
 from webapp.auth.email import send_password_reset_email
@@ -33,6 +37,11 @@ def login():
         if user is None or not user.check_password(form.password.data):
             flash('Login ou mot de passe invalide')
             return redirect(url_for('auth.login'))
+
+        if user.discriminator == "client":
+            user=Client.query.filter_by(username=form.username.data).first()
+        elif user.discriminator == "conseiller":
+            user = Conseiller.query.filter_by(username=form.username.data).first()
         login_user(user, remember=form.remember_me.data)
         return redirect_by_role(user)
         #return redirect(url_for('main.index'))

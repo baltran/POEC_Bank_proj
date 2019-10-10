@@ -19,3 +19,5 @@ class CompteCourant(Compte):
     def retrait(self, somme, cnx=None):
         pass
 
+    def depot(self, somme, cnx=None):
+        pass

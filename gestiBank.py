@@ -16,4 +16,7 @@ def make_shell_context():
             'Demande' : Demande,
             'gph': gph,
             'Message': Message,
-            'mail': mail}
+            'mail': mail,
+            'CompteEpargne': CompteEpargne
+            }
+
