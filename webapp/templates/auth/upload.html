@@ -1,0 +1,15 @@
+{% extends "main/base.html" %}
+{% block nav %}
+    {{ nav_link('main.index', 'Accueil') }}
+    {{ nav_link('auth.signup', 'Inscription') }}
+    {{ nav_link('auth.upload', 'Documents') }}
+{% endblock %}}
+{% block content %}
+    <h2>Demande de création de compte - documents enregistrés </h2>
+        <h4>Documents</h4>
+        <p>formats acceptés: pdf, png, jpg, jpeg</p>
+        <p>Bonjour,</p>
+        <p>
+        Pièce d'identité :
+        </p>
+{% endblock %}

@@ -1,6 +1,6 @@
 import time
 
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request
 from werkzeug.security import generate_password_hash
 
 from webapp import db
@@ -10,8 +10,6 @@ from flask_login import current_user, login_user, logout_user
 from webapp.main.classes.utilisateur import Utilisateur
 from webapp.main.classes.client import Client
 from webapp.main.classes.conseiller import Conseiller
-
-
 from webapp.main.classes.demande import Demande
 from webapp.main.requetes import inserer
 from webapp.auth.email import send_password_reset_email
@@ -69,8 +67,9 @@ def signup():
             form.email.name: form.email.data,
             form.adresse.name: form.adresse.data,
             form.tel.name: form.tel.data,
-            form.revenu_mensuel.name: form.revenu_mensuel.data
+            form.revenu_mensuel.name: form.revenu_mensuel.data,
         }
+        # Création d'un objet demande
         demande = Demande(**data)
         insertion = inserer(demande)
         if insertion == -1:
@@ -78,15 +77,26 @@ def signup():
         elif not insertion:
             flash("Erreur dans la base de données.")
         else:
-            return redirect(url_for('auth.signup_confirmation'))
+            return render_template('auth/signup_confirmation.html', prenom=demande.prenom )
     return render_template('auth/signup.html', title='Inscription',
                            form=form)
+
+
+# @bp.route('/upload', methods=['GET', 'POST'])
+# @bp.endpoint('upload')
+# def upload():
+#     form = UploadForm()
+#     if form.validate_on_submit():
+#         f = request.files['inputFile']
+#         return redirect(url_for('auth.signup_confirmation'))
+#     return redirect('auth/upload.html')
 
 
 @bp.route('/signup_confirmation', methods=['GET', 'POST'])
 @bp.endpoint('signup_confirmation')
 def signup_confirmation():
     return render_template('auth/signup_confirmation.html', title='Confirmation de demande')
+
 
 
 @bp.route('/reset_password_request', methods=['GET', 'POST'])

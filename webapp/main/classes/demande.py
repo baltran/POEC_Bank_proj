@@ -16,9 +16,9 @@ class Demande(db.Model):
     # -> nombre d’enfants
     # -> situation matrimoniale
     # """
-    piece_id = db.Column(db.String(100), index=True, unique=True)
-    just_salaire = db.Column(db.String(100), index=True, unique=True)
-    just_domicile = db.Column(db.String(100), index=True, unique=True)
+    piece_id = db.Column(db.LargeBinary)
+    just_salaire = db.Column(db.LargeBinary)
+    just_domicile = db.Column(db.LargeBinary)
     conseiller_id = db.Column(db.Integer, db.ForeignKey('conseiller.id'))
 
 
