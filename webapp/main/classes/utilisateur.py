@@ -112,7 +112,7 @@ class Utilisateur(UserMixin, db.Model):
             'nom' : self.nom,
             'prenom' : self.prenom,
             'email' : self.email,
-            'password' : self.password,
+            # 'password' : self.password,
             'discriminator' : self.discriminator
         }
 
