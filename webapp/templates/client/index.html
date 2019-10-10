@@ -7,7 +7,7 @@
                 <p><a class="btn_cnx" href="{{ url_for('client.compteCourant') }}">{{ _('Compte Courant') }}</a></p>
 
                         <p><a class="btn_cnx" href="{{ url_for('client.compteEpargne') }}"
-                        {% if comptes.__len__() < 1 %}
+                        {% if comptes.__len__() == 1 %}
                                 style='color:green'
                         {% endif %}
                         >{{ _('Compte Epargne') }}</a></p>
