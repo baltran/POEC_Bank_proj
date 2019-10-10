@@ -7,4 +7,12 @@ class Operation(db.Model):
     done_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     valeur = db.Column(db.Integer)
     compte_src = db.Column(db.Integer, db.ForeignKey('compte.id'))
-    compte_dest = db.Column(db.Integer, db.ForeignKey('compte.id'))
+    #compte_dest = db.Column(db.Integer, db.ForeignKey('compte.id'))
+
+    def afficher(self):
+        return {
+            'done_at' : self.done_at,
+            'valeur' : self.valeur,
+            'compte source' : self.compte_src,
+
+        }

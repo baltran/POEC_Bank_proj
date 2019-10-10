@@ -10,7 +10,7 @@ class Compte(db.Model):
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     solde = db.Column(db.Integer)
     titulaire_id = db.Column(db.Integer, db.ForeignKey('client.id'))
-
+    operations = db.relationship('Operation', backref='compte', lazy='dynamic')
     discriminator = db.Column('type', db.String(50))
     __mapper_args__ = {'polymorphic_on': discriminator}
 
