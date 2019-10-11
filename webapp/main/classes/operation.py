@@ -39,13 +39,14 @@ class Operation(PaginatedAPIMixin, db.Model):
             'id': self.id,
             'done_at': self.done_at,
             'valeur': self.valeur,
-            'compte_id': self.compte_id
+            'compte_id': self.compte_id,
+            'type_operation': self.type_operation.name
         }
         if self.compte_bis_id:
             data['compte_bis_id'] = self.compte_bis_id
         return data
 
     def from_dict(self, data):
-        for field in ['id', 'done_at', 'valeur', 'compte_id']:
+        for field in ['id', 'done_at', 'valeur', 'compte_id', 'type_operation']:
             if field in data:
                 setattr(self, field, data[field])
