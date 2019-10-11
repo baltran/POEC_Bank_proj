@@ -30,6 +30,7 @@ class Operation(PaginatedAPIMixin, db.Model):
             'compte source' : self.compte_id,
             'compte bis' : self.compte_bis_id,
             'type operation': self.type_operation.name,
+            'label': self.label
         }
 
     def to_dict(self):

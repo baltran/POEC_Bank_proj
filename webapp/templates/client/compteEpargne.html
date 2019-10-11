@@ -1,6 +1,7 @@
 {% extends "main/base.html" %}
 {% block content %}
 <form action="{{ url_for('client.compteEpargne') }}" method="post">
-        <p> Bienvenue sur vôtre compte epargne</p>
+        <p> {{_('Bienvenue sur vôtre compte epargne') }}</p>
 </form>
+                 <p>{{ _('Solde :')  }} {{compte.solde}}</p>
 {% endblock %}
