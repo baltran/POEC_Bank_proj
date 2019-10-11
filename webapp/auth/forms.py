@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, FileField
 from wtforms.validators import DataRequired, Email, EqualTo
 
 
@@ -21,12 +21,11 @@ class SignupForm(FlaskForm):
     adresse = StringField('Adresse', validators=[DataRequired()])
     tel = StringField('Téléphone', validators=[DataRequired()])
     revenu_mensuel = StringField('Revenu mensuel moyen', validators=[DataRequired()])
-    piece_id = FileField("Pièce d'identité", validators=[FileRequired(), FileAllowed(['pdf', 'jpg', 'jpeg', 'png'])])
+    piece_id = FileField("Pièce d'identité", validators=[FileAllowed(['pdf', 'jpg', 'jpeg', 'png'])])
+    just_salaire = FileField("Justificatif de salaire", validators=[FileAllowed(['pdf', 'jpg', 'jpeg', 'png'])])
+    just_domicile = FileField("Justificatif de domicile", validators=[FileAllowed(['pdf', 'jpg', 'jpeg', 'png'])])
     submit = SubmitField("Demander mon compte")
 
-# class UploadForm(FlaskForm):
-#     piece_id = FileField("Pièce d'identité", validators=[FileRequired(), FileAllowed(['pdf', 'jpg', 'jpeg', 'png'])])
-#     submit = SubmitField("Envoyer mes documents")
 
 class ResetPasswordRequestForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])

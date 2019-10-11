@@ -15,6 +15,9 @@
                     {% for col in demandes[0].afficher().keys() %}
                         <th>{{ col }}</th>
                     {% endfor %}
+                    <th>Pièce d'identité</th>
+                    <th>Just. de domicile</th>
+                    <th>Just. de revenus</th>
                     <th>Choisissez une action</th>
                 </tr>
                 {% for demande in demandes %}
@@ -23,6 +26,21 @@
                         {% for e in demande.afficher().values() %}
                             <td>{{ e|center }}</td>
                         {% endfor %}
+                    <td>
+                        <form action="{{ url_for('conseiller.display_piece_id') }}">
+                            <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}" onclick="alert('Cliquez sur OK pour télécharger le justificatif de '+{{demande.afficher().prenom}}+{{demande.afficher().nom}}+'.')">Afficher</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('conseiller.display_just_domicile') }}">
+                            <input type="submit" value="Afficher" />
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('conseiller.display_just_salaire') }}">
+                            <input type="submit" value="Afficher" />
+                        </form>
+                    </td>
                     <td>
                         <form>
                         <button type="submit" name="accepter" value="{{ demande.afficher()['id'] }}"

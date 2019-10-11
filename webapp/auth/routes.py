@@ -1,11 +1,12 @@
 import time
 
-from flask import render_template, flash, redirect, url_for, request
-from werkzeug.security import generate_password_hash
+from flask import render_template, flash, redirect, url_for, request, current_app
+# from werkzeug.security import generate_password_hash
+from werkzeug.utils import secure_filename
 
 from webapp import db
 from webapp.auth import bp
-from webapp.auth.forms import LoginForm, SignupForm, ResetPasswordRequestForm, ResetPasswordForm
+from webapp.auth.forms import *
 from flask_login import current_user, login_user, logout_user
 from webapp.main.classes.utilisateur import Utilisateur
 from webapp.main.classes.client import Client
@@ -13,6 +14,8 @@ from webapp.main.classes.conseiller import Conseiller
 from webapp.main.classes.demande import Demande
 from webapp.main.requetes import inserer
 from webapp.auth.email import send_password_reset_email
+import os
+from io import BytesIO
 
 
 def redirect_by_role(user):
@@ -42,7 +45,7 @@ def login():
             user = Conseiller.query.filter_by(username=form.username.data).first()
         login_user(user, remember=form.remember_me.data)
         return redirect_by_role(user)
-        #return redirect(url_for('main.index'))
+        # return redirect(url_for('main.index'))
     return render_template('auth/login.html', title='Authentification',
                            form=form)
 
@@ -58,7 +61,9 @@ def logout():
 @bp.endpoint('signup')
 def signup():
     form = SignupForm()
+
     if form.validate_on_submit():
+        # fichier = request.files['inputFile']
         data = {
             form.prenom.name: form.prenom.data,
             form.nom.name: form.nom.data,
@@ -68,35 +73,41 @@ def signup():
             form.adresse.name: form.adresse.data,
             form.tel.name: form.tel.data,
             form.revenu_mensuel.name: form.revenu_mensuel.data,
+            # form.piece_id.name: fichier.read()
         }
         # Création d'un objet demande
+
         demande = Demande(**data)
+
+        piece_id = request.files['pieceIdUp']
+        just_salaire = request.files['justSalaireUp']
+        just_domicile = request.files['justDomicileUp']
+        demande.piece_id = piece_id.read()
+        demande.just_salaire = just_salaire.read()
+        demande.just_domicile = just_domicile.read()
+
         insertion = inserer(demande)
+
         if insertion == -1:
             flash("Demande déjà effectuée.")
         elif not insertion:
             flash("Erreur dans la base de données.")
         else:
-            return render_template('auth/signup_confirmation.html', prenom=demande.prenom )
+            return render_template('auth/signup_confirmation.html', title='Confirmation')
+            #return render_template('auth/upload.html', title='Upload', form=form)
+            # f = request.files['inputFile']
+            # if form_data.validate_on_submit()
+            #     db.session.add(form_data)
+            #     db.session.commit()
+            #     return render_template('auth/signup_confirmation.html', title='Confirmation')
     return render_template('auth/signup.html', title='Inscription',
                            form=form)
-
-
-# @bp.route('/upload', methods=['GET', 'POST'])
-# @bp.endpoint('upload')
-# def upload():
-#     form = UploadForm()
-#     if form.validate_on_submit():
-#         f = request.files['inputFile']
-#         return redirect(url_for('auth.signup_confirmation'))
-#     return redirect('auth/upload.html')
 
 
 @bp.route('/signup_confirmation', methods=['GET', 'POST'])
 @bp.endpoint('signup_confirmation')
 def signup_confirmation():
     return render_template('auth/signup_confirmation.html', title='Confirmation de demande')
-
 
 
 @bp.route('/reset_password_request', methods=['GET', 'POST'])

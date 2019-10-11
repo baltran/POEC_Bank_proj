@@ -6,6 +6,9 @@ class AcceptForm(FlaskForm):
     value = IntegerField('id', validators=[DataRequired()])
     action = StringField('action', validators=[DataRequired()])
 
+class IdForm(FlaskForm):
+
+
 # class ClientCreationForm(FlaskForm):
 #     login = StringField('login', validators=[DataRequired()])
 #     password = PasswordField('Mot de passe', validators=[DataRequired()])

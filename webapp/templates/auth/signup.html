@@ -6,7 +6,7 @@
 {% block content %}
     <h2>Demande de création de compte</h2>
     <p>{{ nav_link('conseiller.gerer_demandes', 'gerer') }}</p>
-    <form action="" method="post" novalidate>
+    <form action="" method="post" novalidate enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <p>
             {{ form.prenom.label }}<br>
@@ -59,7 +59,21 @@
         </p>
         <p>
             {{ form.piece_id.label }}<br>
-            {{ form.piece_id(size=32) }}
+            <input type="file" name="pieceIdUp">
+            {% for error in form.piece_id.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.just_salaire.label }}<br>
+            <input type="file" name='justSalaireUp'>
+            {% for error in form.piece_id.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.just_domicile.label }}<br>
+            <input type="file" name='justDomicileUp'>
             {% for error in form.piece_id.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
