@@ -27,7 +27,8 @@ class Client(Utilisateur):
         pass
 
     def afficher(self):
-        super().afficher().update({
+        s = super().afficher()
+        s.update({
             'adresse': self.adresse
         })
-        return super().afficher()
+        return s

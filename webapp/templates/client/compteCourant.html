@@ -1,4 +1,10 @@
 {% extends "main/base.html" %}
+{% block links_css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+{% block nav %}
+{{ nav_link('client.index', 'Espace Client') }}
+{% endblock %}
 {% block content %}
 <form action="{{ url_for('client.compteCourant') }}" method="post">
         <p> Bienvenue sur vôtre compte courant</p>
@@ -12,7 +18,7 @@
                 {% for operation in operations %}
                     <tr>
                         {% for e in operation.afficher().values() %}
-                            <td>{{ e|center }}</td>
+                            <td>{{ e|date_format }}</td>
                         {% endfor %}
                     </tr>
                 {% endfor %}
