@@ -21,7 +21,7 @@ def get_operations(id):
     compte = Compte.query.get_or_404(id)
     if g.current_user.id != compte.titulaire_id:
         return denied_request('Veuillez utiliser un identifiant de compte différent')
-    operations = Operation.to_collection_dict(compte.operations.union_all(compte.virements),
+    operations = Operation.to_collection_dict(compte.operations.union_all(compte.virements).order_by(Operation.done_at.desc()),
                                               page,
                                               per_page,
                                               'api.get_operations',
