@@ -11,14 +11,14 @@ cli.register(app)
 def make_shell_context():
     return {'db': db,
             'User': Utilisateur,
-            'Conseiller' : Conseiller,
-            'Client' : Client,
-            'Demande' : Demande,
+            'Conseiller': Conseiller,
+            'Client': Client,
+            'Demande': Demande,
             'gph': gph,
             'Message': Message,
             'mail': mail,
             'Compte': Compte,
-             'CompteCourant':CompteCourant,
+            'CompteCourant': CompteCourant,
             'CompteEpargne': CompteEpargne,
             'Operation': Operation
             }
