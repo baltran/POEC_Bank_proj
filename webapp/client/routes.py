@@ -9,6 +9,7 @@ from webapp.client import bp
 from flask_login import current_user, login_user, logout_user, login_required
 from webapp.main.classes.compte_courant import CompteCourant
 from webapp.main.classes.compte_epargne import CompteEpargne
+from webapp.main.classes.compte import Compte
 from webapp.main.classes.operation import Operation
 from webapp.client.forms import CompteEpargneCreationForm, VirementForm
 from webapp.admin.forms import ConseillerCreationForm
@@ -52,8 +53,8 @@ def compteEpargne():
 
 
 
-@bp.route('/CreerCompteEpargne', methods=['GET', 'POST'])
-@bp.endpoint('CreerCompteEpargne')
+@bp.route('/creerCompteEpargne', methods=['GET', 'POST'])
+@bp.endpoint('creerCompteEpargne')
 def CreerCompteEpargne():
     if current_user.is_authenticated and current_user.discriminator == 'client':
         compte = CompteEpargne.query.filter_by(titulaire=current_user).first()
@@ -76,25 +77,34 @@ def CreerCompteEpargne():
     redirect(url_for('main.index'))
 
 
-@bp.route('/Virement', methods=['GET', 'POST'])
-@bp.endpoint('Virement')
-def Virement():
-    compte = CompteCourant.query.filter_by(titulaire= current_user).first()
+@bp.route('/virement', methods=['GET', 'POST'])
+@bp.endpoint('virement')
+def virement():
     if current_user.is_authenticated and current_user.discriminator == 'client':
         form = VirementForm()
         if form.validate_on_submit():
-            data ={form.compte_src.name: form.compte_src.data,
+            compte = Compte.query.filter_by(titulaire=current_user).first()
+            form.compte_src.data=compte.id
+            data ={form.compte_src.name: form.compte_src,
                    form.compte_dest.name: form.compte_dest.data,
                    form.valeur.name: form.valeur.data
                    }
-            if not compte.autorisation_decouvert and compte.solde - form.valeur.data > 0:
-                operation = Operation(**data)
-                insertion = inserer(operation)
-                compte.solde = compte.solde - operation.valeur
-                compte_maj = compte(**compte.solde)
-                insert = inserer(compte_maj)
-                if insertion:
+            solde_temp = compte.solde - form.valeur.data
+            if form.compte_src.data != form.compte_dest.data:
+                if solde_temp < 0:
+                    if not compte.autorisation_decouvert:
+                        flash("vous n'etes pas autorisé à faire un virement ")
+                    elif solde_temp < (0 - (compte.entree_moyenne * compte.taux_decouvert)):
+                        flash("l'opération depasserait votre seuil de découvert" )
+                    operation = Operation(**data)
+                    insertion = inserer(operation)
+                    solde_tmp = compte.solde - form.valeur.data
+                    compte.solde = solde_tmp
+                    db.session.commit()
                     return redirect(url_for('client.compteCourant'))
+
+
+
 
         return render_template('client/virement.html', user=current_user, title='Effectuer un Virement',
                                form=form)
