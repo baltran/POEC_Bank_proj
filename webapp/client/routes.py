@@ -96,16 +96,12 @@ def virement():
                         flash("vous n'etes pas autorisé à faire un virement ")
                     elif solde_temp < (0 - (compte.entree_moyenne * compte.taux_decouvert)):
                         flash("l'opération depasserait votre seuil de découvert" )
-                    operation = Operation(**data)
-                    insertion = inserer(operation)
-                    solde_tmp = compte.solde - form.valeur.data
-                    compte.solde = solde_tmp
-                    db.session.commit()
-                    return redirect(url_for('client.compteCourant'))
-
-
-
-
+                operation = Operation(**data)
+                insertion = inserer(operation)
+                solde_tmp = compte.solde - form.valeur.data
+                compte.solde = solde_tmp
+                db.session.commit()
+                return redirect(url_for('client.compteCourant'))
         return render_template('client/virement.html', user=current_user, title='Effectuer un Virement',
                                form=form)
     redirect(url_for('main.index'))
