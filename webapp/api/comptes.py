@@ -26,6 +26,7 @@ def get_operations(id):
                                               per_page,
                                               'api.get_operations',
                                               id=id)
+    operations.update({'solde': compte.solde})
     return jsonify(operations)
 
 
