@@ -9,6 +9,7 @@
 <form action="{{ url_for('client.compteCourant') }}" method="post">
         <p> Bienvenue sur vôtre compte courant</p>
 </form>
+
 <table>
                 <tr>
                     {% for col in operations[0].afficher().keys() %}
