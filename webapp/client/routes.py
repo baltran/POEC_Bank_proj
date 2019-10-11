@@ -30,7 +30,7 @@ def index():
 
 
 @bp.route('/compteCourant', methods=['GET', 'POST'])
-@bp.endpoint('/compteCourant')
+@bp.endpoint('compteCourant')
 def compteCourant():
     if current_user.is_authenticated and current_user.discriminator == 'client':
         compte = CompteCourant.query.filter_by(titulaire=current_user).first()
@@ -46,14 +46,14 @@ def compteCourant():
 
 
 @bp.route('/compteEpargne', methods=['GET', 'POST'])
-@bp.endpoint('/compteEpargne')
+@bp.endpoint('compteEpargne')
 def compteEpargne():
     return render_template('client/compteEpargne.html', user=current_user, title='Compte Courant')
 
 
 
 @bp.route('/CreerCompteEpargne', methods=['GET', 'POST'])
-@bp.route('/CreerCompteEpargne')
+@bp.endpoint('CreerCompteEpargne')
 def CreerCompteEpargne():
     if current_user.is_authenticated and current_user.discriminator == 'client':
         compte = CompteEpargne.query.filter_by(titulaire=current_user).first()
@@ -77,7 +77,7 @@ def CreerCompteEpargne():
 
 
 @bp.route('/Virement', methods=['GET', 'POST'])
-@bp.route('/Virement')
+@bp.endpoint('Virement')
 def Virement():
     compte = CompteCourant.query.filter_by(titulaire= current_user).first()
     if current_user.is_authenticated and current_user.discriminator == 'client':
@@ -87,15 +87,15 @@ def Virement():
                    form.compte_dest.name: form.compte_dest.data,
                    form.valeur.name: form.valeur.data
                    }
-            #if not compte.autorisation_decouvert and compte.solde - form.valeur.data > 0:
-            operation = Operation(**data)
-            insertion = inserer(operation)
-            compte.solde = compte.solde - operation.valeur
-            compte_maj = compte(**compte.solde)
-            insert = inserer(compte_maj)
-            if insertion:
-                return redirect(url_for('client.compteCourant'))
-        compte = CompteCourant()
+            if not compte.autorisation_decouvert and compte.solde - form.valeur.data > 0:
+                operation = Operation(**data)
+                insertion = inserer(operation)
+                compte.solde = compte.solde - operation.valeur
+                compte_maj = compte(**compte.solde)
+                insert = inserer(compte_maj)
+                if insertion:
+                    return redirect(url_for('client.compteCourant'))
+
         return render_template('client/virement.html', user=current_user, title='Effectuer un Virement',
                                form=form)
     redirect(url_for('main.index'))
