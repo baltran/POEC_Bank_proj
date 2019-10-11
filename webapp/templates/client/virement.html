@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "main/base.html" %}
+{% block links_css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+{% block nav %}
+{{ nav_link('client.compteCourant', 'Compte Courant') }}
+{% endblock %}
+{% block content %}
+<form action="{{ url_for('client.Virement') }}" method="post">
+        {{form.hidden_tag()}}
+        <p>
+            {{form.compte_src.label}}<br>
+            {{form.compte_src(size=32)}}<br>
 
-</body>
-</html>
+            {% for error in form.compte_src.errors %}
+                <span style='color:red'>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{form.compte_dest.label}}<br>
+            {{form.compte_dest(size=32)}}<br>
+
+            {% for error in form.compte_dest.errors %}
+                <span style='color:red'>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{form.valeur.label}}<br>
+            {{form.valeur(size=32)}}<br>
+
+            {% for error in form.valeur.errors %}
+                <span style='color:red'>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{form.submit}}</p>
+
+</form>
+{% endblock %}

@@ -14,3 +14,4 @@ class VirementForm(FlaskForm):
     compte_src = IntegerField('compte source',  validators=[DataRequired()])
     compte_dest = IntegerField('compte destinataire', validators=[DataRequired()])
     valeur = FloatField('Somme', validators=[DataRequired()])
+    submit = SubmitField("Effectuer")
