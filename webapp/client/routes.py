@@ -37,7 +37,7 @@ def compteCourant():
         if compte.operations.all() is None:
             flash(_l('Aucune opération n a été effectuée sur ce compte'))
         else:
-            operations = compte.operations.union_all(compte.virements).all()
+            operations = compte.operations.union_all(compte.virements).order_by(Operation.done_at.desc()).all()
 
         #if (compte.solde > 0 or  compte.autorisation_decouvert) and ():
 
@@ -56,6 +56,7 @@ def compteEpargne():
 @bp.route('/CreerCompteEpargne')
 def CreerCompteEpargne():
     if current_user.is_authenticated and current_user.discriminator == 'client':
+        compte = CompteEpargne.query.filter_by(titulaire=current_user).first()
         #return redirect(url_for('main.index'))
         form = CompteEpargneCreationForm()
         if form.validate_on_submit():
@@ -69,7 +70,7 @@ def CreerCompteEpargne():
             #afficher le solde du compte epargne
             #rémuneration d'un compte et verser la rémunération dans
 
-        return render_template('client/creerCompteEpargne.html', user=current_user, title='Création COmpte Epargne',
+        return render_template('client/creerCompteEpargne.html', user=current_user, compte=compte, title='Création COmpte Epargne',
                                form=form)
 
     redirect(url_for('main.index'))
@@ -89,10 +90,9 @@ def Virement():
             #if not compte.autorisation_decouvert and compte.solde - form.valeur.data > 0:
             operation = Operation(**data)
             insertion = inserer(operation)
-            compte.solde = compte.solde - form.valeur.data
-            #compte_maj = compte(**compte.solde)
-            #insert = inserer(compte_maj)
-
+            compte.solde = compte.solde - operation.valeur
+            compte_maj = compte(**compte.solde)
+            insert = inserer(compte_maj)
             if insertion:
                 return redirect(url_for('client.compteCourant'))
         compte = CompteCourant()
