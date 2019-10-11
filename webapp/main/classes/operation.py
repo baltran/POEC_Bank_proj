@@ -16,6 +16,7 @@ class Operation(PaginatedAPIMixin, db.Model):
     done_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     valeur = db.Column(db.Float)
     type_operation= db.Column(db.Enum(TypeOp))
+    label = db.Column(db.String)
     compte_id = db.Column(db.Integer, db.ForeignKey('compte.id'))
     compte_bis_id = db.Column(db.Integer, db.ForeignKey('compte.id'))
 
@@ -28,7 +29,8 @@ class Operation(PaginatedAPIMixin, db.Model):
             'valeur' : self.valeur,
             'compte source' : self.compte_id,
             'compte bis' : self.compte_bis_id,
-            'type operation': self.type_operation.name
+            'type operation': self.type_operation.name,
+             'Solde' : self.solde
 
 
 

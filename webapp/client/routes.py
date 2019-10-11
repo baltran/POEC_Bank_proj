@@ -10,7 +10,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from webapp.main.classes.compte_courant import CompteCourant
 from webapp.main.classes.compte_epargne import CompteEpargne
 from webapp.main.classes.operation import Operation
-from webapp.client.forms import CompteEpargneCreationForm
+from webapp.client.forms import CompteEpargneCreationForm, VirementForm
 from webapp.admin.forms import ConseillerCreationForm
 from webapp.main.requetes import inserer
 from webapp.auth.email import send_password_reset_email
@@ -34,27 +34,12 @@ def index():
 def compteCourant():
     if current_user.is_authenticated and current_user.discriminator == 'client':
         compte = CompteCourant.query.filter_by(titulaire=current_user).first()
-        #flash(compte)
-        #print(type(current_user.comptes))
-        #for compte in current_user.comptes:
-            #print(compte.operations)
-        #print(list(current_user.comptes).__len__())
-        operations= compte.operations.union_all(compte.virements).all()
-        #Operation.query.filter_by(compte_id=compte.id).all()
-
-
-        print('++++++++++', operations[0])
-        if compte.operations is None:
-            flash(_l('Aucune opération n\' a été effectuée sur ce compte'))
+        if compte.operations.all() is None:
+            flash(_l('Aucune opération n a été effectuée sur ce compte'))
         else:
-            pass
+            operations = compte.operations.union_all(compte.virements).all()
 
         #if (compte.solde > 0 or  compte.autorisation_decouvert) and ():
-
-
-
-
-
 
         return render_template('client/compteCourant.html', user=current_user, compte =compte, title='Compte Courant', operations=operations)
     redirect(url_for('main.index'))
@@ -84,7 +69,7 @@ def CreerCompteEpargne():
             #afficher le solde du compte epargne
             #rémuneration d'un compte et verser la rémunération dans
 
-        return render_template('client/creerCompteEpargne.html', user=current_user, compte=compte, title='Création COmpte Epargne', operations=operations,
+        return render_template('client/creerCompteEpargne.html', user=current_user, title='Création COmpte Epargne',
                                form=form)
 
     redirect(url_for('main.index'))
@@ -92,5 +77,25 @@ def CreerCompteEpargne():
 
 @bp.route('/Virement', methods=['GET', 'POST'])
 @bp.route('/Virement')
-def Virement(somme):
-    compte = CompteCourant()
+def Virement():
+    compte = CompteCourant.query.filter_by(titulaire= current_user).first()
+    if current_user.is_authenticated and current_user.discriminator == 'client':
+        form = VirementForm()
+        if form.validate_on_submit():
+            data ={form.compte_src.name: form.compte_src.data,
+                   form.compte_dest.name: form.compte_dest.data,
+                   form.valeur.name: form.valeur.data
+                   }
+            #if not compte.autorisation_decouvert and compte.solde - form.valeur.data > 0:
+            operation = Operation(**data)
+            insertion = inserer(operation)
+            compte.solde = compte.solde - form.valeur.data
+            #compte_maj = compte(**compte.solde)
+            #insert = inserer(compte_maj)
+
+            if insertion:
+                return redirect(url_for('client.compteCourant'))
+        compte = CompteCourant()
+        return render_template('client/virement.html', user=current_user, title='Effectuer un Virement',
+                               form=form)
+    redirect(url_for('main.index'))
