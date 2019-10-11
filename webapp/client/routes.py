@@ -93,9 +93,9 @@ def virement():
             if form.compte_src.data != form.compte_dest.data:
                 if solde_temp < 0:
                     if not compte.autorisation_decouvert:
-                        flash("vous n'etes pas autorisé à faire un virement ")
+                        flash(_("vous n'etes pas autorisé à faire un virement "))
                     elif solde_temp < (0 - (compte.entree_moyenne * compte.taux_decouvert)):
-                        flash("l'opération depasserait votre seuil de découvert" )
+                        flash(_("l'opération depasserait votre seuil de découvert") )
                 operation = Operation(**data)
                 insertion = inserer(operation)
                 solde_tmp = compte.solde - form.valeur.data
