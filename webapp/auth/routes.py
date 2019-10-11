@@ -100,7 +100,7 @@ def signup():
             flash(_("Erreur dans la base de données."))
         else:
             return render_template('auth/signup_confirmation.html', title='Confirmation')
-            #return render_template('auth/upload.html', title='Upload', form=form)
+            # return render_template('auth/upload.html', title='Upload', form=form)
             # f = request.files['inputFile']
             # if form_data.validate_on_submit()
             #     db.session.add(form_data)

@@ -74,8 +74,15 @@ def gerer_demandes():
 @bp.route('/display_piece_id', methods=['GET', 'POST'])
 @bp.endpoint('display_piece_id')
 def display_piece_id():
-    form=IdForm
-    return render_template('conseiller/display_piece_id.html')
+    my_string = request.full_path
+    if "=" in my_string:
+        id = int(my_string.split("=", 1)[1])
+        demande_data = Demande.query.get(id).piece_id
+        return send_file(BytesIO(demande_data), attachment_filename="flask.pdf", as_attachment=True)
+    else:
+        return render_template('conseiller/display_piece_id.html')
+    #return render_template('conseiller/display_piece_id.html')
+
 
 
 @bp.route('/display_just_domicile')
