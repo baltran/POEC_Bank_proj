@@ -14,6 +14,7 @@ class Compte(db.Model):
     __mapper_args__ = {'polymorphic_on': discriminator}
     operations = db.relationship('Operation', backref='compte_src', lazy='dynamic', foreign_keys='Operation.compte_id')
     virements = db.relationship('Operation', backref='compte_bis', lazy='dynamic', foreign_keys='Operation.compte_bis_id')
+    #modifier virements vers virements_recus
 
     #def __init__(self, data_compte):
     #    self.rib, self.proprietaire, self.date_creation, self.solde, self.type = data_compte
@@ -24,3 +25,4 @@ class Compte(db.Model):
 
     def __repr__(self):
         return '<Compte {}>'.format(self.id)
+

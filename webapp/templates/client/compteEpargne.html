@@ -4,5 +4,19 @@
 
         <p> Bienvenue sur vôtre compte epargne</p>
 </form>
+<table>
+                <tr>
+                    {% for col in operations[0].afficher().keys() %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+                {% for operation in operations %}
+                    <tr>
+                        {% for e in operation.afficher().values() %}
+                            <td>{{ e }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
 {% endblock %}
 </html>
