@@ -18,7 +18,7 @@ class SignupForm(FlaskForm):
     username = StringField(_l('Utilisateur'), validators=[DataRequired()])
     # password = PasswordField('Mot de passe', validators=[DataRequired()])
     # password_bis = PasswordField('Confirmation du mot de passe', validators=[DataRequired()])
-<<< prenom = StringField('Prénom', validators=[DataRequired()])
+    prenom = StringField('Prénom', validators=[DataRequired()])
     nom = StringField('Nom', validators=[DataRequired()])
     username = StringField('Utilisateur', validators=[DataRequired()])
     # password = PasswordField('Mot de passe', validators=[DataRequired()])
