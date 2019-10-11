@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash
 
 from webapp import db
 from webapp.auth import bp
-from webapp.auth.forms import LoginForm, SigninForm, ResetPasswordRequestForm, ResetPasswordForm
+from webapp.auth.forms import LoginForm, SignupForm, ResetPasswordRequestForm, ResetPasswordForm
 from flask_login import current_user, login_user, logout_user
 from flask_babel import lazy_gettext as _l
 from webapp.main.classes.utilisateur import Utilisateur
@@ -40,7 +40,7 @@ def login():
             return redirect(url_for('auth.login'))
 
         if user.discriminator == "client":
-            user=Client.query.filter_by(username=form.username.data).first()
+            user = Client.query.filter_by(username=form.username.data).first()
         elif user.discriminator == "conseiller":
             user = Conseiller.query.filter_by(username=form.username.data).first()
         login_user(user, remember=form.remember_me.data)
@@ -57,10 +57,10 @@ def logout():
     return redirect(url_for('main.index'))
 
 
-@bp.route('/signin', methods=['GET', 'POST'])
-@bp.endpoint('signin')
-def signin():
-    form = SigninForm()
+@bp.route('/signup', methods=['GET', 'POST'])
+@bp.endpoint('signup')
+def signup():
+    form = SignupForm()
     if form.validate_on_submit():
         data = {
             form.prenom.name: form.prenom.data,
@@ -79,15 +79,15 @@ def signin():
         elif not insertion:
             flash(_("Erreur dans la base de données."))
         else:
-            return redirect(url_for('auth.signin_confirmation'))
-    return render_template('auth/signin.html', title=_l('Inscription'),
+            return redirect(url_for('auth.signup_confirmation'))
+    return render_template('auth/signup.html', title=_l('Inscription'),
                            form=form)
 
 
-@bp.route('/signin_confirmation', methods=['GET', 'POST'])
-@bp.endpoint('signin_confirmation')
-def signin_confirmation():
-    return render_template('auth/signin_confirmation.html', title=_l('Confirmation de demande'))
+@bp.route('/signup_confirmation', methods=['GET', 'POST'])
+@bp.endpoint('signup_confirmation')
+def signup_confirmation():
+    return render_template('auth/signup_confirmation.html', title=_l('Confirmation de demande'))
 
 
 @bp.route('/reset_password_request', methods=['GET', 'POST'])

@@ -6,7 +6,9 @@
     {{ nav_link('conseiller.gerer_demandes', 'Gestion de demandes') }}
 {% endblock %}
 {% block content %}
-            <h2>Demandes de création de compte :</h2>
+            <h2>Vous avez {{ total_de_demandes }} demandes de création de compte.</h2>
+            <p> Les identifiants des demandes sont {{ ids_demandes }}.</p>
+            {% if total_de_demandes>0 %}
             <table>
                 <tr>
                     <th>  </th>
@@ -31,11 +33,13 @@
                     </tr>
                 {% endfor %}
             </table>
+            {% endif %}
             <p>
                 <br>
                 <br>
             </p>
-            <h2>Liste de clients :</h2>
+            <h2>GestiBank a {{ total_de_clients }} clients:</h2>
+            {% if total_de_clients>0 %}
             <table>
                 <tr>
                     {% for col in clients[0].afficher().keys() %}
@@ -50,10 +54,11 @@
                         {% endfor %}
                         <td>
                         <form>
-                        <button type="submit" name="supprimer" value="{{ client.afficher()['id'] }}"
+                        <button class="btn_cnx" type="submit" name="supprimer" value="{{ client.afficher()['id'] }}"
                                   onclick="alert('Client '+{{client.afficher().id}}+' supprimé.')">Supprimer</button></form>
                         </td>
                     </tr>
                 {% endfor %}
             </table>
+            {% endif %}
 {% endblock %}}

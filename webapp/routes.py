@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash
 
 # from modules import requete_bdd
 from webapp import app
-from webapp.forms import LoginForm, SigninForm, CommentForm
+from webapp.forms import LoginForm, SignupForm, CommentForm
 from flask_login import current_user, login_user, logout_user, login_required
 
 

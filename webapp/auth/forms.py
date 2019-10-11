@@ -3,6 +3,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo
 from flask_babel import lazy_gettext as _l
 
+
 class LoginForm(FlaskForm):
     username = StringField(_l('Utilisateur'), validators=[DataRequired()])
     password = PasswordField(_l('Mot de passe'), validators=[DataRequired()])
@@ -10,7 +11,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField(_l('Me connecter'))
 
 
-class SigninForm(FlaskForm):
+class SignupForm(FlaskForm):
     prenom = StringField(_l('Prénom'), validators=[DataRequired()])
     nom = StringField(_l('Nom'), validators=[DataRequired()])
     username = StringField(_l('Utilisateur'), validators=[DataRequired()])
