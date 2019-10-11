@@ -1,18 +1,24 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileRequired, FileAllowed
+from flask_wtf.file import FileRequired, FileAllowed
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, FileField
 from wtforms.validators import DataRequired, Email, EqualTo
+from flask_babel import lazy_gettext as _l
 
 
 class LoginForm(FlaskForm):
-    username = StringField('Utilisateur', validators=[DataRequired()])
-    password = PasswordField('Mot de passe', validators=[DataRequired()])
-    remember_me = BooleanField('Se rappeler de moi')
-    submit = SubmitField('Me connecter')
+    username = StringField(_l('Utilisateur'), validators=[DataRequired()])
+    password = PasswordField(_l('Mot de passe'), validators=[DataRequired()])
+    remember_me = BooleanField(_l('Se rappeler de moi'))
+    submit = SubmitField(_l('Me connecter'))
 
 
 class SignupForm(FlaskForm):
-    prenom = StringField('Prénom', validators=[DataRequired()])
+    prenom = StringField(_l('Prénom'), validators=[DataRequired()])
+    nom = StringField(_l('Nom'), validators=[DataRequired()])
+    username = StringField(_l('Utilisateur'), validators=[DataRequired()])
+    # password = PasswordField('Mot de passe', validators=[DataRequired()])
+    # password_bis = PasswordField('Confirmation du mot de passe', validators=[DataRequired()])
+<<< prenom = StringField('Prénom', validators=[DataRequired()])
     nom = StringField('Nom', validators=[DataRequired()])
     username = StringField('Utilisateur', validators=[DataRequired()])
     # password = PasswordField('Mot de passe', validators=[DataRequired()])
@@ -28,12 +34,12 @@ class SignupForm(FlaskForm):
 
 
 class ResetPasswordRequestForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Request Password Reset')
+    email = StringField(_l('Email'), validators=[DataRequired(), Email()])
+    submit = SubmitField(_l('Request Password Reset'))
 
 
 class ResetPasswordForm(FlaskForm):
-    password = PasswordField('Mot de passe', validators=[DataRequired()])
-    password_bis = PasswordField('Repeter votre mot de passe',
+    password = PasswordField(_l('Mot de passe'), validators=[DataRequired()])
+    password_bis = PasswordField(_l('Repeter votre mot de passe'),
                                  validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Réinitialisez votre mot de passe')
+    submit = SubmitField(_l('Réinitialisez votre mot de passe'))

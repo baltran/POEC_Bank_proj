@@ -9,10 +9,10 @@ class AcceptForm(FlaskForm):
 class IdForm(FlaskForm):
 
 
-# class ClientCreationForm(FlaskForm):
-#     login = StringField('login', validators=[DataRequired()])
-#     password = PasswordField('Mot de passe', validators=[DataRequired()])
-#     password_bis = PasswordField('Confirmation du mot de passe', validators=[DataRequired()])
-#     date_debut = DateTimeField('Date_Entree', validators=[DataRequired()])
-#     date_fin = DateTimeField('Date_sortie')
-#     submit = SubmitField("Creation")
+class ClientCreationForm(FlaskForm):
+    login = StringField('login', validators=[DataRequired()])
+    password = PasswordField('Mot de passe', validators=[DataRequired()])
+    password_bis = PasswordField('Confirmation du mot de passe', validators=[DataRequired()])
+    date_debut = DateTimeField('Date_Entree', validators=[DataRequired()])
+    date_fin = DateTimeField('Date_sortie')
+    submit = SubmitField("Creation")

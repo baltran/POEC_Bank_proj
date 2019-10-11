@@ -8,6 +8,7 @@ from webapp import db
 from webapp.auth import bp
 from webapp.auth.forms import *
 from flask_login import current_user, login_user, logout_user
+from flask_babel import lazy_gettext as _l
 from webapp.main.classes.utilisateur import Utilisateur
 from webapp.main.classes.client import Client
 from webapp.main.classes.conseiller import Conseiller
@@ -36,17 +37,22 @@ def login():
     if form.validate_on_submit():
         user = Utilisateur.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Login ou mot de passe invalide')
+            flash(_l('Login ou mot de passe invalide'))
             return redirect(url_for('auth.login'))
 
         if user.discriminator == "client":
-            user=Client.query.filter_by(username=form.username.data).first()
+            user = Client.query.filter_by(username=form.username.data).first()
         elif user.discriminator == "conseiller":
             user = Conseiller.query.filter_by(username=form.username.data).first()
         login_user(user, remember=form.remember_me.data)
         return redirect_by_role(user)
+<<<<<<< HEAD
         # return redirect(url_for('main.index'))
     return render_template('auth/login.html', title='Authentification',
+=======
+        #return redirect(url_for('main.index'))
+    return render_template('auth/login.html', title=_l('Authentification'),
+>>>>>>> 82c517e5e05bbccaab2cf7e0f1f8e2734f2e42eb
                            form=form)
 
 
@@ -89,9 +95,9 @@ def signup():
         insertion = inserer(demande)
 
         if insertion == -1:
-            flash("Demande déjà effectuée.")
+            flash(_l("Demande déjà effectuée."))
         elif not insertion:
-            flash("Erreur dans la base de données.")
+            flash(_("Erreur dans la base de données."))
         else:
             return render_template('auth/signup_confirmation.html', title='Confirmation')
             #return render_template('auth/upload.html', title='Upload', form=form)
@@ -104,10 +110,11 @@ def signup():
                            form=form)
 
 
+
 @bp.route('/signup_confirmation', methods=['GET', 'POST'])
 @bp.endpoint('signup_confirmation')
 def signup_confirmation():
-    return render_template('auth/signup_confirmation.html', title='Confirmation de demande')
+    return render_template('auth/signup_confirmation.html', title=_l('Confirmation de demande'))
 
 
 @bp.route('/reset_password_request', methods=['GET', 'POST'])
@@ -119,7 +126,7 @@ def reset_password_request():
         user = Utilisateur.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash('Consultez votre email pour et suivez les instructions')
+        flash(_l('Consultez votre email pour et suivez les instructions'))
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password_request.html', form=form)
 
@@ -135,7 +142,7 @@ def reset_password(token):
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
-        flash('Votre mot de passe a été réinitialisé.')
+        flash(_l('Votre mot de passe a été réinitialisé.'))
         return redirect(url_for('auth.login'))
     exp = int(Utilisateur.get_exp_token(token) - time.time())
     return render_template('auth/reset_password.html', form=form, exp=exp)

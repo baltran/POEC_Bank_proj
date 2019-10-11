@@ -33,3 +33,4 @@ class Client(Utilisateur):
             'adresse': self.adresse
         })
         return s
+

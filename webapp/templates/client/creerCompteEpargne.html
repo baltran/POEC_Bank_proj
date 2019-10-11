@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+{% block content %}
+<form action="{{ url_for('client.CreerCompteEpargne') }}" method="post">
+        {{form.hidden_tag()}}
+        <p>
+            {{form.titulaire_id.label}}<br>
+            {{form.titulaire_id(size=32)}}<br>
+
+            {% for error in form.titulaire_id.errors %}
+                <span style='color:red'>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{form.taux_remuneration.label}}<br>
+            {{form.taux_remuneration(size=32)}}<br>
+
+            {% for error in form.taux_remuneration.errors %}
+                <span style='color:red'>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{form.submit}}</p>
+
+</form>
+{% endblock %}

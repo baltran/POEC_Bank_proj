@@ -21,3 +21,7 @@ class CompteCourant(Compte):
 
     def depot(self, somme, cnx=None):
         pass
+
+    def afficher(self):
+        return {'solde': self.solde,
+                'operations': self.operations}
