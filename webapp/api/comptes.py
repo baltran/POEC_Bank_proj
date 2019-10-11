@@ -87,7 +87,7 @@ def set_withdrawal(id):
                 return conflict_request("L'operation demandée dépasse le seuil de découvert")
         data = (solde_tmp, compte.rib)
         compte.solde = solde_tmp
-        data_retrait = {'valeur': decrement, 'compte_id': compte.id, 'type_operation': 'retrait'}
+        data_retrait = {'valeur': -decrement, 'compte_id': compte.id, 'type_operation': 'retrait'}
         operation = Operation(**data_retrait)
         db.session.add(operation)
         db.session.commit()
