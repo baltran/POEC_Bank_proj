@@ -28,17 +28,17 @@
                         {% endfor %}
                     <td>
                         <form action="{{ url_for('conseiller.display_piece_id') }}">
-                            <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}" onclick="alert('Cliquez sur OK pour télécharger le justificatif de '+{{demande.afficher().prenom}}+{{demande.afficher().nom}}+'.')">Afficher</button>
+                            <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">Afficher</button>
                         </form>
                     </td>
                     <td>
                         <form action="{{ url_for('conseiller.display_just_domicile') }}">
-                            <input type="submit" value="Afficher" />
+                            <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">Afficher</button>
                         </form>
                     </td>
                     <td>
                         <form action="{{ url_for('conseiller.display_just_salaire') }}">
-                            <input type="submit" value="Afficher" />
+                            <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">Afficher</button>
                         </form>
                     </td>
                     <td>

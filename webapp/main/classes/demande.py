@@ -46,7 +46,7 @@ class Demande(db.Model):
             'email' : self.email,
             'tel': self.tel,
             'adresse': self.adresse ,
-            'revenus': self.revenu_mensuel
+            'revenu_mensuel': self.revenu_mensuel
             #'piece_id': piece_id
             #'just_domicile': just_domicile,
             #'just_salaire': just_salaire

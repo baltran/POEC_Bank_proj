@@ -40,7 +40,7 @@ def login():
             return redirect(url_for('auth.login'))
 
         if user.discriminator == "client":
-            user=Client.query.filter_by(username=form.username.data).first()
+            user = Client.query.filter_by(username=form.username.data).first()
         elif user.discriminator == "conseiller":
             user = Conseiller.query.filter_by(username=form.username.data).first()
         login_user(user, remember=form.remember_me.data)
@@ -94,7 +94,7 @@ def signup():
             flash("Erreur dans la base de données.")
         else:
             return render_template('auth/signup_confirmation.html', title='Confirmation')
-            #return render_template('auth/upload.html', title='Upload', form=form)
+            # return render_template('auth/upload.html', title='Upload', form=form)
             # f = request.files['inputFile']
             # if form_data.validate_on_submit()
             #     db.session.add(form_data)
