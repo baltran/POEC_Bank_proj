@@ -109,9 +109,9 @@ class Utilisateur(UserMixin, db.Model):
         return {
             'id' : self.id,
             'username' : self.username,
-            'nom' : self.nom,
-            'prenom' : self.prenom,
-            'email' : self.email,
+            'Nom' : self.nom,
+            'Prénom' : self.prenom,
+            'e-mail' : self.email,
             # 'password' : self.password,
             'discriminator' : self.discriminator
         }

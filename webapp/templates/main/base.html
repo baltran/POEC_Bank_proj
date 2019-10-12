@@ -13,19 +13,18 @@
     </head>
     <body>
         <header class="container">
-            <img src="{{ url_for('static', filename='img/logo.png') }}">
+            <img src="{{ url_for('static', filename='img/logo.png') }}"  style="width:48px;height:100px;"    >
             <h1>GestiBank</h1>
             <div id="profile">
                 {% if not current_user.is_authenticated %}
-                    <p><a class="btn_cnx" href="{{ url_for('auth.login') }}">{{ _('Connexion') }}</a></p>
-                    <p><a class="btn_cnx" href="{{ url_for('auth.signup') }}">{{ _('Inscription') }}</a></p>
-
+                    <p><a class="btn_cnx" href="{{ url_for('auth.login') }}">{{ _('Connexion') }}</a>
+                    <a class="btn_cnx" href="{{ url_for('auth.signup') }}">{{ _('Inscription') }}</a></p>
 
                     <!--<p><input type="button" class="btn_cnx" onclick="location.href='{{ url_for('auth.signup') }}';" value="Inscription" /></p>-->
                 {% else %}
                     <p>Bienvenue {{user.username|capitalize}}</p>
-                    <p><a class="btn_cnx" href="{{ url_for('admins.creerConseiller') }}">{{ _('Création de conseiller') }}</a></p>
-                    <p><a class="btn_cnx" href="{{ url_for('auth.logout') }}">{{ _('Déconnexion') }}</a></p>
+                    <p><a class="btn_cnx" href="{{ url_for('admins.creerConseiller') }}">{{ _('Création de conseiller') }}</a>
+                    <a class="btn_cnx" href="{{ url_for('auth.logout') }}">{{ _('Déconnexion') }}</a></p>
 
                 {% endif %}
                 <p>
