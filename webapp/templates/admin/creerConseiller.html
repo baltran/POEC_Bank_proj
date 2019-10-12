@@ -1,4 +1,11 @@
 {% extends "main/base.html" %}
+{% block links_css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+{% block nav %}
+    {{ nav_link('main.index', _('Accueil')) }}
+    {{ nav_link('admins.creerConseiller', _('Créer un Conseiller')) }}
+{% endblock %}}
 {% block content %}
 <form action="{{ url_for('admins.creerConseiller') }}" method="post">
         {{form.hidden_tag() }}

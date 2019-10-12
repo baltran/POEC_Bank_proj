@@ -49,7 +49,9 @@ def compteCourant():
 @bp.route('/compteEpargne', methods=['GET', 'POST'])
 @bp.endpoint('compteEpargne')
 def compteEpargne():
-    return render_template('client/compteEpargne.html', user=current_user, title='Compte Courant')
+    if current_user.is_authenticated and current_user.discriminator == 'client':
+        compte = CompteEpargne.query.filter_by(titulaire=current_user).first()
+        return render_template('client/compteEpargne.html', user=current_user, compte=compte, title='Compte Courant')
 
 
 

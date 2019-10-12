@@ -18,7 +18,6 @@ from webapp.main.classes.conseiller import Conseiller
 #@roles_required('admin')
 def creerConseiller():
     form = ConseillerCreationForm()
-
     if form.validate_on_submit():
         if form.password.data == form.password_bis.data:
             data = {
