@@ -12,13 +12,10 @@ class Config(object):
     SQLALCHEMY_ENGINE_OPTION = {
         'poolclass': SingletonThreadPool
     }
-
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
     MAIL_PORT = os.environ.get('MAIL_PORT')
-    # MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS')
-    # MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_USERNAME = 'poec.python.2019@gmail.com'
-    MAIL_PASSWORD = 'MotDePassePOEC'
+    MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS')
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     LANGUAGES = ['fr', 'en']
     ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg'])
     # UPLOAD_FOLDER = '/Desktop'
