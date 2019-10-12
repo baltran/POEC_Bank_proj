@@ -1,11 +1,11 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateTimeField, DateField
 from wtforms.validators import DataRequired, Email, EqualTo, Optional
-
+from flask_babel import lazy_gettext as _l
 class ConseillerCreationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Mot de passe', validators=[DataRequired()])
-    password_bis = PasswordField('Confirmation du mot de passe', validators=[DataRequired()])
-    date_debut = DateField('Date Entree', format='%d-%m-%Y')
-    date_fin = DateField('Date sortie', format='%d-%m-%Y', validators=[Optional()])
-    submit = SubmitField("Creation")
+    username = StringField(_l('Nom Utilisateur'), validators=[DataRequired()])
+    password = PasswordField(_l('Mot de passe'), validators=[DataRequired()])
+    password_bis = PasswordField(_l('Confirmation du mot de passe'), validators=[DataRequired()])
+    date_debut = DateField(_l('Date Entree'), format='%d-%m-%Y')
+    date_fin = DateField(_l('Date sortie'), format='%d-%m-%Y', validators=[Optional()])
+    submit = SubmitField(_l("Creation"))

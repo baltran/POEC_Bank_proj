@@ -7,7 +7,7 @@
 {% endblock %}
 {% block content %}
 <form action="{{ url_for('client.compteCourant') }}" method="post">
-        <p>_('Bienvenue sur vôtre compte courant')</p>
+        <h1>_('Bienvenue sur vôtre compte courant')</h1>
 </form>
                 <p>{{ _('Solde :')  }} {{compte.solde}}</p>
 

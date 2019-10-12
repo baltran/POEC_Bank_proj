@@ -16,7 +16,7 @@ from webapp.admin.forms import ConseillerCreationForm
 from webapp.main.requetes import inserer
 from webapp.auth.email import send_password_reset_email
 from webapp.main.classes.conseiller import Conseiller
-from flask_babel import lazy_gettext as _l
+from flask_babel import _, lazy_gettext as _l
 
 
 @bp.route('index', methods=['GET', 'POST'])
@@ -36,7 +36,7 @@ def compteCourant():
     if current_user.is_authenticated and current_user.discriminator == 'client':
         compte = CompteCourant.query.filter_by(titulaire=current_user).first()
         if compte.operations.all() is None:
-            flash(_l('Aucune opération n a été effectuée sur ce compte'))
+            flash(_('Aucune opération n a été effectuée sur ce compte'))
         else:
             operations = compte.operations.union_all(compte.virements).order_by(Operation.done_at.desc()).all()
 

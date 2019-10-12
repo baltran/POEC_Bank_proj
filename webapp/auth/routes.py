@@ -46,13 +46,13 @@ def login():
             user = Conseiller.query.filter_by(username=form.username.data).first()
         login_user(user, remember=form.remember_me.data)
         return redirect_by_role(user)
-<<<<<<< HEAD
+
         # return redirect(url_for('main.index'))
-    return render_template('auth/login.html', title='Authentification',
-=======
+
+
         #return redirect(url_for('main.index'))
     return render_template('auth/login.html', title=_l('Authentification'),
->>>>>>> 82c517e5e05bbccaab2cf7e0f1f8e2734f2e42eb
+
                            form=form)
 
 
