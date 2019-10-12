@@ -92,7 +92,7 @@ def signup():
         if insertion == -1:
             flash(_l("Demande déjà effectuée."))
         elif not insertion:
-            flash(_("Erreur dans la base de données."))
+            flash(_l("Erreur dans la base de données."))
         else:
             return render_template('auth/signup_confirmation.html', title='Confirmation')
             # return render_template('auth/upload.html', title='Upload', form=form)
