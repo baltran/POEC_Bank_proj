@@ -35,9 +35,14 @@ def index():
 @login_required
 def compteCourant():
     if current_user.is_authenticated and current_user.discriminator == 'client':
+
         # compte = CompteCourant.query.filter_by(titulaire=current_user).first()
         compte = current_user.comptes.filter_by(discriminator='compte_courant').first()
         operations = None
+
+        compte = CompteCourant.query.filter_by(titulaire=current_user).first()
+
+
         if compte.operations.all() is None:
             flash(_('Aucune opération n a été effectuée sur ce compte'))
         else:

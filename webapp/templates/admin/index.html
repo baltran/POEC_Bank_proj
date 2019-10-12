@@ -2,4 +2,5 @@
 
 {% block body %}
     <h1 >{{_('Bienvenue, Administrateur !')}}</h1>
+    <p><a class="btn_cnx" href="{{ url_for('admins.creerConseiller') }}">{{ _('Créer un Conseiller') }}</a></p>
 {% endblock %}
