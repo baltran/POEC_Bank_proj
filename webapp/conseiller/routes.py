@@ -78,20 +78,37 @@ def display_piece_id():
     if "=" in my_string:
         id = int(my_string.split("=", 1)[1])
         demande_data = Demande.query.get(id).piece_id
+        # Returning Files From a Database in Flask
+        # https: // www.youtube.com / watch?v = QPI3rzZow6k
         return send_file(BytesIO(demande_data), attachment_filename="flask.pdf", as_attachment=True)
     else:
         return render_template('conseiller/display_piece_id.html')
-    #return render_template('conseiller/display_piece_id.html')
+
 
 
 
 @bp.route('/display_just_domicile')
 @bp.endpoint('display_just_domicile')
 def display_just_domicile():
-    return render_template('conseiller/display_just_domicile.html')
-
+    my_string = request.full_path
+    if "=" in my_string:
+        id = int(my_string.split("=", 1)[1])
+        demande_data = Demande.query.get(id).just_domicile
+        # Returning Files From a Database in Flask
+        # https: // www.youtube.com / watch?v = QPI3rzZow6k
+        return send_file(BytesIO(demande_data), attachment_filename="flask.pdf", as_attachment=True)
+    else:
+        return render_template('conseiller/display_just_domicile.html')
 
 @bp.route('/display_just_salaire')
 @bp.endpoint('display_just_salaire')
 def display_just_salaire():
-    return render_template('conseiller/display_just_salaire.html')
+    my_string = request.full_path
+    if "=" in my_string:
+        id = int(my_string.split("=", 1)[1])
+        demande_data = Demande.query.get(id).just_salaire
+        # Returning Files From a Database in Flask
+        # https: // www.youtube.com / watch?v = QPI3rzZow6k
+        return send_file(BytesIO(demande_data), attachment_filename="flask.pdf", as_attachment=True)
+    else:
+        return render_template('conseiller/display_just_salaire.html')

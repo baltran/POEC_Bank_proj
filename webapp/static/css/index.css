@@ -1,18 +1,23 @@
 @charset "utf-8";
 
+
 th, td {
   border-bottom: 1px solid #ddd;
-  padding: 15px;
+  /*padding: 15px;*/
+  padding: 5px;
   text-align: center;
 }
 
 th {
-  background-color: #4CAF50;
+  /*background-color: #4CAF50;*/
+  /*background-color:#0900b3;*/
+  background-color:#0e02de;
   color: white;
 }
 
 tr:hover, tr:hover td {
-    background-color: lightblue;
+    /*background-color: lightblue;*/
+    background-color: white;
     cursor: grab;
 }
 td:nth-child(even) {
@@ -21,5 +26,6 @@ td:nth-child(even) {
 }
 
 td:hover {
-    background-color: lightpink !important;
+    /*background-color: lightpink !important;*/
+    background-color: lightblue !important;
 }

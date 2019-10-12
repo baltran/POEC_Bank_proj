@@ -79,6 +79,8 @@ def signup():
 
         demande = Demande(**data)
 
+        # Uploading Files to a Database in Flask
+        # https://www.youtube.com/watch?v=TLgVEBuQURA
         piece_id = request.files['pieceIdUp']
         just_salaire = request.files['justSalaireUp']
         just_domicile = request.files['justDomicileUp']
