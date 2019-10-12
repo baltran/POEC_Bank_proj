@@ -27,7 +27,7 @@ class Compte(db.Model):
         return '<Compte {}>'.format(self.id)
 
     def format_name(self):
-        name = self.titulaire.nom + " " + self.titulaire.prenom
+        name = str(self.titulaire.nom) + " " + str(self.titulaire.prenom)
         if self.discriminator == "compte_courant":
             name += " (Compte Courant)"
         else:
