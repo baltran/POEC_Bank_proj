@@ -1,24 +1,29 @@
 {% extends "main/base.html" %}
+{% block nav %}
+    {{ nav_link('main.index', _('Accueil')) }}
+    {{ nav_link('client.index', _('Espace client')) }}
+    {{ nav_link('client.creer_compte_epargne', _('Création Compte Épargne')) }}
+{% endblock %}}
 {% block content %}
-<form action="{{ url_for('client.CreerCompteEpargne') }}" method="post">
-        {{form.hidden_tag()}}
-        <p>
-            {{form.titulaire_id.label}}<br>
-            {{form.titulaire_id(size=32)}}<br>
+    <form action="{{ url_for('client.creer_compte_epargne') }}" method="post">
+            {{form.hidden_tag()}}
+            <p>
+                {{form.titulaire_id.label}}<br>
+                {{form.titulaire_id(size=32)}}<br>
 
-            {% for error in form.titulaire_id.errors %}
-                <span style='color:red'>[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{form.taux_remuneration.label}}<br>
-            {{form.taux_remuneration(size=32)}}<br>
+                {% for error in form.titulaire_id.errors %}
+                    <span style='color:red'>[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{form.taux_remuneration.label}}<br>
+                {{form.taux_remuneration(size=32)}}<br>
 
-            {% for error in form.taux_remuneration.errors %}
-                <span style='color:red'>[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{form.submit}}</p>
+                {% for error in form.taux_remuneration.errors %}
+                    <span style='color:red'>[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{form.submit}}</p>
 
-</form>
+    </form>
 {% endblock %}

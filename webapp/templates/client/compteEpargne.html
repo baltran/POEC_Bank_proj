@@ -3,14 +3,29 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 {% block nav %}
-    {{ nav_link('client.index', _('Espace Client')) }}
-    {{ nav_link('client.compteEpargne', _('Compte Epargne')) }}
+    {{ nav_link('main.index', _('Accueil')) }}
+    {{ nav_link('client.index', _('Espace client')) }}
+    {{ nav_link('client.compteEpargne', _('Compte Épargne')) }}
 {% endblock %}}
 {% block content %}
-<form action="{{ url_for('client.compteEpargne') }}" method="post">
-
-        <h1> {{_('Bienvenue sur Vôtre Compte Epargne') }}</h1>
-
-</form>
-<p style='color:blue'><u>{{ _('Solde :')  }} {{compte.solde}} {{_('€') }}</u></p>
+        <h2>{{ _('Bienvenue sur votre compte épargne') }}</h2>
+        <p style='color:blue'><u>{{ _('Solde :')  }} {{compte.solde}} {{_('€') }}</u></p>
+        {% if operations %}
+            <table>
+                <tr>
+                    {% for col in operations[0].afficher().keys() %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+                {% for operation in operations %}
+                    <tr>
+                        {% for e in operation.afficher().values() %}
+                            <td>{{ e|date_format }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        <p><a class="btn_cnx" href="{{ url_for('client.virement') }}">{{ _('Effectuer un Virement') }}</a></p>
 {% endblock %}
+</html>

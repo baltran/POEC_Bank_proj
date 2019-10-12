@@ -41,18 +41,13 @@ def login():
             return redirect(url_for('auth.login'))
 
         if user.discriminator == "client":
-            user = Client.query.filter_by(username=form.username.data).first()
+            user = Client.query.get(user.id)
         elif user.discriminator == "conseiller":
-            user = Conseiller.query.filter_by(username=form.username.data).first()
+            user = Conseiller.query.get(user.id)
         login_user(user, remember=form.remember_me.data)
         return redirect_by_role(user)
-
-        # return redirect(url_for('main.index'))
-
-
         #return redirect(url_for('main.index'))
     return render_template('auth/login.html', title=_l('Authentification'),
-
                            form=form)
 
 
