@@ -11,7 +11,7 @@
         <h1>{{_('Bienvenue sur vôtre compte courant')}}</h1>
 </form>
 <p style='color:blue'><u>{{ _('Solde :')  }} {{compte.solde}} {{_('€') }}</u></p>
-
+{% if operations.__len__() != 0 %}
 <table>
                 <tr>
                     {% for col in operations[0].afficher().keys() %}
@@ -26,5 +26,6 @@
                     </tr>
                 {% endfor %}
             </table>
+{% endif %}
 {% endblock %}
 </html>

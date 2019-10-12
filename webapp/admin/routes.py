@@ -35,6 +35,7 @@ def creerConseiller():
             elif not insertion:
                 flash("Erreur dans la base de donnée !")
             else:
+                flash('Un Conseiller a été Créé')
                 return redirect(url_for('main.index'))
         else:
             form.password_bis.errors.append('Mot de passe non confirmé !')

@@ -24,9 +24,6 @@
                 {% else %}
                     <p>{{ _('Bienvenue %(username)s', username=(user.username|capitalize))}}</p>
                     <p><a class="btn_cnx" href="{{ url_for('auth.logout') }}">{{ _('Déconnexion') }}</a></p>
-                    {% if current_user.descriminator == 'admin' %}
-                        <p><a class="btn_cnx" href="{{ url_for('admins.creerConseiller') }}">{{ _('Créer un Conseiller') }}</a></p>
-                    {% endif %}
                 {% endif %}
                 <p>
                     <label for="lang-select">{{ _('Langue') }}</label>
