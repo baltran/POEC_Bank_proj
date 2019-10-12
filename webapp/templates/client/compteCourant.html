@@ -13,9 +13,19 @@
 <p style='color:blue'><u>{{ _('Solde :')  }} {{compte.solde}} {{_('€') }}</u></p>
 {% if operations.__len__() != 0 %}
 <table>
+    <h2>{{ _('Bienvenue sur votre compte courant') }}</h2>
+    <p style='color:blue'><u>{{ _('Solde :')  }} {{compte.solde}} {{_('€') }}</u></p>
+    {% if operations %}
+        <table>
+            <tr>
+                {% for col in operations[0].afficher().keys() %}
+                    <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+            {% for operation in operations %}
                 <tr>
-                    {% for col in operations[0].afficher().keys() %}
-                        <th>{{ col }}</th>
+                    {% for e in operation.afficher().values() %}
+                        <td>{{ e|date_format }}</td>
                     {% endfor %}
                 </tr>
                 {% for operation in operations %}
@@ -26,6 +36,10 @@
                     </tr>
                 {% endfor %}
             </table>
+    {% endif %}
+    {% endfor %}
+</table>
 {% endif %}
+    <p><a class="btn_cnx" href="{{ url_for('client.virement') }}">{{ _('Effectuer un Virement') }}</a></p>
 {% endblock %}
 </html>

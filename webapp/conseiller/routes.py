@@ -7,8 +7,9 @@ from io import BytesIO
 
 # from webapp.main.classes.conseiller import Conseiller
 
-
+@bp.route('/index')
 @bp.route('/gerer_demande', methods=['GET', 'POST'])
+@bp.endpoint('/gerer_demande')
 # @login_required
 # TODO: Assurer que seulement les conseillers peuvent y accéder.
 def gerer_demandes():

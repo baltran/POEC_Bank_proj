@@ -96,7 +96,8 @@ def signup():
         elif not insertion:
             flash(_l("Erreur dans la base de données."))
         else:
-            return render_template('auth/signup_confirmation.html', title='Confirmation')
+            #return render_template('auth/signup_confirmation.html', title='Confirmation')
+            return redirect(url_for('auth.signup_confirmation'))
             # return render_template('auth/upload.html', title='Upload', form=form)
             # f = request.files['inputFile']
             # if form_data.validate_on_submit()
@@ -111,7 +112,9 @@ def signup():
 @bp.route('/signup_confirmation', methods=['GET', 'POST'])
 @bp.endpoint('signup_confirmation')
 def signup_confirmation():
-    return render_template('auth/signup_confirmation.html', title=_l('Confirmation de demande'))
+    # return render_template('auth/signup_confirmation.html', title=_l('Confirmation de demande'))
+    return redirect(url_for('auth.signup_confirmation'))
+    #return redirect('auth/signup_confirmation.html')
 
 
 @bp.route('/reset_password_request', methods=['GET', 'POST'])
