@@ -9,7 +9,7 @@ data_cli_2 = {'username': 'Sadia', 'password': 'Sadia', 'email': 'sadia_ing@msn.
               'adresse': '12, rue de la liberté', 'tel': '0123786589', 'prenom': 'Sadia', 'nom': 'Anon'}
 data_admin = {'username': 'admin', 'password': 'admin', 'email': 'admin@gestibank.fr'}
 
-data_conseiller = {'username': 'Bob', 'password': 'bob', 'email': 'bob@bip.fr'}
+data_conseiller = {'username': 'Bob', 'password': 'bob', 'email': 'bob@bip.fr', 'prenom': 'Jean', 'nom': 'Durt'}
 
 data_demande = {'username': 'Bernard', 'password': 'bernard', 'email': 'bern@bip.fr', 'tel': '0147852369'}
 data_demande2 = {'username': 'Jean', 'password': 'jean', 'email': 'abd@bip.fr', 'tel': '0145879632'}

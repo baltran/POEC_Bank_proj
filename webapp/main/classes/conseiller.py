@@ -13,7 +13,7 @@ class Conseiller(Utilisateur):
     demande = db.relationship('Demande', backref='mon_conseiller', lazy='dynamic')
 
     def __repr__(self):
-        return '<Conseiller {}>'.format(self.username)
+        return '<Conseiller {} {}>'.format(self.nom, self.prenom)
 
     @classmethod
     def creer(cls, data_user, data_conseiller, role, cnx=None):
