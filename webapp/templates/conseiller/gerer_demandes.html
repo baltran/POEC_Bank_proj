@@ -7,40 +7,36 @@
 {% endblock %}
 {% block content %}
             <h2>Vous avez {{ total_de_demandes }} demandes de création de compte.</h2>
-            <p> Les identifiants des demandes sont {{ ids_demandes }}.</p>
             {% if total_de_demandes>0 %}
-            <table>
-                <tr>
-                    <th>  </th>
-                    {% for col in demandes[0].afficher().keys() %}
-                        <th>{{ col }}</th>
-                    {% endfor %}
-                    <th>Pièce d'identité</th>
-                    <th>Just. de domicile</th>
-                    <th>Just. de revenus</th>
-                    <th>Choisissez une action</th>
+            <table><tr>
+                <th>  </th>
+                {% for col in demandes[0].afficher() %}
+                    <th>{{ col }}</th>
+                {% endfor %}
+                <th>Choisissez une action</th>
                 </tr>
                 {% for demande in demandes %}
                     <tr>
                         <td><input type="checkbox" id="Accepter" name="Accepter"></td>
-                        {% for e in demande.afficher().values() %}
-                            <td>{{ e|center }}</td>
+                        {% for e in demande.afficher() %}
+                            <td>{{ demande.afficher()[e]|center }}
+                            {% if e=="Nom" %}
+                                <br><form action="{{ url_for('conseiller.display_piece_id') }}">
+                                <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">
+                                    Pièce d'identité</button>
+                                 </form>
+                            {% elif e=="Adresse" %}
+                                <br><form action="{{ url_for('conseiller.display_just_domicile') }}">
+                                <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">
+                                    Just. de domicile</button>
+                                </form>
+                            {% elif e=="Revenu mensuel" %}
+                                <br><form action="{{ url_for('conseiller.display_just_salaire') }}">
+                                <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">
+                                    Just. de revenus</button>
+                                </form>
+                            {% endif %}</td>
                         {% endfor %}
-                    <td>
-                        <form action="{{ url_for('conseiller.display_piece_id') }}">
-                            <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">Afficher</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="{{ url_for('conseiller.display_just_domicile') }}">
-                            <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">Afficher</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="{{ url_for('conseiller.display_just_salaire') }}">
-                            <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">Afficher</button>
-                        </form>
-                    </td>
                     <td>
                         <form>
                         <button type="submit" name="accepter" value="{{ demande.afficher()['id'] }}"
@@ -60,20 +56,49 @@
             {% if total_de_clients>0 %}
             <table>
                 <tr>
-                    {% for col in clients[0].afficher().keys() %}
+                    {% for col in clients[0].afficher() %}
+                        {% if col != "discriminator" and col!='username'  %}
                         <th>{{ col }}</th>
+                        {% endif %}
                     {% endfor %}
-                    <th>Action</th>
+                    <th>Compte épargne</th>
                 </tr>
                 {% for client in clients %}
                     <tr>
-                        {% for e in client.afficher().values() %}
-                            <td>{{ e|center }}</td>
+                        {% for c in client.afficher() %}
+                        {% if c != "discriminator" and c!='username' %}
+                            <td>{{ client.afficher()[c]|center }}
+                            {% if c=="Nom" %}
+                                <br><form action="{{ url_for('conseiller.display_piece_id') }}">
+                                <button type="submit" name="identite" value="{{ client.afficher()['id'] }}">
+                                    Pièce d'identité</button>
+                                 </form>
+                            {% elif c=="Adresse" %}
+                                <br><form action="{{ url_for('conseiller.display_just_domicile') }}">
+                                <button type="submit" name="domicile" value="{{ client.afficher()['id'] }}">
+                                    Just. de domicile</button>
+                                </form>
+                            {% elif c=="Revenu_mensuel" %}
+                                <br><form action="{{ url_for('conseiller.display_just_salaire') }}">
+                                <button type="submit" name="salaire" value="{{ client.afficher()['id'] }}">
+                                    Just. de revenus</button>
+                                </form>
+                            {% endif %}</td>
+                            </td>
+                        {% endif %}
                         {% endfor %}
                         <td>
                         <form>
-                        <button type="submit" name="supprimer" value="{{ client.afficher()['id'] }}"
-                                  onclick="alert('Client '+{{client.afficher().id}}+' supprimé.')">Supprimer</button></form>
+                            <button type="submit" name="creer_epargne" value="{{ client.afficher()['id'] }}"
+                                  onclick="alert('Un compte épargne pour'+{{client.afficher()['Nom']}}+'vient d'être crée.')">Créer</button>
+                            <br>
+                            <button type="submit" name="suppr_epargne" value="{{ client.afficher()['id'] }}"
+                                  onclick="alert('Compte épargne de'+{{client.afficher()['Nom']}}+' supprimé.')">Supprimer</button>
+                        </form>
+                        </td>
+                        <td>
+                            <button type="submit" name="supprimer" value="{{ client.afficher()['id'] }}"
+                                  onclick="alert('Client '+{{client.afficher().id}}+' supprimé.')">Supprimer client</button>
                         </td>
                     </tr>
                 {% endfor %}

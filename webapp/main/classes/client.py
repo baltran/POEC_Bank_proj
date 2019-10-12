@@ -36,8 +36,9 @@ class Client(Utilisateur):
     def afficher(self):
         s = super().afficher()
         s.update({
-            'tel': self.tel,
-            'adresse': self.adresse
+            'Téléphone': self.tel,
+            'Adresse': self.adresse ,
+            'Revenu mensuel': self.revenu_mensuel
         })
         return s
 

@@ -1,0 +1,81 @@
+{% extends "main/base.html" %}
+{% block links_css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+{% block nav %}
+    {{ nav_link('conseiller.gerer_demandes', 'Gestion de demandes') }}
+{% endblock %}
+{% block content %}
+            <h2>Vous avez {{ total_de_demandes }} demandes de création de compte.</h2>
+            <p> Les identifiants des demandes sont {{ ids_demandes }}.</p>
+            {% if total_de_demandes>0 %}
+            <table><tr>
+                    <th>  </th>
+                    {% for col in demandes[0].afficher().keys() %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
+                    <th>Pièce d'identité</th>
+                    <th>Just. de domicile</th>
+                    <th>Just. de revenus</th>
+                    <th>Choisissez une action</th>
+                </tr>
+                {% for demande in demandes %}
+                    <tr>
+                        <td><input type="checkbox" id="Accepter" name="Accepter"></td>
+                        {% for e in demande.afficher().values() %}
+                            <td>{{ e|center }}</td>
+                        {% endfor %}
+                    <td>
+                        <form action="{{ url_for('conseiller.display_piece_id') }}">
+                            <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">Afficher</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('conseiller.display_just_domicile') }}">
+                            <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">Afficher</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('conseiller.display_just_salaire') }}">
+                            <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">Afficher</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form>
+                        <button type="submit" name="accepter" value="{{ demande.afficher()['id'] }}"
+                                onclick="alert('Demande '+{{demande.afficher().id}}+' acceptée.')">Accepter</button>
+                        <button type="submit" name="refuser" value="{{ demande.afficher()['id'] }}"
+                                  onclick="alert('Demande '+{{demande.afficher().id}}+' refusée.')">Refuser</button></form>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+            <p>
+                <br>
+                <br>
+            </p>
+            <h2>GestiBank a {{ total_de_clients }} clients:</h2>
+            {% if total_de_clients>0 %}
+            <table>
+                <tr>
+                    {% for col in clients[0].afficher().keys() %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
+                    <th>Action</th>
+                </tr>
+                {% for client in clients %}
+                    <tr>
+                        {% for e in client.afficher().values() %}
+                            <td>{{ e|center }}</td>
+                        {% endfor %}
+                        <td>
+                        <form>
+                        <button type="submit" name="supprimer" value="{{ client.afficher()['id'] }}"
+                                  onclick="alert('Client '+{{client.afficher().id}}+' supprimé.')">Supprimer</button></form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+{% endblock %}}

@@ -41,12 +41,12 @@ class Demande(db.Model):
         return {
             'id' : self.id,
             # 'username' : self.username,
-            'nom' : self.nom,
-            'prenom' : self.prenom,
-            'email' : self.email,
-            'tel': self.tel,
-            'adresse': self.adresse ,
-            'revenu_mensuel': self.revenu_mensuel
+            'Nom' : self.nom,
+            'Prénom' : self.prenom,
+            'e-mail' : self.email,
+            'Téléphone': self.tel,
+            'Adresse': self.adresse ,
+            'Revenu mensuel': self.revenu_mensuel
             #'piece_id': piece_id
             #'just_domicile': just_domicile,
             #'just_salaire': just_salaire
