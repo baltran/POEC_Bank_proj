@@ -3,16 +3,10 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 {% block nav %}
-    {{ nav_link('main.index', _('Accueil')) }}
-    {{ nav_link('client.index', _('Espace client')) }}
+    {{ nav_link('client.index', _('Espace Client')) }}
     {{ nav_link('client.compteCourant', _('Compte Courant')) }}
 {% endblock %}}
 {% block content %}
-
-        <h2>{{ _('Bienvenue sur votre compte courant') }}</h2>
-        <p style='color:blue'><u>{{ _('Solde :')  }} {{compte.solde}} {{_('€') }}</u></p>
-        {% if operations %}
-
 <form action="{{ url_for('client.compteCourant') }}" method="post">
         <h1>{{_('Bienvenue sur vôtre compte courant')}}</h1>
 </form>
@@ -32,8 +26,6 @@
                     </tr>
                 {% endfor %}
             </table>
-        {% endif %}
-        <p><a class="btn_cnx" href="{{ url_for('client.virement') }}">{{ _('Effectuer un Virement') }}</a></p>
 {% endif %}
 {% endblock %}
 </html>
