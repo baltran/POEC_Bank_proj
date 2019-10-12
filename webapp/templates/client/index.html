@@ -1,17 +1,21 @@
 {% extends "main/base.html" %}
+{% block nav %}
+    {{ nav_link('main.index', _('Accueil')) }}
+    {{ nav_link('client.index', _('Espace client')) }}
+{% endblock %}}
 {% block content %}
 <form action="{{ url_for('client.index') }}" method="post">
 
-        <p> Bienvenue dans vôtre espace</p>
-        {% if current_user.is_authenticated %}
-                <p><a class="btn_cnx" href="{{ url_for('client.virement') }}">{{ _('Effectuer un Virement ') }}</a></p>
-                <p><a class="btn_cnx" href="{{ url_for('client.compteCourant') }}">{{ _('Compte Courant') }}</a></p>
-                {% if nb_comptes > 1 %}
-                      <p><a class="btn_cnx" href="{{ url_for('client.compteEpargne') }}"> {{ _('Compte Epargne') }}</a></p>
-                {% else %}
-                        <p><a class="btn_cnx" href="{{ url_for('client.CreerCompteEpargne') }}"> {{ _('Créer Un Compte Epargne') }}</a></p>
-                {% endif %}
+    <p>{{ _('Bienvenue dans votre espace') }}</p>
+    {% if current_user.is_authenticated %}
+        <p><a class="btn_cnx" href="{{ url_for('client.virement') }}">{{ _('Effectuer un Virement') }}</a></p>
+        <p><a class="btn_cnx" href="{{ url_for('client.compteCourant') }}">{{ _('Compte Courant') }}</a></p>
+        {% if nb_comptes > 1 %}
+            <p><a class="btn_cnx" href="{{ url_for('client.compteEpargne') }}"> {{ _('Compte Epargne') }}</a></p>
+        {% else %}
+            <p><a class="btn_cnx" href="{{ url_for('client.creer_compte_epargne') }}"> {{ _('Ouvrir Un Compte Epargne') }}</a></p>
         {% endif %}
+    {% endif %}
 </form>
 {% endblock %}
 </html>

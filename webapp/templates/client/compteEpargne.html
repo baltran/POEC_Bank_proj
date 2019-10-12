@@ -1,7 +1,31 @@
 {% extends "main/base.html" %}
-{% block content %}
-<form action="{{ url_for('client.compteEpargne') }}" method="post">
-        <p> {{_('Bienvenue sur vôtre compte epargne') }}</p>
-</form>
-                 <p>{{ _('Solde :')  }} {{compte.solde}}</p>
+{% block links_css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
+{% block nav %}
+    {{ nav_link('main.index', _('Accueil')) }}
+    {{ nav_link('client.index', _('Espace client')) }}
+    {{ nav_link('client.compteEpargne', _('Compte Épargne')) }}
+{% endblock %}}
+{% block content %}
+        <p>{{ _('Bienvenue sur votre compte épargne') }}</p>
+        <p>{{ _('Solde :')  }} {{compte.solde}}</p>
+        {% if operations %}
+            <table>
+                <tr>
+                    {% for col in operations[0].afficher().keys() %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+                {% for operation in operations %}
+                    <tr>
+                        {% for e in operation.afficher().values() %}
+                            <td>{{ e|date_format }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        <p><a class="btn_cnx" href="{{ url_for('client.virement') }}">{{ _('Effectuer un Virement') }}</a></p>
+{% endblock %}
+</html>

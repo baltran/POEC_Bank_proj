@@ -40,7 +40,7 @@ def set_deposit(id):
     """
     compte = Compte.query.get_or_404(id)
     data = request.get_json() or {}
-    if g.current_user.id != compte.titulaire_id:
+    if g.current_user.id != compte.titulaire_id or compte.discriminator == 'compte_epargne':
         return denied_request('Veuillez utiliser un identifiant de compte différent')
     if 'valeur' in data and not data['valeur']:
         return bad_request('Veuillez mettre un nombre')
@@ -71,7 +71,7 @@ def set_withdrawal(id):
     """
     compte = Compte.query.get_or_404(id)
     data = request.get_json() or {}
-    if g.current_user.id != compte.titulaire_id:
+    if g.current_user.id != compte.titulaire_id or compte.discriminator == 'compte_epargne':
         return denied_request('Veuillez utiliser un identifiant de compte différent')
     if 'valeur' in data and not data['valeur']:
         return bad_request('Veuillez mettre un nombre')

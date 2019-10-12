@@ -3,14 +3,16 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 {% block nav %}
-{{ nav_link('client.compteCourant', 'Compte Courant') }}
-{% endblock %}
+    {{ nav_link('main.index', _('Accueil')) }}
+    {{ nav_link('client.index', _('Espace client')) }}
+    {{ nav_link('client.virement', _("Envoi virement")) }}
+{% endblock %}}
 {% block content %}
 <form action="{{ url_for('client.virement') }}" method="post">
         {{form.hidden_tag()}}
         <p>
             {{form.compte_src.label}}<br>
-            {{form.compte_src(size=32)}}<br>
+            {{form.compte_src()}}<br>
 
             {% for error in form.compte_src.errors %}
                 <span style='color:red'>[{{ error }}]</span>
@@ -18,7 +20,7 @@
         </p>
         <p>
             {{form.compte_dest.label}}<br>
-            {{form.compte_dest(size=32)}}<br>
+            {{form.compte_dest()}}<br>
 
             {% for error in form.compte_dest.errors %}
                 <span style='color:red'>[{{ error }}]</span>
@@ -29,6 +31,14 @@
             {{form.valeur(size=32)}}<br>
 
             {% for error in form.valeur.errors %}
+                <span style='color:red'>[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{form.motif.label}}<br>
+            {{form.motif(size=32)}}<br>
+
+            {% for error in form.motif.errors %}
                 <span style='color:red'>[{{ error }}]</span>
             {% endfor %}
         </p>
