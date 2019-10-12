@@ -9,7 +9,6 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 
-
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
@@ -19,8 +18,12 @@ babel = Babel()
 admin_flask = Admin(name='Administration')
 
 
-def create_app(config_class=Config):
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in current_app.config['ALLOWED_EXTENSIONS']
 
+
+def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
@@ -33,7 +36,7 @@ def create_app(config_class=Config):
     babel.init_app(app)
     admin_flask.init_app(app)
 
-    #admin = Admin(app, name='Administration', index_view=views.MyAdminIndexView())
+    # admin = Admin(app, name='Administration', index_view=views.MyAdminIndexView())
 
     # ... no changes to blueprint registration
     from webapp.auth import bp as auth_bp
@@ -42,6 +45,7 @@ def create_app(config_class=Config):
 
     from webapp.client import bp as client_pb
     from webapp.api import bp as api_bp
+
     from webapp.conseiller import bp as conseiller_bp
 
     app.register_blueprint(auth_bp, url_prefix='/auth')
@@ -62,6 +66,8 @@ def create_app(config_class=Config):
         admin_flask.add_view(views.DemandeModelView(models.Demande, db.session, endpoint='demande_'))
         admin_flask.add_view(views.ConseillerModelView(models.Conseiller, db.session, endpoint='conseiller_'))
         admin_flask.add_link(views.LogoutMenuLink(name='Logout', category='', url='/auth/logout'))
+
+    app.__setattr__('allowed_file', allowed_file)
 
     return app
 

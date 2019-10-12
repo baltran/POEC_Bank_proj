@@ -5,38 +5,3 @@
 {% block nav %}
     {{ nav_link('main.index', _('Accueil')) }}
 {% endblock %}
-{% block content %}
-        {% if current_user.is_authenticated %}
-            <h2>Hi, {{ user.username|capitalize }}!</h2>
-            <label>Gagnant :</label><p>{{ participants|random }}</p>
-            <h2>Hi, {{ user.username|capitalize }}!</h2>
-            <table>
-                <tr>
-                    {% for col in users[0].afficher().keys() %}
-                        <th>{{ col }}</th>
-                    {% endfor %}
-                </tr>
-                {% for user in users %}
-                    <tr>
-                        {% for e in user.afficher().values() %}
-                            <td>{{ e|make_caps|center }}</td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </table>
-        {% else %}
-            {% for post in posts %}
-                <div>
-                    <p>
-                    {{ post.author.username }} dit: <b>{{ post.body }}</b>
-                    </p>
-                </div>
-            {% endfor %}
-            <h4>Desktop</h4>
-            <ul>
-                {% for fic in desktop %}
-                    <li>{{ fic }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-{% endblock %}}
