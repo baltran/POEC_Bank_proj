@@ -27,18 +27,13 @@ class Operation(PaginatedAPIMixin, db.Model):
     def afficher(self):
         compte = Compte.query.get(self.compte_id)
         compte_dest = Compte.query.get(self.compte_bis_id or -1)
-        beneficiaire = ""
-        if compte_dest:
-            beneficiaire = (self.compte_bis.titulaire.nom or "") + " " + \
-                       (self.compte_bis.titulaire.prenom or "") + \
-                       " (" + compte_dest.discriminator + ")"
         return {
-            'Fait le'     : self.done_at or "",
-            'Valeur'      : self.valeur or "",
-            'Émetteur'    : self.compte_id or "",
-            'Type'        : self.type_operation.name or "",
-            'Bénéficiaire': self.compte_bis_id or "",
-            'Libellé'     : self.label or ""
+            'Fait le'     : self.done_at,
+            'Valeur'      : self.valeur,
+            'Type'        : "dépot" if self.type_operation.name == "depot" else self.type_operation.name,
+            'Émetteur'    : compte.format_name() if compte_dest else "",
+            'Bénéficiaire': compte_dest.format_name() if compte_dest else "",
+            'Motif'       : self.label or ""
         }
 
     def to_dict(self):

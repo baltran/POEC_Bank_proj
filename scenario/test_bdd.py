@@ -4,9 +4,9 @@ from werkzeug.security import generate_password_hash as gph
 from webapp.main.requetes import inserer, delete_database_data
 
 data_cli = {'username': 'Baltran', 'password': 'elpoto', 'email': 'daubie_vic@msn.com',
-            'adresse': '10, rue de la liberté', 'tel': '0123456789'}
+            'adresse': '10, rue de la liberté', 'tel': '0123456789', 'prenom': 'Victor', 'nom': 'Daubié'}
 data_cli_2 = {'username': 'Sadia', 'password': 'Sadia', 'email': 'sadia_ing@msn.com',
-              'adresse': '12, rue de la liberté', 'tel': '0123786589'}
+              'adresse': '12, rue de la liberté', 'tel': '0123786589', 'prenom': 'Sadia', 'nom': 'Anon'}
 data_admin = {'username': 'admin', 'password': 'admin', 'email': 'admin@gestibank.fr'}
 
 data_conseiller = {'username': 'Bob', 'password': 'bob', 'email': 'bob@bip.fr'}

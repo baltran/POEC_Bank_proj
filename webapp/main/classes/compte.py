@@ -26,3 +26,11 @@ class Compte(db.Model):
     def __repr__(self):
         return '<Compte {}>'.format(self.id)
 
+    def format_name(self):
+        name = self.titulaire.nom + " " + self.titulaire.prenom
+        if self.discriminator == "compte_courant":
+            name += " (Compte Courant)"
+        else:
+            name += " (Compte Épargne)"
+        return name
+

@@ -22,11 +22,11 @@ def get_operations(id):
     if g.current_user.id != compte.titulaire_id:
         return denied_request('Veuillez utiliser un identifiant de compte différent')
     operations = Operation.to_collection_dict(
-                    compte.operations.union_all(compte.virements).order_by(Operation.done_at.desc()),
-                    page,
-                    per_page,
-                    'api.get_operations',
-                    id=id)
+        compte.operations.union_all(compte.virements).order_by(Operation.done_at.desc()),
+        page,
+        per_page,
+        'api.get_operations',
+        id=id)
     operations.update({'solde': compte.solde})
     return jsonify(operations)
 
@@ -47,13 +47,15 @@ def set_deposit(id):
     if 'valeur' not in data:
         return bad_request('Veuillez ajouter une valeur')
     try:
-        increment = int(data['valeur'])
+        increment = float(data['valeur'])
     except (ValueError, TypeError):
         bad_request('Veuillez mettre un nombre')
     else:
         increment = abs(increment)
         compte.solde += increment
         data_depot = {'valeur': increment, 'compte_id': compte.id, 'type_operation': 'depot'}
+        if 'motif' in data and data['motif']:
+            data_depot.update({'label': data['motif']})
         operation = Operation(**data_depot)
         db.session.add(operation)
         db.session.commit()
@@ -76,7 +78,7 @@ def set_withdrawal(id):
     if 'valeur' not in data:
         return bad_request('Veuillez ajouter une valeur')
     try:
-        decrement = float(data['valeur'])
+        decrement = int(data['valeur'])
     except (ValueError, TypeError):
         return bad_request('Veuillez mettre un nombre')
     else:
@@ -89,6 +91,8 @@ def set_withdrawal(id):
                 return denied_request("L'opération demandée dépasse le seuil de découvert")
         compte.solde = solde_tmp
         data_retrait = {'valeur': -decrement, 'compte_id': compte.id, 'type_operation': 'retrait'}
+        if 'motif' in data and data['motif']:
+            data_retrait.update({'label': data['motif']})
         operation = Operation(**data_retrait)
         db.session.add(operation)
         db.session.commit()
@@ -129,10 +133,12 @@ def set_transfert(id):
                 return conflict_request("L'operation demandée dépasse le seuil de découvert")
         compte.solde = solde_tmp
         compte_dest.solde += decrement
-        data_virement = {'valeur': decrement,
-                         'compte_id': compte.id,
+        data_virement = {'valeur'        : decrement,
+                         'compte_id'     : compte.id,
                          'type_operation': 'virement',
-                         'compte_bis_id': compte_dest.id}
+                         'compte_bis_id' : compte_dest.id}
+        if 'motif' in data and data['motif']:
+            data_virement.update({'label': data['motif']})
         operation = Operation(**data_virement)
         db.session.add(operation)
         db.session.commit()
