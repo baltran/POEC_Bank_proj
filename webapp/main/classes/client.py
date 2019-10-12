@@ -1,4 +1,4 @@
-#import mysql.connector
+# import mysql.connector
 from webapp import db
 from webapp.main.classes.utilisateur import Utilisateur
 from webapp.main.classes.compte import Compte
@@ -37,8 +37,19 @@ class Client(Utilisateur):
         s = super().afficher()
         s.update({
             'Téléphone': self.tel,
-            'Adresse': self.adresse ,
+            'Adresse': self.adresse,
             'Revenu mensuel': self.revenu_mensuel
         })
         return s
 
+    def data_dict(self):
+        s = super().afficher()
+        s.update({
+            'tel': self.tel,
+            'adresse': self.adresse,
+            'revenu_mensuel': self.revenu_mensuel,
+            'piece_id': self.piece_id,
+            'just_salaire': self.just_salaire,
+            'just_domicile': self.just_domicile
+        })
+        return s

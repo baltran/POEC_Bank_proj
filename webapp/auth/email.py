@@ -28,3 +28,12 @@ def send_password_reset_email(user):
                html_body=render_template('auth/email/reset_password.html',
                                          user=user, token=token))
 
+def send_password_new_account_email(client, random_pass):
+    token = client.get_reset_password_token()
+    send_email('Bienvenue sur GestiBank',
+               sender=current_app.config['MAIL_USERNAME'],
+               recipients=[client.email],
+               text_body=render_template('auth/email/first_password.txt',
+                                         client=client, random_pass=random_pass),
+               html_body=render_template('auth/email/first_password.html',
+                                         client=client, random_pass=random_pass))

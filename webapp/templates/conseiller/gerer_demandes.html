@@ -9,10 +9,7 @@
             <h2>Vous avez {{ total_de_demandes }} demandes de création de compte.</h2>
             {% if total_de_demandes>0 %}
             <table><tr>
-                <th>  </th>
-                {% for col in demandes[0].afficher() %}
-                    <th>{{ col }}</th>
-                {% endfor %}
+                <th>  </th>{% for col in demandes[0].afficher() %}<th>{{ col }}</th>{% endfor %}
                 <th>Choisissez une action</th>
                 </tr>
                 {% for demande in demandes %}
@@ -35,7 +32,8 @@
                                 <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">
                                     Just. de revenus</button>
                                 </form>
-                            {% endif %}</td>
+                            {% endif %}
+                            </td>
                         {% endfor %}
                     <td>
                         <form>
@@ -88,18 +86,9 @@
                         {% endif %}
                         {% endfor %}
                         <td>
-                        <form>
-                            <button type="submit" name="creer_epargne" value="{{ client.afficher()['id'] }}"
-                                  onclick="alert('Un compte épargne pour'+{{client.afficher()['Nom']}}+'vient d'être crée.')">Créer</button>
-                            <br>
-                            <button type="submit" name="suppr_epargne" value="{{ client.afficher()['id'] }}"
-                                  onclick="alert('Compte épargne de'+{{client.afficher()['Nom']}}+' supprimé.')">Supprimer</button>
-                        </form>
-                        </td>
-                        <td>
-                            <button type="submit" name="supprimer" value="{{ client.afficher()['id'] }}"
-                                  onclick="alert('Client '+{{client.afficher().id}}+' supprimé.')">Supprimer client</button>
-                        </td>
+<form>
+                        <button type="submit" name="supprimer" value="{{ client.afficher()['id'] }}"
+                                  onclick="alert('Client '+{{client.afficher().id}}+' supprimé.')">Supprimer</button></form>                        </td>
                     </tr>
                 {% endfor %}
             </table>

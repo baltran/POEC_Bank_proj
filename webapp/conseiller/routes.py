@@ -4,6 +4,11 @@ from webapp.main.classes.demande import Demande
 from webapp.main.classes.client import Client
 from webapp.main.classes.utilisateur import db
 from io import BytesIO
+from werkzeug.security import generate_password_hash
+import numpy as np
+from webapp.auth.email import send_password_new_account_email
+import time
+
 
 # from webapp.main.classes.conseiller import Conseiller
 
@@ -25,13 +30,26 @@ def gerer_demandes():
         id = int(my_string.split("=", 1)[1])
         if (id,) in ids_demandes:
             print(ids_demandes)
-            data = Demande.query.get(id).afficher()
+            data = Demande.query.get(id).data_dict()
             del data['id']
             client = Client(**data)
             demande = Demande.query.get(id)
+            # generate a random password
+            # first choose a seed
+            np.random.seed(int(time.time()))
+            # then a random int from 1 to 100 included
+            random_int = np.random.randint(1, 101)
+            # Use the seed to choose a random length for the password between 12 and 15 characters
+            random_length = np.random.randint(12, 16)
+            # Now the password correspond to the last random_lenght carachters of the random_int hash:
+            random_pass = generate_password_hash(str(random_int))[-random_length:]
+            # Add the password to the client object
+            client.password = generate_password_hash(random_pass)
+            # Save the object in the database
             db.session.add(client)
             db.session.delete(demande)
             db.session.commit()
+            send_password_new_account_email(client, random_pass)
             clients = Client.query.all()
             demandes = Demande.query.all()
         else:
@@ -55,14 +73,9 @@ def gerer_demandes():
             db.session.commit()
             clients = Client.query.all()
 
-    # if clients == []:
-    #     clients = client_null
-    # if demandes == []:
-    #     demande = demande_null
-    #
     total_de_clients = Client.query.count()
     total_de_demandes = Demande.query.count()
-    #
+
     return render_template('conseiller/gerer_demandes.html',
                            title="Gestion des demandes",
                            clients=clients,
@@ -86,8 +99,6 @@ def display_piece_id():
         return render_template('conseiller/display_piece_id.html')
 
 
-
-
 @bp.route('/display_just_domicile')
 @bp.endpoint('display_just_domicile')
 def display_just_domicile():
@@ -100,6 +111,7 @@ def display_just_domicile():
         return send_file(BytesIO(demande_data), attachment_filename="flask.pdf", as_attachment=True)
     else:
         return render_template('conseiller/display_just_domicile.html')
+
 
 @bp.route('/display_just_salaire')
 @bp.endpoint('display_just_salaire')

@@ -1,7 +1,7 @@
 import time
 
 from flask import render_template, flash, redirect, url_for, request, current_app
-# from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 
 from webapp import db
@@ -15,8 +15,6 @@ from webapp.main.classes.conseiller import Conseiller
 from webapp.main.classes.demande import Demande
 from webapp.main.requetes import inserer
 from webapp.auth.email import send_password_reset_email
-import os
-from io import BytesIO
 
 
 def redirect_by_role(user):
@@ -143,3 +141,8 @@ def reset_password(token):
         return redirect(url_for('auth.login'))
     exp = int(Utilisateur.get_exp_token(token) - time.time())
     return render_template('auth/reset_password.html', form=form, exp=exp)
+
+
+# @bp.route('/first_password/<token>', methods=['GET', 'POST'])
+# def first_password(token):
+#     return redirect('auth/first_password.html')
