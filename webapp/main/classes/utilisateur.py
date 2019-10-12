@@ -30,7 +30,7 @@ class Utilisateur(UserMixin, db.Model):
     nom = db.Column(db.String(40), index=True, unique=False)
     prenom = db.Column(db.String(40), index=True, unique=False)
     email = db.Column(db.String(40), index=True, unique=True)
-    _password = db.Column('password', db.String(50))
+    _password = db.Column('password', db.String(100))
     discriminator = db.Column('type', db.String(50))
     __mapper_args__ = {'polymorphic_on': discriminator}
 

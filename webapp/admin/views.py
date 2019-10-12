@@ -5,6 +5,9 @@ from flask_admin.menu import MenuLink
 from flask_login import current_user
 from werkzeug.utils import redirect
 
+from webapp.main.classes.conseiller import Conseiller
+from webapp.main.classes.demande import Demande
+
 
 class GestiBankModelView(sqla.ModelView):
 
@@ -18,20 +21,27 @@ class GestiBankModelView(sqla.ModelView):
 
 class DemandeModelView(GestiBankModelView):
     can_create = False
-    can_edit = True
+    can_edit = False
+    can_delete = False
     form_columns = ['mon_conseiller']
     column_exclude_list = (
         'password',
     )
+    column_editable_list = ('mon_conseiller',)
+    column_sortable_list = (('mon_conseiller', 'mon_conseiller.nom'),)
+    can_view_details = True
 
 
 class ConseillerModelView(GestiBankModelView):
+    can_edit = False
     column_exclude_list = (
         'discriminator',
         '_password',
         'token',
         'token_expiration')
     form_columns = ['username', 'password', 'nom', 'prenom', 'email', 'date_debut', 'date_fin']
+    column_editable_list = ('username', 'nom', 'prenom', 'email', 'date_debut', 'date_fin')
+    can_view_details = True
 
 
 class MyAdminIndexView(AdminIndexView):
