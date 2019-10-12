@@ -1,28 +1,21 @@
-from flask import render_template, request
+from flask import render_template, request, send_file
 from webapp.conseiller import bp
 from webapp.main.classes.demande import Demande
 from webapp.main.classes.client import Client
 from webapp.main.classes.utilisateur import db
-
+from io import BytesIO
 
 # from webapp.main.classes.conseiller import Conseiller
 
 
 @bp.route('/gerer_demande', methods=['GET', 'POST'])
-#@login_required
+# @login_required
 # TODO: Assurer que seulement les conseillers peuvent y accéder.
 def gerer_demandes():
     my_string = request.full_path
     ids_demandes = Demande.query.with_entities(Demande.id).all()
     ids_clients = Client.query.with_entities(Client.id).all()
-    print("Il y a ",len(ids_demandes),"demandes")
-
-    # Pour ne pas crasher en absence de clients:
-    c=Client(id=1, username='', email='', discriminator='client')
-    client_null = [c]
-    # Pour ne pas crasher en absence de demandes:
-    d=Demande(id=1, username='', email='')
-    demande_null=[c]
+    print("Il y a ", len(ids_demandes), "demandes")
 
     clients = Client.query.all()
     demandes = Demande.query.all()
@@ -70,9 +63,35 @@ def gerer_demandes():
     total_de_demandes = Demande.query.count()
     #
     return render_template('conseiller/gerer_demandes.html',
-                        title="Gestion des demandes",
-                        clients=clients,
-                        demandes=demandes,
-                        total_de_demandes=total_de_demandes,
-                        total_de_clients=total_de_clients,
-                        ids_demandes=ids_demandes)
+                           title="Gestion des demandes",
+                           clients=clients,
+                           demandes=demandes,
+                           total_de_demandes=total_de_demandes,
+                           total_de_clients=total_de_clients,
+                           ids_demandes=ids_demandes)
+
+
+@bp.route('/display_piece_id', methods=['GET', 'POST'])
+@bp.endpoint('display_piece_id')
+def display_piece_id():
+    my_string = request.full_path
+    if "=" in my_string:
+        id = int(my_string.split("=", 1)[1])
+        demande_data = Demande.query.get(id).piece_id
+        return send_file(BytesIO(demande_data), attachment_filename="flask.pdf", as_attachment=True)
+    else:
+        return render_template('conseiller/display_piece_id.html')
+    #return render_template('conseiller/display_piece_id.html')
+
+
+
+@bp.route('/display_just_domicile')
+@bp.endpoint('display_just_domicile')
+def display_just_domicile():
+    return render_template('conseiller/display_just_domicile.html')
+
+
+@bp.route('/display_just_salaire')
+@bp.endpoint('display_just_salaire')
+def display_just_salaire():
+    return render_template('conseiller/display_just_salaire.html')

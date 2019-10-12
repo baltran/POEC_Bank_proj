@@ -15,6 +15,9 @@
                     {% for col in demandes[0].afficher().keys() %}
                         <th>{{ col }}</th>
                     {% endfor %}
+                    <th>Pièce d'identité</th>
+                    <th>Just. de domicile</th>
+                    <th>Just. de revenus</th>
                     <th>Choisissez une action</th>
                 </tr>
                 {% for demande in demandes %}
@@ -23,6 +26,21 @@
                         {% for e in demande.afficher().values() %}
                             <td>{{ e|center }}</td>
                         {% endfor %}
+                    <td>
+                        <form action="{{ url_for('conseiller.display_piece_id') }}">
+                            <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">Afficher</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('conseiller.display_just_domicile') }}">
+                            <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">Afficher</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('conseiller.display_just_salaire') }}">
+                            <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">Afficher</button>
+                        </form>
+                    </td>
                     <td>
                         <form>
                         <button type="submit" name="accepter" value="{{ demande.afficher()['id'] }}"
@@ -54,7 +72,7 @@
                         {% endfor %}
                         <td>
                         <form>
-                        <button class="btn_cnx" type="submit" name="supprimer" value="{{ client.afficher()['id'] }}"
+                        <button type="submit" name="supprimer" value="{{ client.afficher()['id'] }}"
                                   onclick="alert('Client '+{{client.afficher().id}}+' supprimé.')">Supprimer</button></form>
                         </td>
                     </tr>

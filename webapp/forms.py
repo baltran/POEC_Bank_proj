@@ -11,7 +11,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Me connecter')
 
 
-class SigninForm(FlaskForm):
+class SignupForm(FlaskForm):
     username = StringField('Utilisateur', validators=[DataRequired()])
     password = PasswordField('Mot de passe', validators=[DataRequired()])
     password_bis = PasswordField('Confirmation du mot de passe', validators=[DataRequired()])

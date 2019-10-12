@@ -4,6 +4,7 @@
 
         <p> Bienvenue dans vôtre espace</p>
         {% if current_user.is_authenticated %}
+                <p><a class="btn_cnx" href="{{ url_for('client.virement') }}">{{ _('Effectuer un Virement ') }}</a></p>
                 <p><a class="btn_cnx" href="{{ url_for('client.compteCourant') }}">{{ _('Compte Courant') }}</a></p>
                 {% if nb_comptes > 1 %}
                       <p><a class="btn_cnx" href="{{ url_for('client.compteEpargne') }}"> {{ _('Compte Epargne') }}</a></p>

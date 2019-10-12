@@ -19,3 +19,5 @@ class Config(object):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     # MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     LANGUAGES = ['fr', 'en']
+    ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg'])
+    # UPLOAD_FOLDER = '/Desktop'

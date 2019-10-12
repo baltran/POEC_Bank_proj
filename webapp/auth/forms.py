@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from flask_wtf.file import FileRequired, FileAllowed
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, FileField
 from wtforms.validators import DataRequired, Email, EqualTo
 from flask_babel import lazy_gettext as _l
 
@@ -17,11 +18,19 @@ class SignupForm(FlaskForm):
     username = StringField(_l('Utilisateur'), validators=[DataRequired()])
     # password = PasswordField('Mot de passe', validators=[DataRequired()])
     # password_bis = PasswordField('Confirmation du mot de passe', validators=[DataRequired()])
-    email = StringField(_l('Email'), validators=[DataRequired()])
-    adresse = StringField(_l('Adresse'), validators=[DataRequired()])
-    tel = StringField(_l('Téléphone'), validators=[DataRequired()])
-    revenu_mensuel = StringField(_l('Revenu mensuel moyen'), validators=[DataRequired()])
-    submit = SubmitField(_l("Demander mon compte"))
+    prenom = StringField('Prénom', validators=[DataRequired()])
+    nom = StringField('Nom', validators=[DataRequired()])
+    username = StringField('Utilisateur', validators=[DataRequired()])
+    # password = PasswordField('Mot de passe', validators=[DataRequired()])
+    # password_bis = PasswordField('Confirmation du mot de passe', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired()])
+    adresse = StringField('Adresse', validators=[DataRequired()])
+    tel = StringField('Téléphone', validators=[DataRequired()])
+    revenu_mensuel = StringField('Revenu mensuel moyen', validators=[DataRequired()])
+    piece_id = FileField("Pièce d'identité", validators=[FileAllowed(['pdf', 'jpg', 'jpeg', 'png'])])
+    just_salaire = FileField("Justificatif de salaire", validators=[FileAllowed(['pdf', 'jpg', 'jpeg', 'png'])])
+    just_domicile = FileField("Justificatif de domicile", validators=[FileAllowed(['pdf', 'jpg', 'jpeg', 'png'])])
+    submit = SubmitField("Demander mon compte")
 
 
 class ResetPasswordRequestForm(FlaskForm):
