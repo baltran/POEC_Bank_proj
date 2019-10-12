@@ -108,13 +108,10 @@ def signup():
                            form=form)
 
 
-
 @bp.route('/signup_confirmation', methods=['GET', 'POST'])
 @bp.endpoint('signup_confirmation')
 def signup_confirmation():
-    # return render_template('auth/signup_confirmation.html', title=_l('Confirmation de demande'))
-    return redirect(url_for('auth.signup_confirmation'))
-    #return redirect('auth/signup_confirmation.html')
+    return render_template('auth/signup_confirmation.html', title=_l('Confirmation de demande'))
 
 
 @bp.route('/reset_password_request', methods=['GET', 'POST'])
