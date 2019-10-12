@@ -24,14 +24,6 @@ h1 {
     text-align: center;
 }
 
-#lang_logo {
-    flex-basis: 20%;
-}
-
-#lang-select {
-    flex-basis:10%;
-}
-
 #profile {
     flex-basis: 10%;
 }
