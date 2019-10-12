@@ -23,12 +23,12 @@ def redirect_by_role(user):
     if user.discriminator == "client":
         return redirect(url_for('client.index'))
     elif user.discriminator == "conseiller":
-        return redirect(url_for('conseiller.index'))
+        return redirect(url_for('conseiller.gerer_demandes'))
     else:
         return redirect(url_for('admin.index'))
 
 
-@bp.route('login', methods=['GET', 'POST'])
+@bp.route('/login', methods=['GET', 'POST'])
 @bp.endpoint('login')
 def login():
     if current_user.is_authenticated:

@@ -1,4 +1,6 @@
 from flask import render_template, request, send_file
+from flask_login import current_user
+
 from webapp.conseiller import bp
 from webapp.main.classes.demande import Demande
 from webapp.main.classes.client import Client
@@ -7,9 +9,10 @@ from io import BytesIO
 
 # from webapp.main.classes.conseiller import Conseiller
 
-@bp.route('/index')
-@bp.route('/gerer_demande', methods=['GET', 'POST'])
-@bp.endpoint('/gerer_demande')
+
+@bp.route('/index', methods=['GET'])
+@bp.route('/gerer_demandes', methods=['GET', 'POST'])
+@bp.endpoint('gerer_demandes')
 # @login_required
 # TODO: Assurer que seulement les conseillers peuvent y accéder.
 def gerer_demandes():
@@ -69,7 +72,8 @@ def gerer_demandes():
                            demandes=demandes,
                            total_de_demandes=total_de_demandes,
                            total_de_clients=total_de_clients,
-                           ids_demandes=ids_demandes)
+                           ids_demandes=ids_demandes,
+                           user=current_user)
 
 
 @bp.route('/display_piece_id', methods=['GET', 'POST'])

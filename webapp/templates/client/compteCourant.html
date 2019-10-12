@@ -7,12 +7,6 @@
     {{ nav_link('client.compteCourant', _('Compte Courant')) }}
 {% endblock %}}
 {% block content %}
-<form action="{{ url_for('client.compteCourant') }}" method="post">
-        <h1>{{_('Bienvenue sur vôtre compte courant')}}</h1>
-</form>
-<p style='color:blue'><u>{{ _('Solde :')  }} {{compte.solde}} {{_('€') }}</u></p>
-{% if operations.__len__() != 0 %}
-<table>
     <h2>{{ _('Bienvenue sur votre compte courant') }}</h2>
     <p style='color:blue'><u>{{ _('Solde :')  }} {{compte.solde}} {{_('€') }}</u></p>
     {% if operations %}
@@ -28,18 +22,9 @@
                         <td>{{ e|date_format }}</td>
                     {% endfor %}
                 </tr>
-                {% for operation in operations %}
-                    <tr>
-                        {% for e in operation.afficher().values() %}
-                            <td>{{ e|date_format }}</td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </table>
+            {% endfor %}
+        </table>
     {% endif %}
-    {% endfor %}
-</table>
-{% endif %}
     <p><a class="btn_cnx" href="{{ url_for('client.virement') }}">{{ _('Effectuer un Virement') }}</a></p>
 {% endblock %}
 </html>
