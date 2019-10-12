@@ -116,6 +116,16 @@ class Utilisateur(UserMixin, db.Model):
             'discriminator' : self.discriminator
         }
 
+    def data_dict(self):
+        return {
+            'id' : self.id,
+            'username' : self.username,
+            'nom' : self.nom,
+            'prenom' : self.prenom,
+            'email' : self.email,
+            'discriminator' : self.discriminator
+        }
+
 
 @login.user_loader
 def load_user(id):

@@ -16,21 +16,16 @@ class SignupForm(FlaskForm):
     prenom = StringField(_l('Prénom'), validators=[DataRequired()])
     nom = StringField(_l('Nom'), validators=[DataRequired()])
     username = StringField(_l('Utilisateur'), validators=[DataRequired()])
-    # password = PasswordField('Mot de passe', validators=[DataRequired()])
-    # password_bis = PasswordField('Confirmation du mot de passe', validators=[DataRequired()])
-    prenom = StringField('Prénom', validators=[DataRequired()])
-    nom = StringField('Nom', validators=[DataRequired()])
-    username = StringField('Utilisateur', validators=[DataRequired()])
-    # password = PasswordField('Mot de passe', validators=[DataRequired()])
-    # password_bis = PasswordField('Confirmation du mot de passe', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired()])
-    adresse = StringField('Adresse', validators=[DataRequired()])
-    tel = StringField('Téléphone', validators=[DataRequired()])
-    revenu_mensuel = StringField('Revenu mensuel moyen', validators=[DataRequired()])
-    piece_id = FileField("Pièce d'identité", validators=[FileAllowed(['pdf', 'jpg', 'jpeg', 'png'])])
-    just_salaire = FileField("Justificatif de salaire", validators=[FileAllowed(['pdf', 'jpg', 'jpeg', 'png'])])
-    just_domicile = FileField("Justificatif de domicile", validators=[FileAllowed(['pdf', 'jpg', 'jpeg', 'png'])])
-    submit = SubmitField("Demander mon compte")
+    # password = PasswordField(_l('Mot de passe'), validators=[DataRequired()])
+    # password_bis = PasswordField(_l('Confirmation du mot de passe'), validators=[DataRequired()])
+    email = StringField(_l('Email'), validators=[DataRequired()])
+    adresse = StringField(_l('Adresse'), validators=[DataRequired()])
+    tel = StringField(_l('Téléphone'), validators=[DataRequired()])
+    revenu_mensuel = StringField(_l('Revenu mensuel moyen'), validators=[DataRequired()])
+    piece_id = FileField(_l("Pièce d'identité"), validators=[FileAllowed(['pdf', 'jpg', 'jpeg', 'png'])])
+    just_salaire = FileField(_l("Justificatif de salaire"), validators=[FileAllowed(['pdf', 'jpg', 'jpeg', 'png'])])
+    just_domicile = FileField(_l("Justificatif de domicile"), validators=[FileAllowed(['pdf', 'jpg', 'jpeg', 'png'])])
+    submit = SubmitField(_l("Demander mon compte"))
 
 
 class ResetPasswordRequestForm(FlaskForm):
@@ -39,6 +34,13 @@ class ResetPasswordRequestForm(FlaskForm):
 
 
 class ResetPasswordForm(FlaskForm):
+    password = PasswordField(_l('Mot de passe'), validators=[DataRequired()])
+    password_bis = PasswordField(_l('Repeter votre mot de passe'),
+                                 validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField(_l('Réinitialisez votre mot de passe'))
+
+
+class CreatePasswordForm(FlaskForm):
     password = PasswordField(_l('Mot de passe'), validators=[DataRequired()])
     password_bis = PasswordField(_l('Repeter votre mot de passe'),
                                  validators=[DataRequired(), EqualTo('password')])
