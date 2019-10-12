@@ -3,7 +3,8 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 {% block nav %}
-    {{ nav_link('conseiller.gerer_demandes', 'Gestion de demandes') }}
+    {{ nav_link('main.index', _('Accueil')) }}
+    {{ nav_link('conseiller.gerer_demandes', _('Gestion de demandes')) }}
 {% endblock %}
 {% block content %}
             <h2>Vous avez {{ total_de_demandes }} demandes de création de compte.</h2>

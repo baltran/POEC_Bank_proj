@@ -65,6 +65,7 @@ def create_app(config_class=Config):
         admin_flask.template_mode = 'bootstrap3'
         admin_flask.add_view(views.DemandeModelView(models.Demande, db.session, endpoint='demande_'))
         admin_flask.add_view(views.ConseillerModelView(models.Conseiller, db.session, endpoint='conseiller_'))
+        admin_flask.add_link(views.HomeMenuLink(name='Retour au site', category='', url='/index'))
         admin_flask.add_link(views.LogoutMenuLink(name='Logout', category='', url='/auth/logout'))
 
     app.__setattr__('allowed_file', allowed_file)

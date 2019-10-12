@@ -22,7 +22,12 @@
                     <!--<p><input type="button" class="btn_cnx" onclick="location.href='{{ url_for('auth.signup') }}';" value="Inscription" /></p>-->
                 {% else %}
 
-                    <p>{{ _('Bienvenue %(username)s', username=(user.username|capitalize))}}</p>
+                    <p>{{ _('Bienvenue %(username)s', username=(current_user.username|capitalize))}}</p>
+                    {% if current_user.discriminator == "conseiller" %}
+                        <a class="btn_cnx" href="{{ url_for('conseiller.gerer_demandes') }}">{{ _('Gestion de demandes') }}</a>
+                    {% elif current_user.discriminator == "client" %}
+                        <a class="btn_cnx" href="{{ url_for('client.index') }}">{{ _('Espace Client') }}</a>
+                    {% endif %}
                     <p><a class="btn_cnx" href="{{ url_for('auth.logout') }}">{{ _('Déconnexion') }}</a></p>
 
                 {% endif %}
@@ -65,6 +70,10 @@
                     </ul>
                 {% endif %}
             {% endwith %}
+            {% if current_user.discriminator == "admin" %}
+                <p><a class="btn_cnx" href="{{ url_for('admin.index') }}">{{ _('Espace Admin') }}</a></p>
+                <p><a class="btn_cnx" href="{{ url_for('admins.creerConseiller') }}">{{ _('Créer un Conseiller') }}</a></p>
+            {% endif %}
             {% block content %}{% endblock %}
         </section>
         <footer>

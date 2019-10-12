@@ -57,7 +57,7 @@ class MyAdminIndexView(AdminIndexView):
 class HomeMenuLink(MenuLink):
 
     def is_accessible(self):
-        return not current_user.is_authenticated
+        return current_user.is_authenticated
 
 
 class LogoutMenuLink(MenuLink):
