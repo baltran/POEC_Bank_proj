@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-10-13 17:27+0200\n"
+"POT-Creation-Date: 2019-10-13 18:25+0200\n"
 "PO-Revision-Date: 2019-10-13 10:59+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -151,50 +151,50 @@ msgstr "Interest rate"
 msgid "Creation"
 msgstr "Creation"
 
-#: webapp/client/routes.py:28 webapp/templates/client/compteCourant.html:6
+#: webapp/client/routes.py:36 webapp/templates/client/compteCourant.html:6
 #: webapp/templates/client/index.html:7 webapp/templates/client/virement.html:7
 #: webapp/templates/main/base.html:29
 msgid "Espace Client"
 msgstr "Secure Customer Area"
 
-#: webapp/client/routes.py:47
+#: webapp/client/routes.py:50
 msgid "Aucune opération n'a été effectuée sur ce compte"
 msgstr "No transactions were made on this account"
 
-#: webapp/client/routes.py:51 webapp/templates/client/compteCourant.html:7
+#: webapp/client/routes.py:54 webapp/templates/client/compteCourant.html:7
 #: webapp/templates/client/index.html:14
 msgid "Compte Courant"
 msgstr "Current Account"
 
-#: webapp/client/routes.py:63
+#: webapp/client/routes.py:66
 msgid "Aucune opération n a été effectuée sur ce compte"
 msgstr "No transactions were made on this account"
 
-#: webapp/client/routes.py:68 webapp/templates/client/compteEpargne.html:8
+#: webapp/client/routes.py:71 webapp/templates/client/compteEpargne.html:8
 msgid "Compte Épargne"
 msgstr "Savings Account"
 
-#: webapp/client/routes.py:94 webapp/templates/client/creerCompteEpargne.html:5
+#: webapp/client/routes.py:97 webapp/templates/client/creerCompteEpargne.html:5
 msgid "Création Compte Épargne"
 msgstr "Savings Account Creation"
 
-#: webapp/client/routes.py:123 webapp/client/routes.py:128
+#: webapp/client/routes.py:126 webapp/client/routes.py:131
 msgid "Conditions pour un virement non remplies"
 msgstr "Unsatisfied conditions for a bank transfer"
 
-#: webapp/client/routes.py:134
+#: webapp/client/routes.py:137
 msgid "vous n'êtes pas autorisé à passer en découvert"
 msgstr "you are not allowed to go overdraft"
 
-#: webapp/client/routes.py:137
+#: webapp/client/routes.py:140
 msgid "l'opération dépasserait votre seuil de découvert"
 msgstr "the transaction would exceed your overdraft threshold"
 
-#: webapp/client/routes.py:153
+#: webapp/client/routes.py:156
 msgid "Virement effectué !"
 msgstr "Bank transfert made !"
 
-#: webapp/client/routes.py:156 webapp/templates/client/compteCourant.html:28
+#: webapp/client/routes.py:159 webapp/templates/client/compteCourant.html:28
 #: webapp/templates/client/compteEpargne.html:29
 #: webapp/templates/client/index.html:13
 #: webapp/templates/client/virement.html:8
@@ -311,11 +311,39 @@ msgstr "Savings Account"
 msgid "Ouvrir Un Compte Epargne"
 msgstr "Open a savings account"
 
+#: webapp/templates/conseiller/display_just_domicile.html:5
+#: webapp/templates/conseiller/display_just_salaire.html:5
+#: webapp/templates/conseiller/display_piece_id.html:5
+msgid "Document manquant"
+msgstr ""
+
+#: webapp/templates/conseiller/display_just_domicile.html:9
+msgid "Aucun justificatif de domicile n'a été fourni."
+msgstr ""
+
+#: webapp/templates/conseiller/display_just_domicile.html:10
+#: webapp/templates/conseiller/display_just_salaire.html:9
+#: webapp/templates/conseiller/display_piece_id.html:9
+msgid "Veuillez contacter le client."
+msgstr ""
+
+#: webapp/templates/conseiller/display_just_salaire.html:8
+msgid "Aucun justificatif de salaire n'a été fourni."
+msgstr ""
+
+#: webapp/templates/conseiller/display_piece_id.html:8
+msgid "Aucune pièce d'identité n'a été fournie."
+msgstr ""
+
 #: webapp/templates/conseiller/gerer_demandes_old.html:6
 #: webapp/templates/conseiller/redirect.html:6
 #: webapp/templates/main/base.html:27
 msgid "Gestion de demandes"
 msgstr "Manage requests"
+
+#: webapp/templates/conseiller/redirect.html:9
+msgid "Demandes de création de compte :"
+msgstr ""
 
 #: webapp/templates/main/base.html:7
 msgid "Bienvenue sur GestiBank"

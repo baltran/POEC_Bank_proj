@@ -60,7 +60,7 @@
                         <th>{{ col }}</th>
                         {% endif %}
                     {% endfor %}
-                    <th>_('Compte épargne')</th>
+                    <th>{{ _('Compte épargne') }}</th>
                 </tr>
                 {% for client in clients %}
                     <tr>
@@ -70,7 +70,7 @@
                             {% if c=="Nom" %}
                                 <br><form action="{{ url_for('conseiller.display_piece_id') }}">
                                 <button type="submit" name="identite" value="{{ client.afficher()['id'] }}">
-                                   _(' Pièce d'identité')</button>
+                                   {{_("Pièce d'identité")}}</button>
                                  </form>
                             {% elif c=="Adresse" %}
                                 <br><form action="{{ url_for('conseiller.display_just_domicile') }}">
@@ -82,14 +82,16 @@
                                 <button type="submit" name="salaire" value="{{ client.afficher()['id'] }}">
                                     Just. de revenus</button>
                                 </form>
-                            {% endif %}</td>
+                            {% endif %}
                             </td>
                         {% endif %}
                         {% endfor %}
                         <td>
-<form>
-                        <button type="submit" name="supprimer" value="{{ client.afficher()['id'] }}"
-                                  onclick="alert('Client '+{{client.afficher().id}}+' supprimé.')">Supprimer</button></form>                        </td>
+                            <form>
+                            <button type="submit" name="supprimer" value="{{ client.afficher()['id'] }}"
+                                      onclick="alert('Client '+{{client.afficher().id}}+' supprimé.')">Supprimer</button>
+                            </form>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
