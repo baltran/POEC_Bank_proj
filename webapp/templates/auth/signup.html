@@ -1,11 +1,10 @@
 {% extends "main/base.html" %}
 {% block nav %}
-    {{ nav_link('main.index', 'Accueil') }}
-    {{ nav_link('auth.signup', 'Inscription') }}
+    {{ nav_link('main.index', _('Accueil')) }}
+    {{ nav_link('auth.signup', _('Inscription')) }}
 {% endblock %}}
 {% block content %}
-    <h2>Demande de création de compte</h2>
-    <p>{{ nav_link('conseiller.gerer_demandes', 'gerer') }}</p>
+    <h2>{{ _('Demande de création de compte') }}</h2>
     <form action="" method="post" novalidate enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <p>

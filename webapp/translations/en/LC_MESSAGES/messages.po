@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-10-09 12:14+0200\n"
-"PO-Revision-Date: 2019-10-09 11:29+0200\n"
+"POT-Creation-Date: 2019-10-13 12:26+0200\n"
+"PO-Revision-Date: 2019-10-13 10:59+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
@@ -18,74 +18,331 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
+#: webapp/admin/forms.py:6 webapp/auth/forms.py:9 webapp/auth/forms.py:18
+msgid "Utilisateur"
+msgstr "Username"
+
+#: webapp/admin/forms.py:7 webapp/auth/forms.py:10 webapp/auth/forms.py:37
+#: webapp/auth/forms.py:44 webapp/conseiller/forms.py:14
+msgid "Mot de passe"
+msgstr "Password"
+
+#: webapp/admin/forms.py:8 webapp/conseiller/forms.py:15
+msgid "Confirmation du mot de passe"
+msgstr "Password Confirmation"
+
+#: webapp/admin/forms.py:9
+msgid "Date Entree"
+msgstr "Hiring Date"
+
+#: webapp/admin/forms.py:10
+msgid "Date sortie"
+msgstr "End Date"
+
+#: webapp/admin/forms.py:11 webapp/client/forms.py:14
+msgid "Creation"
+msgstr "Creation"
+
+#: webapp/auth/forms.py:11
+msgid "Se rappeler de moi"
+msgstr "Remember me"
+
+#: webapp/auth/forms.py:12 webapp/templates/auth/login.html:7
+msgid "Me connecter"
+msgstr "Sign in"
+
+#: webapp/auth/forms.py:16
+msgid "Prénom"
+msgstr "First name"
+
+#: webapp/auth/forms.py:17
+msgid "Nom"
+msgstr "Name"
+
+#: webapp/auth/forms.py:21 webapp/auth/forms.py:32
+msgid "Email"
+msgstr "Email"
+
+#: webapp/auth/forms.py:22
+msgid "Adresse"
+msgstr "Adress"
+
+#: webapp/auth/forms.py:23
+msgid "Téléphone"
+msgstr "Phone number"
+
+#: webapp/auth/forms.py:24
+msgid "Revenu mensuel moyen"
+msgstr "Average monthly income"
+
+#: webapp/auth/forms.py:25
+msgid "Pièce d'identité"
+msgstr "ID"
+
+#: webapp/auth/forms.py:26
+msgid "Justificatif de salaire"
+msgstr "Proof of salary"
+
+#: webapp/auth/forms.py:27
+msgid "Justificatif de domicile"
+msgstr "Proof of adress"
+
+#: webapp/auth/forms.py:28
+msgid "Demander mon compte"
+msgstr "Request my account"
+
+#: webapp/auth/forms.py:33
+msgid "Request Password Reset"
+msgstr "Request Password Reset"
+
+#: webapp/auth/forms.py:38 webapp/auth/forms.py:45
+msgid "Repeter votre mot de passe"
+msgstr "Repeat your password"
+
+#: webapp/auth/forms.py:40 webapp/auth/forms.py:47
+msgid "Réinitialisez votre mot de passe"
+msgstr "Reset your password"
+
+#: webapp/auth/routes.py:38
+msgid "Login ou mot de passe invalide"
+msgstr "Incorrect login or password"
+
+#: webapp/auth/routes.py:48
+msgid "Authentification"
+msgstr "Authentication"
+
+#: webapp/auth/routes.py:93
+msgid "Demande déjà effectuée."
+msgstr "Request already made"
+
+#: webapp/auth/routes.py:95
+msgid "Erreur dans la base de données."
+msgstr "Error in the database"
+
+#: webapp/auth/routes.py:112
+msgid "Confirmation de demande"
+msgstr "Confirmation of request"
+
+#: webapp/auth/routes.py:124
+msgid "Consultez votre email et suivez les instructions"
+msgstr "Check your email and follow the instructions"
+
+#: webapp/auth/routes.py:140
+msgid "Votre mot de passe a été réinitialisé."
+msgstr "Your password has been reset"
+
+#: webapp/client/forms.py:12
+msgid "titulaire"
+msgstr "holder"
+
+#: webapp/client/forms.py:13
+msgid "Taux Rémuneration"
+msgstr "Rate of pay"
+
+#: webapp/client/routes.py:28 webapp/templates/client/compteCourant.html:6
+#: webapp/templates/client/index.html:7 webapp/templates/client/virement.html:7
+#: webapp/templates/main/base.html:29
+msgid "Espace Client"
+msgstr "Client area"
+
+#: webapp/client/routes.py:47 webapp/client/routes.py:63
+msgid "Aucune opération n a été effectuée sur ce compte"
+msgstr "No transactions were made on this account"
+
+#: webapp/client/routes.py:51 webapp/templates/client/compteCourant.html:7
+#: webapp/templates/client/index.html:14
+msgid "Compte Courant"
+msgstr "Current Account"
+
+#: webapp/client/routes.py:68 webapp/templates/client/compteEpargne.html:8
+msgid "Compte Épargne"
+msgstr "Savings Account"
+
+#: webapp/client/routes.py:94 webapp/templates/client/creerCompteEpargne.html:5
+msgid "Création Compte Épargne"
+msgstr "Savings Account Creation"
+
+#: webapp/client/routes.py:123 webapp/client/routes.py:128
+msgid "Conditions pour un virement non remplies"
+msgstr "Unsatisfied conditions for a bank transfer"
+
+#: webapp/client/routes.py:134
+msgid "vous n'êtes pas autorisé à passer en découvert"
+msgstr "you are not allowed to go overdraft"
+
+#: webapp/client/routes.py:137
+msgid "l'opération dépasserait votre seuil de découvert"
+msgstr "the transaction would exceed your overdraft threshold"
+
+#: webapp/client/routes.py:153
+msgid "Virement effectué !"
+msgstr "Bank transfert made !"
+
+#: webapp/client/routes.py:156 webapp/templates/client/compteCourant.html:28
+#: webapp/templates/client/compteEpargne.html:29
+#: webapp/templates/client/index.html:13
+#: webapp/templates/client/virement.html:8
+msgid "Effectuer un Virement"
+msgstr "Make a bank transfert"
+
+#: webapp/conseiller/forms.py:16
+msgid "Date d'entrée"
+msgstr "Hiring date"
+
+#: webapp/conseiller/forms.py:17
+msgid "Date de sortie"
+msgstr "End date"
+
+#: webapp/conseiller/forms.py:18
+msgid "Création"
+msgstr "Creation"
+
+#: webapp/main/forms.py:9
+msgid "Text"
+msgstr "Text"
+
+#: webapp/main/forms.py:10
+msgid "Poster"
+msgstr "Send"
+
+#: webapp/templates/admin/creerConseiller.html:6
 #: webapp/templates/auth/login.html:3
 #: webapp/templates/auth/reset_password.html:3
+#: webapp/templates/auth/reset_password_request.html:3
+#: webapp/templates/auth/signup.html:3
+#: webapp/templates/auth/signup_confirmation.html:3
+#: webapp/templates/client/compteEpargne.html:6
+#: webapp/templates/client/creerCompteEpargne.html:3
+#: webapp/templates/client/index.html:6 webapp/templates/client/virement.html:6
+#: webapp/templates/conseiller/gerer_demandes.html:6
 #: webapp/templates/main/index.html:6
 msgid "Accueil"
-msgstr "Toto"
+msgstr "Home"
 
-#: webapp/templates/auth/login.html:4 webapp/templates/main/base.html:19
+#: webapp/templates/admin/creerConseiller.html:7
+#: webapp/templates/admin/index.html:5 webapp/templates/main/base.html:75
+msgid "Créer un Conseiller"
+msgstr "Add an advisor"
+
+#: webapp/templates/admin/index.html:4
+msgid "Bienvenue, Administrateur !"
+msgstr "Welcome, Administrator !"
+
+#: webapp/templates/auth/login.html:4
+#: webapp/templates/auth/reset_password_request.html:4
+#: webapp/templates/main/base.html:19
 msgid "Connexion"
-msgstr ""
-
-#: webapp/templates/auth/login.html:7
-msgid "Me connecter"
-msgstr ""
+msgstr "Sign in"
 
 #: webapp/templates/auth/login.html:24
 msgid "Mot de passe oublié ?"
-msgstr ""
+msgstr "Forgotten password ?"
 
 #: webapp/templates/auth/login.html:25
 msgid "cliquer pour réinitialiser"
-msgstr ""
+msgstr "Reset password"
 
 #: webapp/templates/auth/reset_password.html:4
 msgid "Réinitialisation Password"
-msgstr ""
+msgstr "Reset password"
 
 #: webapp/templates/auth/reset_password.html:7
 msgid "Nouveau Password"
-msgstr ""
+msgstr "New Password"
 
 #: webapp/templates/auth/reset_password.html:32
 msgid "Procédure de réinitialisation de mot de passe expirée!"
-msgstr "Time OUT !"
+msgstr "Password reset procedure expired!"
+
+#: webapp/templates/auth/reset_password_request.html:5
+#: webapp/templates/auth/reset_password_request.html:8
+msgid "Reset Password"
+msgstr "Reset Password"
+
+#: webapp/templates/auth/signup.html:4
+#: webapp/templates/auth/signup_confirmation.html:4
+#: webapp/templates/main/base.html:20
+msgid "Inscription"
+msgstr "Sign up"
+
+#: webapp/templates/auth/signup.html:7
+msgid "Demande de création de compte"
+msgstr "Request of account creation"
+
+#: webapp/templates/auth/signup_confirmation.html:5
+msgid "Confirmation d'inscription"
+msgstr "Sign up Confirmation"
+
+#: webapp/templates/client/compteCourant.html:10
+msgid "Bienvenue sur votre compte courant"
+msgstr "Welcome on your current account"
+
+#: webapp/templates/client/compteCourant.html:11
+#: webapp/templates/client/compteEpargne.html:12
+msgid "Solde :"
+msgstr "Balance :"
+
+#: webapp/templates/client/compteCourant.html:11
+#: webapp/templates/client/compteEpargne.html:12
+msgid "€"
+msgstr "€"
+
+#: webapp/templates/client/compteEpargne.html:7
+#: webapp/templates/client/creerCompteEpargne.html:4
+msgid "Espace client"
+msgstr "Client area"
+
+#: webapp/templates/client/compteEpargne.html:11
+msgid "Bienvenue sur votre compte épargne"
+msgstr "Welcome on your savings account"
+
+#: webapp/templates/client/index.html:11
+msgid "Bienvenue dans votre espace"
+msgstr "Welcome"
+
+#: webapp/templates/client/index.html:16
+msgid "Compte Epargne"
+msgstr "Savings Account"
+
+#: webapp/templates/client/index.html:18
+msgid "Ouvrir Un Compte Epargne"
+msgstr "Open a savings account"
+
+#: webapp/templates/conseiller/gerer_demandes.html:7
+#: webapp/templates/main/base.html:27
+msgid "Gestion de demandes"
+msgstr "Requests management"
 
 #: webapp/templates/main/base.html:7
 msgid "Bienvenue sur GestiBank"
-msgstr ""
-
-#: webapp/templates/main/base.html:20
-msgid "Inscription"
-msgstr ""
-
-#: webapp/templates/main/base.html:24
-#, python-format
-msgid "Bienvenue %(username)s"
-msgstr ""
+msgstr "Welcome on GestiBank"
 
 #: webapp/templates/main/base.html:25
-msgid "Création de conseiller"
-msgstr ""
+#, python-format
+msgid "Bienvenue %(username)s"
+msgstr "Welcome %(username)s"
 
-#: webapp/templates/main/base.html:26
+#: webapp/templates/main/base.html:31
 msgid "Déconnexion"
-msgstr ""
+msgstr "Logout"
 
-#: webapp/templates/main/base.html:29
+#: webapp/templates/main/base.html:35
 msgid "Langue"
-msgstr ""
+msgstr "Language"
 
-#: webapp/templates/main/base.html:45
+#: webapp/templates/main/base.html:51
 msgid "Choisir une langue"
-msgstr ""
+msgstr "Choose a language"
 
-#: webapp/templates/main/base.html:46
+#: webapp/templates/main/base.html:52
 msgid "Français"
-msgstr ""
+msgstr "French"
 
-#: webapp/templates/main/base.html:47
+#: webapp/templates/main/base.html:53
 msgid "Anglais"
-msgstr ""
+msgstr "English"
+
+#: webapp/templates/main/base.html:74
+msgid "Espace Admin"
+msgstr "Admin Area"
 

@@ -121,7 +121,7 @@ def reset_password_request():
         user = Utilisateur.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash(_l('Consultez votre email pour et suivez les instructions'))
+        flash(_l('Consultez votre email et suivez les instructions'))
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password_request.html', form=form)
 
