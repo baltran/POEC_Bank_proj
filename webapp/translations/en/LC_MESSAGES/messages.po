@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-10-13 13:44+0200\n"
+"POT-Creation-Date: 2019-10-13 17:27+0200\n"
 "PO-Revision-Date: 2019-10-13 10:59+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -31,15 +31,15 @@ msgstr "Password"
 msgid "Confirmation du mot de passe"
 msgstr "Password confirmation"
 
-#: webapp/admin/forms.py:9
+#: webapp/admin/forms.py:9 webapp/conseiller/forms.py:16
 msgid "Date d'entrée"
 msgstr "Hiring date"
 
-#: webapp/admin/forms.py:10
+#: webapp/admin/forms.py:10 webapp/conseiller/forms.py:17
 msgid "Date de sortie"
 msgstr "End date"
 
-#: webapp/admin/forms.py:11 webapp/client/forms.py:14
+#: webapp/admin/forms.py:11 webapp/conseiller/forms.py:18
 msgid "Création"
 msgstr "Creation"
 
@@ -59,9 +59,9 @@ msgstr "First name"
 msgid "Nom"
 msgstr "Last name"
 
-#: webapp/auth/forms.py:21 webapp/auth/forms.py:32
-msgid "e-mail"
-msgstr "e-mail"
+#: webapp/auth/forms.py:21
+msgid "Email"
+msgstr "Email"
 
 #: webapp/auth/forms.py:22
 msgid "Adresse"
@@ -91,8 +91,12 @@ msgstr "Proof of adress"
 msgid "Demander mon compte"
 msgstr "Request my account"
 
+#: webapp/auth/forms.py:32
+msgid "e-mail"
+msgstr "e-mail"
+
 #: webapp/auth/forms.py:33
-msgid 'Demander un nouveau mot de passe'
+msgid "Demander un nouveau mot de passe"
 msgstr "Request Password Reset"
 
 #: webapp/auth/forms.py:38 webapp/auth/forms.py:45
@@ -100,11 +104,11 @@ msgid "Repeter votre mot de passe"
 msgstr "Repeat your password"
 
 #: webapp/auth/forms.py:40
-msgid 'Réinitialisez votre mot de passe'
+msgid "Réinitialisez votre mot de passe"
 msgstr "Reset your password"
 
-#: webapp/auth/forms.py:40 webapp/auth/forms.py:47
-msgid 'Créez votre mot de passe'
+#: webapp/auth/forms.py:47
+msgid "Créez votre mot de passe"
 msgstr "Create your password"
 
 #: webapp/auth/routes.py:38
@@ -143,13 +147,17 @@ msgstr "holder"
 msgid "Taux de rémuneration"
 msgstr "Interest rate"
 
+#: webapp/client/forms.py:14
+msgid "Creation"
+msgstr "Creation"
+
 #: webapp/client/routes.py:28 webapp/templates/client/compteCourant.html:6
 #: webapp/templates/client/index.html:7 webapp/templates/client/virement.html:7
 #: webapp/templates/main/base.html:29
 msgid "Espace Client"
 msgstr "Secure Customer Area"
 
-#: webapp/client/routes.py:47 webapp/client/routes.py:63
+#: webapp/client/routes.py:47
 msgid "Aucune opération n'a été effectuée sur ce compte"
 msgstr "No transactions were made on this account"
 
@@ -157,6 +165,10 @@ msgstr "No transactions were made on this account"
 #: webapp/templates/client/index.html:14
 msgid "Compte Courant"
 msgstr "Current Account"
+
+#: webapp/client/routes.py:63
+msgid "Aucune opération n a été effectuée sur ce compte"
+msgstr "No transactions were made on this account"
 
 #: webapp/client/routes.py:68 webapp/templates/client/compteEpargne.html:8
 msgid "Compte Épargne"
@@ -189,18 +201,6 @@ msgstr "Bank transfert made !"
 msgid "Effectuer un Virement"
 msgstr "Make a bank transfert"
 
-#: webapp/conseiller/forms.py:16
-msgid "Date d'entrée"
-msgstr "Hiring date"
-
-#: webapp/conseiller/forms.py:17
-msgid "Date de sortie"
-msgstr "End date"
-
-#: webapp/conseiller/forms.py:18
-msgid "Création"
-msgstr "Creation"
-
 #: webapp/main/forms.py:9
 msgid "Text"
 msgstr "Text"
@@ -218,7 +218,6 @@ msgstr "Send"
 #: webapp/templates/client/compteEpargne.html:6
 #: webapp/templates/client/creerCompteEpargne.html:3
 #: webapp/templates/client/index.html:6 webapp/templates/client/virement.html:6
-#: webapp/templates/conseiller/gerer_demandes.html:6
 #: webapp/templates/main/index.html:6
 msgid "Accueil"
 msgstr "Home"
@@ -312,7 +311,6 @@ msgstr "Savings Account"
 msgid "Ouvrir Un Compte Epargne"
 msgstr "Open a savings account"
 
-#: webapp/templates/conseiller/gerer_demandes.html:7
 #: webapp/templates/conseiller/gerer_demandes_old.html:6
 #: webapp/templates/conseiller/redirect.html:6
 #: webapp/templates/main/base.html:27
