@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-10-13 18:25+0200\n"
+"POT-Creation-Date: 2019-10-13 18:41+0200\n"
 "PO-Revision-Date: 2019-10-13 10:59+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -75,7 +75,7 @@ msgstr "Phone number"
 msgid "Revenu mensuel moyen"
 msgstr "Average monthly income"
 
-#: webapp/auth/forms.py:25
+#: webapp/auth/forms.py:25 webapp/templates/conseiller/gerer_demandes.html:24
 msgid "Pièce d'identité"
 msgstr "ID"
 
@@ -218,6 +218,7 @@ msgstr "Send"
 #: webapp/templates/client/compteEpargne.html:6
 #: webapp/templates/client/creerCompteEpargne.html:3
 #: webapp/templates/client/index.html:6 webapp/templates/client/virement.html:6
+#: webapp/templates/conseiller/gerer_demandes.html:6
 #: webapp/templates/main/index.html:6
 msgid "Accueil"
 msgstr "Home"
@@ -293,7 +294,7 @@ msgstr "€"
 #: webapp/templates/client/compteEpargne.html:7
 #: webapp/templates/client/creerCompteEpargne.html:4
 msgid "Espace client"
-msgstr "Client area"
+msgstr "Customer area"
 
 #: webapp/templates/client/compteEpargne.html:11
 msgid "Bienvenue sur votre compte épargne"
@@ -312,38 +313,50 @@ msgid "Ouvrir Un Compte Epargne"
 msgstr "Open a savings account"
 
 #: webapp/templates/conseiller/display_just_domicile.html:5
-#: webapp/templates/conseiller/display_just_salaire.html:5
-#: webapp/templates/conseiller/display_piece_id.html:5
 msgid "Document manquant"
-msgstr ""
+msgstr "Missing document"
 
 #: webapp/templates/conseiller/display_just_domicile.html:9
 msgid "Aucun justificatif de domicile n'a été fourni."
-msgstr ""
+msgstr "No proof of adress has been provided"
 
 #: webapp/templates/conseiller/display_just_domicile.html:10
-#: webapp/templates/conseiller/display_just_salaire.html:9
-#: webapp/templates/conseiller/display_piece_id.html:9
 msgid "Veuillez contacter le client."
-msgstr ""
+msgstr "Please contact the customer"
 
-#: webapp/templates/conseiller/display_just_salaire.html:8
-msgid "Aucun justificatif de salaire n'a été fourni."
-msgstr ""
-
-#: webapp/templates/conseiller/display_piece_id.html:8
-msgid "Aucune pièce d'identité n'a été fournie."
-msgstr ""
-
+#: webapp/templates/conseiller/gerer_demandes.html:7
+>>>>>>> client
 #: webapp/templates/conseiller/gerer_demandes_old.html:6
 #: webapp/templates/conseiller/redirect.html:6
 #: webapp/templates/main/base.html:27
 msgid "Gestion de demandes"
 msgstr "Manage requests"
 
+<<<<<<< HEAD
 #: webapp/templates/conseiller/redirect.html:9
 msgid "Demandes de création de compte :"
 msgstr ""
+=======
+#: webapp/templates/conseiller/gerer_demandes.html:10
+msgid "Vous avez"
+msgstr "You have"
+
+#: webapp/templates/conseiller/gerer_demandes.html:10
+msgid "demandes de création de compte."
+msgstr "account creation requests"
+
+#: webapp/templates/conseiller/gerer_demandes.html:14
+msgid "Choisissez une action"
+msgstr "Choose an action"
+
+#: webapp/templates/conseiller/gerer_demandes.html:54
+msgid "GestiBank a"
+msgstr "GestiBank has"
+
+#: webapp/templates/conseiller/gerer_demandes.html:54
+msgid "clients:"
+msgstr "Customers:"
+>>>>>>> client
 
 #: webapp/templates/main/base.html:7
 msgid "Bienvenue sur GestiBank"
