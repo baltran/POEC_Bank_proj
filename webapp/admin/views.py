@@ -26,6 +26,9 @@ class DemandeModelView(GestiBankModelView):
     form_columns = ['mon_conseiller']
     column_exclude_list = (
         'password',
+        'piece_id',
+        'just_salaire',
+        'just_domicile'
     )
     column_editable_list = ('mon_conseiller',)
     column_sortable_list = (('mon_conseiller', 'mon_conseiller.nom'),)
