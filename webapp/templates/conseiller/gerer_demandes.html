@@ -72,18 +72,18 @@
                             <td>{{ client.afficher()[c]|center }}
                             {% if c=="Nom" %}
                                 <br><form action="{{ url_for('conseiller.display_piece_id') }}">
-                                <button type="submit" name="identite" value="{{ client.afficher()['id'] }}">
+                                <button type="submit" name="identite" value="c{{ client.afficher()['id'] }}">
 
                                    Pièce d'identité</button>
                                  </form>
                             {% elif c=="Adresse" %}
                                 <br><form action="{{ url_for('conseiller.display_just_domicile') }}">
-                                <button type="submit" name="domicile" value="{{ client.afficher()['id'] }}">
+                                <button type="submit" name="domicile" value="c{{ client.afficher()['id'] }}">
                                     Just. de domicile</button>
                                 </form>
                             {% elif c=="Revenu_mensuel" %}
                                 <br><form action="{{ url_for('conseiller.display_just_salaire') }}">
-                                <button type="submit" name="salaire" value="{{ client.afficher()['id'] }}">
+                                <button type="submit" name="salaire" value="c{{ client.afficher()['id'] }}">
                                     Just. de revenus</button>
                                 </form>
                             {% endif %}

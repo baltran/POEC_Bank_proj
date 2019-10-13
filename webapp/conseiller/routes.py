@@ -2,6 +2,7 @@ from flask import render_template, request, send_file, redirect, url_for
 from flask_login import current_user, login_required
 
 from webapp.conseiller import bp
+from webapp.main.classes.compte_courant import CompteCourant
 from webapp.main.classes.demande import Demande
 from webapp.main.classes.client import Client
 # from webapp.main.classes.compte import CompteCourant
@@ -43,6 +44,7 @@ def gerer_demandes():
                 del data['id']
                 # CREATE A CLIENT
                 client = Client(**data)
+                compte = CompteCourant(titulaire_id=id)
                 demande = Demande.query.get(id)
                 # generate a random password
                 # first choose a seed
@@ -57,6 +59,7 @@ def gerer_demandes():
                 client.password = generate_password_hash(random_pass)
                 # Save the object in the database
                 db.session.add(client)
+                db.session.add(compte)
                 db.session.delete(demande)
                 db.session.commit()
                 send_password_new_account_email(client, random_pass)
@@ -105,38 +108,56 @@ def gerer_demandes():
 def display_piece_id():
     my_string = request.full_path
     if "=" in my_string:
-        id = int(my_string.split("=", 1)[1])
-        demande_data = Demande.query.get(id).piece_id
-        # Returning Files From a Database in Flask
-        # https: // www.youtube.com / watch?v = QPI3rzZow6k
-        return send_file(BytesIO(demande_data), attachment_filename="flask.pdf", as_attachment=True)
-    else:
-        return render_template('conseiller/display_piece_id.html')
+        id = my_string.split("=", 1)[1]
+        if id[0] == 'c':
+            id = int(id[1:])
+            demande_data = Client.query.get(id)
+        else:
+            demande_data = Demande.query.get(int(id))
+        if demande_data:
+            demande_data = demande_data.piece_id
+            # Returning Files From a Database in Flask
+            # https: // www.youtube.com / watch?v = QPI3rzZow6k
+            if demande_data:
+                return send_file(BytesIO(demande_data), attachment_filename="flask.pdf", as_attachment=True)
+    return render_template('conseiller/display_piece_id.html')
 
 
-@bp.route('/display_just_domicile')
+@bp.route('/display_just_domicile', methods=['GET', 'POST'])
 @bp.endpoint('display_just_domicile')
 def display_just_domicile():
     my_string = request.full_path
     if "=" in my_string:
-        id = int(my_string.split("=", 1)[1])
-        demande_data = Demande.query.get(id).just_domicile
-        # Returning Files From a Database in Flask
-        # https: // www.youtube.com / watch?v = QPI3rzZow6k
-        return send_file(BytesIO(demande_data), attachment_filename="flask.pdf", as_attachment=True)
-    else:
-        return render_template('conseiller/display_just_domicile.html')
+        id = my_string.split("=", 1)[1]
+        if id[0] == 'c':
+            id = int(id[1:])
+            demande_data = Client.query.get(id)
+        else:
+            demande_data = Demande.query.get(int(id))
+        if demande_data:
+            demande_data = demande_data.just_domicile
+            # Returning Files From a Database in Flask
+            # https: // www.youtube.com / watch?v = QPI3rzZow6k
+            if demande_data:
+                return send_file(BytesIO(demande_data), attachment_filename="flask.pdf", as_attachment=True)
+    return render_template('conseiller/display_just_domicile.html')
 
 
-@bp.route('/display_just_salaire')
+@bp.route('/display_just_salaire', methods=['GET', 'POST'])
 @bp.endpoint('display_just_salaire')
 def display_just_salaire():
     my_string = request.full_path
     if "=" in my_string:
-        id = int(my_string.split("=", 1)[1])
-        demande_data = Demande.query.get(id).just_salaire
-        # Returning Files From a Database in Flask
-        # https: // www.youtube.com / watch?v = QPI3rzZow6k
-        return send_file(BytesIO(demande_data), attachment_filename="flask.pdf", as_attachment=True)
-    else:
-        return render_template('conseiller/display_just_salaire.html')
+        id = my_string.split("=", 1)[1]
+        if id[0] == 'c':
+            id = int(id[1:])
+            demande_data = Client.query.get(id)
+        else:
+            demande_data = Demande.query.get(int(id))
+        if demande_data:
+            demande_data = demande_data.just_salaire
+            # Returning Files From a Database in Flask
+            # https: // www.youtube.com / watch?v = QPI3rzZow6k
+            if demande_data:
+                return send_file(BytesIO(demande_data), attachment_filename="flask.pdf", as_attachment=True)
+    return render_template('conseiller/display_just_salaire.html')
