@@ -127,10 +127,13 @@ def set_transfert(id):
         decrement = abs(decrement)
         solde_tmp = compte.solde - decrement
         if solde_tmp < 0:
-            if not compte.autorisation_decouvert:
-                return conflict_request("Le compte n'a pas d'autorisation de découvert")
-            elif solde_tmp < (0 - (compte.entree_moyenne * compte.taux_decouvert)):
-                return conflict_request("L'operation demandée dépasse le seuil de découvert")
+            if compte.discriminator == "compte_courant":
+                if not compte.autorisation_decouvert:
+                    return conflict_request("Le compte n'a pas d'autorisation de découvert")
+                elif solde_tmp < (0 - (compte.entree_moyenne * compte.taux_decouvert)):
+                    return conflict_request("L'operation demandée dépasse le seuil de découvert")
+            else:
+                return conflict_request("L'operation demandée passerait le compte en négatif")
         compte.solde = solde_tmp
         compte_dest.solde += decrement
         data_virement = {'valeur'        : decrement,

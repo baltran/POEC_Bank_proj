@@ -133,11 +133,15 @@ def virement():
                     valeur = abs(valeur)
                     solde_temp = compte.solde - valeur
                     if solde_temp < 0:
-                        if not compte.autorisation_decouvert:
-                            flash(_l("vous n'êtes pas autorisé à passer en découvert"))
-                            redirect(url_for('client.index'))
-                        elif solde_temp < (0 - (compte.entree_moyenne * compte.taux_decouvert)):
-                            flash(_l("l'opération dépasserait votre seuil de découvert"))
+                        if compte.discriminator == "compte_courant":
+                            if not compte.autorisation_decouvert:
+                                flash(_l("vous n'êtes pas autorisé à passer en découvert"))
+                                redirect(url_for('client.index'))
+                            elif solde_temp < (0 - (compte.entree_moyenne * compte.taux_decouvert)):
+                                flash(_l("l'opération dépasserait votre seuil de découvert"))
+                                redirect(url_for('client.index'))
+                        else:
+                            flash(_l("L'operation demandée passerait le compte en négatif"))
                             redirect(url_for('client.index'))
                     compte.solde = solde_temp
                     compte_dest.solde += valeur
