@@ -13,10 +13,10 @@ class Demande(db.Model):
     prenom = db.Column(db.String(40), index=True, unique=False)
     email = db.Column(db.String(40), index=True, unique=True)
     username = db.Column(db.String(40), index=True, unique=True)
-    password = db.Column(db.String(50))
-    adresse = db.Column(db.String(100), index=False, unique=False)
-    tel = db.Column(db.String(20), unique=False)
-    revenu_mensuel = db.Column(db.Integer, index=False)
+    password = db.Column(db.String(100))
+    adresse = db.Column(db.String(100), index=False, unique=False, default="")
+    tel = db.Column(db.String(20), unique=False, default="")
+    revenu_mensuel = db.Column(db.Integer, index=False, default=0)
     # """Manquent (?) :
     # -> nombre d’enfants
     # -> situation matrimoniale

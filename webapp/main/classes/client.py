@@ -10,9 +10,9 @@ class Client(Utilisateur):
     __mapper_args__ = {'polymorphic_identity': 'client'}
     id = db.Column(db.Integer, db.ForeignKey('utilisateur.id'), primary_key=True)
     num_client = db.Column(db.Integer, index=True, unique=True)
-    adresse = db.Column(db.String(50))
-    tel = db.Column(db.String(10))
-    revenu_mensuel = db.Column(db.Integer)
+    adresse = db.Column(db.String(50), default="")
+    tel = db.Column(db.String(10), default="")
+    revenu_mensuel = db.Column(db.Integer, default="")
     # """Manquent (?) :
     # -> nombre d’enfants
     # -> situation matrimoniale

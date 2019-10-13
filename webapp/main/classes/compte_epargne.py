@@ -9,7 +9,7 @@ class CompteEpargne(Compte):
     id = db.Column(db.Integer, db.ForeignKey('compte.id'), primary_key=True)
     num_compte = db.Column(db.Integer, index=True, unique=True)
     taux_remuneration = db.Column(db.Float, default=0.02)
-    seuil_remuneration = db.Column(db.Integer)
+    seuil_remuneration = db.Column(db.Integer, default=1000)
 
     #def __init__(self, data_compte, data_compte_epargne):
     #    super().__init__(data_compte)
