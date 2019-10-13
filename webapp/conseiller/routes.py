@@ -21,17 +21,19 @@ from flask_babel import _, lazy_gettext as _l
 @bp.route('/gerer_demandes', methods=['GET', 'POST'])
 @bp.endpoint('gerer_demandes')
 @login_required
-# TODO: Assurer que seulement les conseillers peuvent y accéder. (Victor : fait)
 def gerer_demandes():
     if current_user.is_authenticated and current_user.discriminator == 'conseiller':
         my_string = request.full_path
-        ids_demandes = Demande.query.with_entities(Demande.id).all()
-        ids_clients = Client.query.with_entities(Client.id).all()
+        #ids_demandes = Demande.query.with_entities(Demande.id).all()
+        #ids_clients = Client.query.with_entities(Client.id).all()
+        ids_demandes = current_user.demande.with_entities(Demande.id).all()
+        ids_clients = current_user.clients.with_entities(Client.id).all()
         print("Il y a ", len(ids_demandes), "demandes")
 
-        clients = Client.query.all()
-        demandes = Demande.query.all()
-
+        #clients = Client.query.all()
+        #demandes = Demande.query.all()
+        #clients = current_user.clients.all()
+        #demandes = current_user.demande.all()
     if 'accepter' in my_string:
         id = int(my_string.split("=", 1)[1])
         if (id,) in ids_demandes:
@@ -81,21 +83,26 @@ def gerer_demandes():
         id = int(my_string.split("=", 1)[1])
         if (id,) in ids_clients:
             id = int(my_string.split("=", 1)[1])
-            client = Client.query.get(id)
-            db.session.delete(client)
-            db.session.commit()
-            clients = Client.query.all()
-
-    total_de_clients = Client.query.count()
-    total_de_demandes = Demande.query.count()
-
-    return render_template('conseiller/gerer_demandes.html',
-                           title="Gestion des demandes",
-                           clients=clients,
-                           demandes=demandes,
-                           total_de_demandes=total_de_demandes,
-                           total_de_clients=total_de_clients,
-                           ids_demandes=ids_demandes)
+            if (id,) in ids_clients:
+                id = int(my_string.split("=", 1)[1])
+                client = Client.query.get(id)
+                db.session.delete(client)
+                db.session.commit()
+                #clients = Client.query.all()
+        #total_de_clients = Client.query.count()
+        #total_de_demandes = Demande.query.count()
+        total_de_clients = current_user.clients.count()
+        total_de_demandes = current_user.demande.count()
+        clients = current_user.clients.all()
+        demandes = current_user.demande.all()
+        return render_template('conseiller/gerer_demandes.html',
+                               title="Gestion des demandes",
+                               clients=clients,
+                               demandes=demandes,
+                               total_de_demandes=total_de_demandes,
+                               total_de_clients=total_de_clients,
+                               ids_demandes=ids_demandes)
+    return redirect(url_for('main.index'))
 
 
 @bp.route('/display_piece_id', methods=['GET', 'POST'])

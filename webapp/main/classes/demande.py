@@ -54,5 +54,6 @@ class Demande(db.Model):
             'revenu_mensuel': self.revenu_mensuel,
             'piece_id' : self.piece_id,
             'just_salaire' : self.just_salaire,
-            'just_domicile' : self.just_domicile
+            'just_domicile' : self.just_domicile,
+            'conseiller_id' : self.conseiller_id
         }

@@ -10,7 +10,8 @@ class Conseiller(Utilisateur):
     id = db.Column(db.Integer, db.ForeignKey('utilisateur.id'), primary_key=True)
     date_debut = db.Column(db.DateTime, index=True, default=datetime.datetime.utcnow)
     date_fin = db.Column(db.DateTime, index=True, default=None)
-    demande = db.relationship('Demande', backref='mon_conseiller', lazy='dynamic')
+    demande = db.relationship('Demande', backref='mon_conseiller', lazy='dynamic', foreign_keys='Demande.conseiller_id')
+    clients = db.relationship('Client', backref='mon_conseiller', lazy='dynamic', foreign_keys='Client.conseiller_id')
 
     def __repr__(self):
         return '<Conseiller {} {}>'.format(self.nom, self.prenom)
