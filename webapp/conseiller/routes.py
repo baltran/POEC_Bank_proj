@@ -55,6 +55,12 @@ def gerer_demandes():
             # Save the object in the database
             db.session.add(client)
             db.session.delete(demande)
+            # db.session.commit()
+            # client_id = Client.query.filter_by(username=data['username']).first().id
+            # # CREATE NEW ACCOUNT
+            # new_account = CompteCourant(titulaire_id=client_id)
+            # new_account.discriminator = 'compte_courant'
+            # db.session.add(new_account)
             db.session.commit()
             send_password_new_account_email(client, random_pass)
             clients = Client.query.all()
