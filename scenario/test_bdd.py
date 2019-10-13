@@ -3,9 +3,9 @@ from webapp.main.models import *
 from werkzeug.security import generate_password_hash as gph
 from webapp.main.requetes import inserer, delete_database_data
 
-data_cli = {'username': 'Baltran', 'password': 'elpoto', 'email': 'daubie_vic@msn.com',
+data_cli = {'username': 'Baltran', 'password': 'elpoto', 'email': 'daubie_vic@msn.com', 'conseiller_id': 2,
             'adresse': '10, rue de la liberté', 'tel': '0123456789', 'prenom': 'Victor', 'nom': 'Daubié'}
-data_cli_2 = {'username': 'Sadia', 'password': 'Sadia', 'email': 'sadia_ing@msn.com',
+data_cli_2 = {'username': 'Sadia', 'password': 'Sadia', 'email': 'sadia_ing@msn.com', 'conseiller_id': 2,
               'adresse': '12, rue de la liberté', 'tel': '0123786589', 'prenom': 'Sadia', 'nom': 'Anon'}
 data_admin = {'username': 'admin', 'password': 'admin', 'email': 'admin@gestibank.fr'}
 
@@ -26,9 +26,9 @@ data_depot = {'valeur': 50, 'compte_id': '2', 'type_operation': 'depot'}
 delete_database_data(Client, Utilisateur, Demande, Conseiller, CompteCourant, CompteEpargne, Operation)
 populate = []
 populate.append(Admin(**data_admin))
+populate.append(Conseiller(**data_conseiller))
 populate.append(Client(**data_cli))
 populate.append(Client(**data_cli_2))
-populate.append(Conseiller(**data_conseiller))
 populate.append(Demande(**data_demande))
 populate.append(Demande(**data_demande2))
 populate.append(Operation(**data_virement))
@@ -41,7 +41,7 @@ populate.append(CompteEpargne(**data_compte_epargne))
 for obj in populate:
     inserer(obj)
 
-client = Client.query.get(2)
+client = Client.query.get(3)
 
 print(client.username)
 compte = Compte.query.get(2)
