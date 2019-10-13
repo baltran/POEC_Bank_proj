@@ -49,7 +49,7 @@ def gerer_demandes():
                 # Now the password correspond to the last random_lenght carachters of the random_int hash:
                 random_pass = generate_password_hash(str(random_int))[-random_length:]
                 # Add the password to the client object
-                client.password = generate_password_hash(random_pass)
+                client.password = random_pass
                 # Save the object in the database
                 db.session.add(client)
                 db.session.add(compte)
