@@ -45,7 +45,7 @@ class Demande(db.Model):
     def data_dict(self):
         return {
             'id' : self.id,
-            # 'username' : self.username,
+            'username' : self.username,
             'nom' : self.nom,
             'prenom' : self.prenom,
             'email' : self.email,

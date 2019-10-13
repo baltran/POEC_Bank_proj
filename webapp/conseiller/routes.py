@@ -4,6 +4,7 @@ from flask_login import current_user, login_required
 from webapp.conseiller import bp
 from webapp.main.classes.demande import Demande
 from webapp.main.classes.client import Client
+# from webapp.main.classes.compte import CompteCourant
 from webapp.main.classes.utilisateur import db
 from io import BytesIO
 from werkzeug.security import generate_password_hash
@@ -36,6 +37,7 @@ def gerer_demandes():
             print(ids_demandes)
             data = Demande.query.get(id).data_dict()
             del data['id']
+            # CREATE A CLIENT
             client = Client(**data)
             demande = Demande.query.get(id)
             # generate a random password
