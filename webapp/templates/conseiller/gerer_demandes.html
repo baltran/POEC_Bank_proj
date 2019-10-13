@@ -7,11 +7,11 @@
     {{ nav_link('conseiller.gerer_demandes', _('Gestion de demandes')) }}
 {% endblock %}
 {% block content %}
-            <h2>Vous avez {{ total_de_demandes }} demandes de création de compte.</h2>
+            <h2>_('Vous avez') {{ total_de_demandes }} _('demandes de création de compte.')</h2>
             {% if total_de_demandes>0 %}
             <table><tr>
                 <th>  </th>{% for col in demandes[0].afficher() %}<th>{{ col }}</th>{% endfor %}
-                <th>Choisissez une action</th>
+                <th>_('Choisissez une action')</th>
                 </tr>
                 {% for demande in demandes %}
                     <tr>
@@ -21,7 +21,7 @@
                             {% if e=="Nom" %}
                                 <br><form action="{{ url_for('conseiller.display_piece_id') }}">
                                 <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">
-                                    Pièce d'identité</button>
+                                    _('Pièce d'identité')</button>
                                  </form>
                             {% elif e=="Adresse" %}
                                 <br><form action="{{ url_for('conseiller.display_just_domicile') }}">
@@ -60,7 +60,7 @@
                         <th>{{ col }}</th>
                         {% endif %}
                     {% endfor %}
-                    <th>Compte épargne</th>
+                    <th>_('Compte épargne')</th>
                 </tr>
                 {% for client in clients %}
                     <tr>
@@ -70,7 +70,7 @@
                             {% if c=="Nom" %}
                                 <br><form action="{{ url_for('conseiller.display_piece_id') }}">
                                 <button type="submit" name="identite" value="{{ client.afficher()['id'] }}">
-                                    Pièce d'identité</button>
+                                   _(' Pièce d'identité')</button>
                                  </form>
                             {% elif c=="Adresse" %}
                                 <br><form action="{{ url_for('conseiller.display_just_domicile') }}">

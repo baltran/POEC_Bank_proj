@@ -10,6 +10,7 @@ from werkzeug.security import generate_password_hash
 import numpy as np
 from webapp.auth.email import send_password_new_account_email
 import time
+from flask_babel import _, lazy_gettext as _l
 
 
 # from webapp.main.classes.conseiller import Conseiller
