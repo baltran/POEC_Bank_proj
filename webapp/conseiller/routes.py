@@ -25,16 +25,9 @@ from flask_babel import _, lazy_gettext as _l
 def gerer_demandes():
     if current_user.is_authenticated and current_user.discriminator == 'conseiller':
         my_string = request.full_path
-        #ids_demandes = Demande.query.with_entities(Demande.id).all()
-        #ids_clients = Client.query.with_entities(Client.id).all()
         ids_demandes = current_user.demande.with_entities(Demande.id).all()
         ids_clients = current_user.clients.with_entities(Client.id).all()
         print("Il y a ", len(ids_demandes), "demandes")
-
-        #clients = Client.query.all()
-        #demandes = Demande.query.all()
-        #clients = current_user.clients.all()
-        #demandes = current_user.demande.all()
 
         if 'accepter' in my_string:
             id = int(my_string.split("=", 1)[1])
@@ -63,8 +56,6 @@ def gerer_demandes():
                 db.session.delete(demande)
                 db.session.commit()
                 send_password_new_account_email(client, random_pass)
-                #clients = Client.query.all()
-                #demandes = Demande.query.all()
             else:
                 pass
 
@@ -75,7 +66,6 @@ def gerer_demandes():
                 demande = Demande.query.get(id)
                 db.session.delete(demande)
                 db.session.commit()
-                #demandes = Demande.query.all()
 
         elif 'supprimer' in my_string:
             id = int(my_string.split("=", 1)[1])
@@ -84,15 +74,10 @@ def gerer_demandes():
                 client = Client.query.get(id)
                 db.session.delete(client)
                 db.session.commit()
-                #clients = Client.query.all()
-
-        #total_de_clients = Client.query.count()
-        #total_de_demandes = Demande.query.count()
         total_de_clients = current_user.clients.count()
         total_de_demandes = current_user.demande.count()
         clients = current_user.clients.all()
         demandes = current_user.demande.all()
-
         return render_template('conseiller/gerer_demandes.html',
                                title="Gestion des demandes",
                                clients=clients,
