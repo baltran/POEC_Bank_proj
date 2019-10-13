@@ -25,7 +25,15 @@ from flask_babel import _, lazy_gettext as _l
 @login_required
 def index():
     if current_user.is_authenticated and current_user.discriminator == 'client':
-        return render_template('client/index.html', user=current_user, title=_l('Espace Client'),
+        if "open_ce" in request.full_path:
+            if len(current_user.comptes.all()) == 1 and request.args.get("open_ce"):
+                compte = CompteEpargne(titulaire_id=current_user.id)
+                insertion = inserer(compte)
+                if insertion:
+                    return redirect(url_for('client.compteEpargne'))
+        return render_template('client/index.html',
+                               user=current_user,
+                               title=_l('Espace Client'),
                                nb_comptes=len(current_user.comptes.all()))
     redirect(url_for('main.index'))
 
@@ -35,13 +43,8 @@ def index():
 @login_required
 def compteCourant():
     if current_user.is_authenticated and current_user.discriminator == 'client':
-
-        # compte = CompteCourant.query.filter_by(titulaire=current_user).first()
         compte = current_user.comptes.filter_by(discriminator='compte_courant').first()
         operations = None
-
-        compte = CompteCourant.query.filter_by(titulaire=current_user).first()
-
 
         if compte.operations.all() is None:
             flash(_("Aucune opération n'a été effectuée sur ce compte"))
