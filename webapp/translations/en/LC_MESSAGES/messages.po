@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-10-13 12:26+0200\n"
+"POT-Creation-Date: 2019-10-13 13:44+0200\n"
 "PO-Revision-Date: 2019-10-13 10:59+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -309,6 +309,8 @@ msgid "Ouvrir Un Compte Epargne"
 msgstr "Open a savings account"
 
 #: webapp/templates/conseiller/gerer_demandes.html:7
+#: webapp/templates/conseiller/gerer_demandes_old.html:6
+#: webapp/templates/conseiller/redirect.html:6
 #: webapp/templates/main/base.html:27
 msgid "Gestion de demandes"
 msgstr "Requests management"
