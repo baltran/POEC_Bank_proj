@@ -1,4 +1,4 @@
-# English translations for PROJECT.
+# English translations for GestiBank.
 # Copyright (C) 2019 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
@@ -29,18 +29,18 @@ msgstr "Password"
 
 #: webapp/admin/forms.py:8 webapp/conseiller/forms.py:15
 msgid "Confirmation du mot de passe"
-msgstr "Password Confirmation"
+msgstr "Password confirmation"
 
 #: webapp/admin/forms.py:9
-msgid "Date Entree"
-msgstr "Hiring Date"
+msgid "Date d'entrée"
+msgstr "Hiring date"
 
 #: webapp/admin/forms.py:10
-msgid "Date sortie"
-msgstr "End Date"
+msgid "Date de sortie"
+msgstr "End date"
 
 #: webapp/admin/forms.py:11 webapp/client/forms.py:14
-msgid "Creation"
+msgid "Création"
 msgstr "Creation"
 
 #: webapp/auth/forms.py:11
@@ -57,15 +57,15 @@ msgstr "First name"
 
 #: webapp/auth/forms.py:17
 msgid "Nom"
-msgstr "Name"
+msgstr "Last name"
 
 #: webapp/auth/forms.py:21 webapp/auth/forms.py:32
-msgid "Email"
-msgstr "Email"
+msgid "e-mail"
+msgstr "e-mail"
 
 #: webapp/auth/forms.py:22
 msgid "Adresse"
-msgstr "Adress"
+msgstr "Address"
 
 #: webapp/auth/forms.py:23
 msgid "Téléphone"
@@ -92,16 +92,20 @@ msgid "Demander mon compte"
 msgstr "Request my account"
 
 #: webapp/auth/forms.py:33
-msgid "Request Password Reset"
+msgid 'Demander un nouveau mot de passe'
 msgstr "Request Password Reset"
 
 #: webapp/auth/forms.py:38 webapp/auth/forms.py:45
 msgid "Repeter votre mot de passe"
 msgstr "Repeat your password"
 
-#: webapp/auth/forms.py:40 webapp/auth/forms.py:47
-msgid "Réinitialisez votre mot de passe"
+#: webapp/auth/forms.py:40
+msgid 'Réinitialisez votre mot de passe'
 msgstr "Reset your password"
+
+#: webapp/auth/forms.py:40 webapp/auth/forms.py:47
+msgid 'Créez votre mot de passe'
+msgstr "Create your password"
 
 #: webapp/auth/routes.py:38
 msgid "Login ou mot de passe invalide"
@@ -121,11 +125,11 @@ msgstr "Error in the database"
 
 #: webapp/auth/routes.py:112
 msgid "Confirmation de demande"
-msgstr "Confirmation of request"
+msgstr "Request confirmation"
 
 #: webapp/auth/routes.py:124
-msgid "Consultez votre email et suivez les instructions"
-msgstr "Check your email and follow the instructions"
+msgid "Consultez votre e-mail et suivez les instructions"
+msgstr "Check your e-mail and follow the instructions"
 
 #: webapp/auth/routes.py:140
 msgid "Votre mot de passe a été réinitialisé."
@@ -136,17 +140,17 @@ msgid "titulaire"
 msgstr "holder"
 
 #: webapp/client/forms.py:13
-msgid "Taux Rémuneration"
-msgstr "Rate of pay"
+msgid "Taux de rémuneration"
+msgstr "Interest rate"
 
 #: webapp/client/routes.py:28 webapp/templates/client/compteCourant.html:6
 #: webapp/templates/client/index.html:7 webapp/templates/client/virement.html:7
 #: webapp/templates/main/base.html:29
 msgid "Espace Client"
-msgstr "Client area"
+msgstr "Secure Customer Area"
 
 #: webapp/client/routes.py:47 webapp/client/routes.py:63
-msgid "Aucune opération n a été effectuée sur ce compte"
+msgid "Aucune opération n'a été effectuée sur ce compte"
 msgstr "No transactions were made on this account"
 
 #: webapp/client/routes.py:51 webapp/templates/client/compteCourant.html:7
@@ -311,7 +315,7 @@ msgstr "Open a savings account"
 #: webapp/templates/conseiller/gerer_demandes.html:7
 #: webapp/templates/main/base.html:27
 msgid "Gestion de demandes"
-msgstr "Requests management"
+msgstr "Manage requests"
 
 #: webapp/templates/main/base.html:7
 msgid "Bienvenue sur GestiBank"

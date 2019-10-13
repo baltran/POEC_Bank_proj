@@ -29,8 +29,8 @@ class SignupForm(FlaskForm):
 
 
 class ResetPasswordRequestForm(FlaskForm):
-    email = StringField(_l('Email'), validators=[DataRequired(), Email()])
-    submit = SubmitField(_l('Request Password Reset'))
+    email = StringField(_l('e-mail'), validators=[DataRequired(), Email()])
+    submit = SubmitField(_l('Demander un nouveau mot de passe'))
 
 
 class ResetPasswordForm(FlaskForm):
@@ -44,4 +44,4 @@ class CreatePasswordForm(FlaskForm):
     password = PasswordField(_l('Mot de passe'), validators=[DataRequired()])
     password_bis = PasswordField(_l('Repeter votre mot de passe'),
                                  validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField(_l('Réinitialisez votre mot de passe'))
+    submit = SubmitField(_l('Créez votre mot de passe'))

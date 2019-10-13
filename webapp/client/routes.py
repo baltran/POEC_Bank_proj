@@ -44,7 +44,7 @@ def compteCourant():
 
 
         if compte.operations.all() is None:
-            flash(_('Aucune opération n a été effectuée sur ce compte'))
+            flash(_("Aucune opération n'a été effectuée sur ce compte"))
         else:
             operations = compte.operations.union_all(compte.virements).order_by(Operation.done_at.desc()).all()
         return render_template('client/compteCourant.html', user=current_user, compte=compte,

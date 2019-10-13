@@ -10,7 +10,7 @@ from webapp.main.classes.compte import Compte
 
 class CompteEpargneCreationForm(FlaskForm):
     titulaire_id = IntegerField(_l('titulaire'), validators=[DataRequired()])
-    taux_remuneration = StringField(_l('Taux Rémuneration'), default=0.02)
+    taux_remuneration = StringField(_l('Taux de rémuneration'), default=0.02)
     submit = SubmitField(_l('Creation'))
 
 
