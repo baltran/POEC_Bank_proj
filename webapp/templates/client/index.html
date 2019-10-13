@@ -15,7 +15,7 @@
         {% if nb_comptes > 1 %}
             <p><a class="btn_cnx" href="{{ url_for('client.compteEpargne') }}"> {{ _('Compte Epargne') }}</a></p>
         {% else %}
-            <p><a class="btn_cnx" href="{{ url_for('client.creer_compte_epargne') }}"> {{ _('Ouvrir Un Compte Epargne') }}</a></p>
+            <p><a class="btn_cnx" href="{{ url_for('client.index') }}?open_ce=1"> {{ _('Ouvrir Un Compte Epargne') }}</a></p>
         {% endif %}
     {% endif %}
 </form>
