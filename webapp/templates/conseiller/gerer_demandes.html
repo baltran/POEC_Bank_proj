@@ -21,7 +21,7 @@
                             {% if e=="Nom" %}
                                 <br><form action="{{ url_for('conseiller.display_piece_id') }}">
                                 <button type="submit" name="identite" value="{{ demande.afficher()['id'] }}">
-                                   {{ _('Pièce d'identité')}}</button>
+                                   {{ _("Pièce d'identité")}}</button>
                                  </form>
                             {% elif e=="Adresse" %}
                                 <br><form action="{{ url_for('conseiller.display_just_domicile') }}">
@@ -51,7 +51,7 @@
                 <br>
                 <br>
             </p>
-            <h2>GestiBank a {{ total_de_clients }} clients:</h2>
+            <h2>{{ _('GestiBank a') }} {{ total_de_clients }} {{ _('clients:') }}</h2>
             {% if total_de_clients>0 %}
             <table>
                 <tr>
@@ -60,7 +60,7 @@
                         <th>{{ col }}</th>
                         {% endif %}
                     {% endfor %}
-                    <th>_('Compte épargne')</th>
+                    <th>Compte épargne</th>
                 </tr>
                 {% for client in clients %}
                     <tr>
@@ -70,7 +70,7 @@
                             {% if c=="Nom" %}
                                 <br><form action="{{ url_for('conseiller.display_piece_id') }}">
                                 <button type="submit" name="identite" value="{{ client.afficher()['id'] }}">
-                                   _(' Pièce d'identité')</button>
+                                   Pièce d'identité</button>
                                  </form>
                             {% elif c=="Adresse" %}
                                 <br><form action="{{ url_for('conseiller.display_just_domicile') }}">
