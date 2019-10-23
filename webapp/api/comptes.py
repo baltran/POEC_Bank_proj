@@ -49,7 +49,7 @@ def set_deposit(id):
     try:
         increment = float(data['valeur'])
     except (ValueError, TypeError):
-        bad_request('Veuillez mettre un nombre')
+        return bad_request('Veuillez mettre un nombre')
     else:
         increment = abs(increment)
         compte.solde += increment

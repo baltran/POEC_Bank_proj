@@ -27,25 +27,24 @@
             {
                if(xhr.readyState  == 4)
                {
+                    var result_elem = document.getElementById("result_convert");
+                    var rep = JSON.parse(xhr.responseText);
                     if(xhr.status  == 200){
                         //document.ajax.dyn="Received:"  + xhr.responseText;
-                        var rep = JSON.parse(xhr.responseText);
-                        var result = montant;
-                        if (src_type == "EUR" && conv_type == "USD"){
-                            result = result / rep.quotes.USDEUR;
-                        }else if(src_type == "USD" && conv_type == "EUR"){
-                            result = result * rep.quotes.USDEUR;
-                        }
-                        var result_elem = document.getElementById("result_convert");
-                        result_elem.innerHTML = result;
+
+                        result_elem.innerHTML = rep.value;
                     }else
-                        document.ajax.dyn="Error code " + xhr.status;
+                        //document.ajax.dyn="Error code " + xhr.status;
+                        result_elem.innerHTML = rep.message;
                }
             };
             if ( src_type != conv_type) {
-                var requete = "http://apilayer.net/api/historical?access_key=25280eb3808bb1588174f5e19c3bbbf3&date=2019-10-13&currencies=EUR&format=1";
+                /*var requete = "http://apilayer.net/api/historical?access_key=25280eb3808bb1588174f5e19c3bbbf3&date=2019-10-13&currencies=EUR&format=1";
                 xhr.open("GET", requete, true);
-                xhr.send(null);
+                xhr.send(null);*/
+                xhr.open("POST", '/api/convert',  true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(JSON.stringify({value:montant, source_currency:src_type, dest_currency:conv_type}));
             }
         }
     </script>
