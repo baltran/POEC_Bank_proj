@@ -6,7 +6,7 @@
     {{ nav_link('client.index', _('Espace Client')) }}
     {{ nav_link('client.compteCourant', _('Compte Courant')) }}
 {% endblock %}}
-{% block content %}
+{% block app_content %}
     <h2>{{ _('Bienvenue sur votre compte courant') }}</h2>
     <p style='color:blue'><u>{{ _('Solde :')  }} {{compte.solde}} {{_('€') }}</u></p>
     {% if operations %}

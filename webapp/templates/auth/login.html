@@ -3,7 +3,7 @@
     {{ nav_link('main.index', _('Accueil')) }}
     {{ nav_link('auth.login', _('Connexion')) }}
 {% endblock %}}
-{% block content %}
+{% block app_content %}
     <h2>{{_('Me connecter')}}</h2>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}

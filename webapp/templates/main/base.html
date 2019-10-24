@@ -1,16 +1,21 @@
 {% from "main/macros.html" import nav_link with context %}
-<html>
-    <head>
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
     {% if title %}
-        <title>GestiBank - {{ title }}</title>
+        GestiBank - {{ title }}
     {% else %}
-        <title>{{ _('Bienvenue sur GestiBank') }}</title>
+        {{ _('Bienvenue sur GestiBank') }}
     {% endif %}
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/cuicui.png') }}" />
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/barre.css') }}">
-        {% block links_css %}{% endblock %}
-    </head>
-    <body>
+{% endblock %}
+{% block styles %}
+    <!-- Bootstrap -->
+    <link href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/cuicui.png') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/barre.css') }}">
+    {% block links_css %}{% endblock %}
+{% endblock %}
+{% block content %}
         <header class="container">
             <img src="{{ url_for('static', filename='img/logo.png') }}"  style="width:48px;height:100px;"    >
             <h1>GestiBank</h1>
@@ -74,10 +79,9 @@
                 <p><a class="btn_cnx" href="{{ url_for('admin.index') }}">{{ _('Espace Admin') }}</a></p>
                 <p><a class="btn_cnx" href="{{ url_for('admins.creerConseiller') }}">{{ _('Créer un Conseiller') }}</a></p>
             {% endif %}
-            {% block content %}{% endblock %}
+            {% block app_content %}{% endblock %}
         </section>
         <footer>
 
         </footer>
-    </body>
-</html>
+{% endblock %}

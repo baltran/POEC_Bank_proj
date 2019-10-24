@@ -4,7 +4,7 @@
     {{ nav_link('client.index', _('Espace client')) }}
     {{ nav_link('client.creer_compte_epargne', _('Création Compte Épargne')) }}
 {% endblock %}}
-{% block content %}
+{% block app_content %}
     <form action="{{ url_for('client.creer_compte_epargne') }}" method="post">
             {{form.hidden_tag()}}
             <p>

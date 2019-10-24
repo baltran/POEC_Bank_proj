@@ -7,7 +7,7 @@
     {{ nav_link('client.index', _('Espace client')) }}
     {{ nav_link('client.compteEpargne', _('Compte Épargne')) }}
 {% endblock %}}
-{% block content %}
+{% block app_content %}
         <h2>{{ _('Bienvenue sur votre compte épargne') }}</h2>
         <p style='color:blue'><u>{{ _('Solde :')  }} {{compte.solde}} {{_('€') }}</u></p>
         {% if operations %}

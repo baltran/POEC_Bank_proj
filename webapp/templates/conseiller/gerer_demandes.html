@@ -6,7 +6,7 @@
     {{ nav_link('main.index', _('Accueil')) }}
     {{ nav_link('conseiller.gerer_demandes', _('Gestion de demandes')) }}
 {% endblock %}
-{% block content %}
+{% block app_content %}
             <h2>{{ _('Vous avez') }} {{ total_de_demandes }} {{ _('demandes de création de compte.') }}</h2>
             {% if total_de_demandes>0 %}
             <table><tr>
